@@ -107,6 +107,7 @@ if getattr (settings.site_settings, "PINGBACK_LINKS", False):
 if getattr (settings.site_settings, "DIRECTORY_URLS", None):
     models.signals.post_save.connect (ping_directories (
             url_attr="get_absolute_url",
+            filtr=lambda instance: instance.published == True,
             feed_url_fun=lambda instance: reverse ("blog_feeds_view",
             args=["latest"])),
         sender=Post, dispatch_uid="pingback_directories", weak=False)
