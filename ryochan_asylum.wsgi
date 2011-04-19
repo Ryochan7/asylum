@@ -4,8 +4,8 @@ import site
 
 sys.stdout = sys.stderr
 # Add virtualenv site-packages directory to sys.path
-VIRTUALENV_DIR = """/home/ryochan7/.virtualenvs/asylum/lib/python2.7/"""
-    """site-packages"""
+VIRTUALENV_DIR = ("""/home/ryochan7/.virtualenvs/asylum/lib/python2.7/"""
+    """site-packages""")
 site.addsitedir(VIRTUALENV_DIR)
 
 PROJECT_PATH  = os.path.dirname (__file__)
