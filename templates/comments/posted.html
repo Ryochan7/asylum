@@ -1,0 +1,9 @@
+{#{% extends "comments/base.html" %}#}
+{% extends "base.html" %}
+
+{% block title %}Thanks for commenting | {{ block.super }}{% endblock %}
+
+{% block content %}
+  <h1>Thank you for your comment.</h1>
+  <br/><a href="{{ comment.content_object.get_absolute_url }}">Return to post</a>
+{% endblock %}

@@ -1,0 +1,10 @@
+*.pyc
+.ropeproject/
+build/
+dist/
+nbproject/
+wordpress.2008-11-08.xml
+local_settings.py
+test.db
+*.*~
+

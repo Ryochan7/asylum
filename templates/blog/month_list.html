@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ month|date:"F Y" }} | {{ block.super }}{% endblock %}
+{% block heading %}<h1><div align="center">Archives: {{ month|date:"F Y" }}</div></h1><br/><br/>{% endblock %}
+
+{% block content_footer %}
+<br/>
+    {% if previous_month %}<div style="float: left;"><a href="{% url blog_month_view previous_month.pub_date.year,previous_month.pub_date|date:"m" %}">&laquo; {{ previous_month.pub_date|date:"N Y" }}</a></div>{% endif %}
+    {% if next_month %}<div style="text-align: right;"><a href="{% url blog_month_view next_month.pub_date.year,next_month.pub_date|date:"m" %}">{{ next_month.pub_date|date:"N Y" }} &raquo;</a></div>{% endif %}
+{% endblock %}
+
+{% block calendar %}
+{% load blog_tags %}
+                <li>
+					<h2>Calendar</h2>
+					<ul>
+                        {% month_calendar month.year month.month %}				    
+					</ul>
+				</li>
+{% endblock %}

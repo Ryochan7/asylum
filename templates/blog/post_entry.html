@@ -1,0 +1,12 @@
+{% load tagging_tags %}
+{% load pingback_tags %}
+            <div class="post">
+		        <h1 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+			    <p class="meta">Posted by {{ post.author }} on {{ post.pub_date|date:"F jS, Y" }}
+			        &nbsp;&bull;&nbsp; <a href="{{ post.get_absolute_url }}#disqus_thread">View Comments</a> &nbsp;&bull;&nbsp;  {#<a>Pingbacks ({% get_pingback_count for post as bacon %}{{ bacon }})</a>&nbsp;&bull;&nbsp;#} <a href="{{ post.get_absolute_url }}" class="permalink">Permalink</a>
+                    <br/>Tags: {% tags_for_object post as tag_list %}{% for tag in tag_list %}<a href="{% url blog_tag_view tag %}">{{ tag }}</a>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}
+                    {% ifnotequal post.pub_date post.edit_date %}<br/>Updated on {{ post.edit_date|date:"F jS, Y" }}{% endifnotequal %}</p>
+			    <div class="entry">
+			        {{ post.body }}
+			    </div>
+			</div>

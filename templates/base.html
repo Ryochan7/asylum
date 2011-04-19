@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Long Beach
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20081210
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Ryochan's Asylum{% endblock %}</title>
+        <link href="{{ MEDIA_URL }}css/style.css" rel="stylesheet" type="text/css" media="screen" />
+        {% block extra_css %}<link href="{{ MEDIA_URL }}css/calendar.css" rel="stylesheet" type="text/css" />{% endblock %}
+        <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Blog Feed" href="{% url blog_feeds_view "latest" %}" />
+	{#<link rel="pingback" href={% url xmlrpc %}" />#}
+        {% if ANALYTICS %}
+           <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-22789045-1']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+            </script>
+        {% endif %}
+        {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <div id="logo">
+                    <h1><a href="{% url home_view %}">Ryochan's Asylum</a></h1>
+                    <p> I write a fast song</p>
+                </div>
+                {% block search %}
+                <div id="search">
+                    <form method="get" action="{% url blog_search_view %}">
+                        <fieldset>
+                            {{ search_form.search }}
+                            <input type="submit" value="Search" />
+                        </fieldset>
+                    </form>
+                </div>
+                {% endblock %}
+            </div>
+        <!-- end #header -->
+        <div id="menu">
+            <ul>
+                <li><a href="{% url home_view %}">Home</a></li>
+                <li><a href="{% url about_view %}">About</a></li>
+                <li><a href="{% url blog_home_view %}">Blog</a></li>
+                <li><a href="{% url projects_view %}">Projects</a></li>
+            </ul>
+        </div>
+        <!-- end #menu -->
+        <div id="page">
+            <div id="content">
+                {% load pagination_tags %}
+                {% autoescape off %}
+                {% block content %}
+                {% block heading %}{% endblock %}
+                {% autopaginate post_list paginate_by %}
+                {% for post in post_list %}
+                    {% include "blog/post_entry.html" %}
+                {% endfor %}
+                {% block paginator_block %}
+                {% if page_obj.has_next %}
+                    <a href="{% url blog_home_view %}?page={{ page_obj.next_page_number }}">More Blog Posts</a>
+                {% endif %}
+                {% endblock %}
+                {% block content_footer %}{% endblock %}
+                {% endblock %}
+                {% endautoescape %}
+
+            </div>
+            <!-- end #content -->
+            {% load blog_tags %}
+            <div id="sidebar">
+                <ul>
+                    <li>
+                        <h2>Ryochan's Asylum</h2>
+                        <p>This is a test blog written in Django. Obviously, there isn't much here.</p>
+                    </li>
+                    <li>
+                        <h2>RSS Feeds</h2>
+                        <ul>
+                            {% block rss_feeds %}
+                            <li>
+                                <a href="{% url blog_feeds_view "latest" %}"><img src="{{ MEDIA_URL }}images/feed-icon-14x14.png" alt="Latest Posts" title="Latest Posts"/></a>&nbsp;
+                                <a href="{% url blog_feeds_view "latest" %}">Latest Posts</a>
+                            </li>
+                            {% endblock %}
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h2>Archives</h2>
+                        <ul>
+                            {% print_post_date_list %}
+                        </ul>
+                    </li>
+                    {% block calendar %}
+                    <li>
+                        <h2>Calendar</h2>
+                        {% month_calendar %}
+                        <br/><br/>
+                    </li>{% endblock %}
+                    
+                    <li>
+                        <h2>Tag Cloud</h2>
+                        {% load tagging_tags %}
+                        {% tag_cloud_for_model blog.post as tag_cloud with steps=5 %}
+                        {% for tag in tag_cloud %}<span class="tag_size{{ tag.font_size }}"><a href="{% url blog_tag_view tag.name %}">{{ tag }}</a></span>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}<br/><br/>
+                    </li>
+                    <li>
+                        <h2>Find Me</h2>
+                        <ul>
+                            <li><a href="http://twitter.com/ryochan7">Twitter</a></li>
+                            <li><a href="http://www.facebook.com/profile.php?id=738212647">Facebook</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- end #sidebar -->
+            <div style="clear: both;">&nbsp;</div>
+        </div>
+        <!-- end #page -->
+        <div id="footer">
+            <p>Copyright (c) {% now "Y" %} Ryochan7 &nbsp;&bull;&nbsp; Original design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.&nbsp;&nbsp;<a href="http://www.djangoproject.com/"><img src="{{ MEDIA_URL }}images/djangomade124x25_grey.gif" alt="Made with Django." title="Made with Django." /></a>
+                    &nbsp;&nbsp; <a href="http://validator.w3.org/check?uri=referer"><img src="{{ MEDIA_URL }}images/valid-xhtml10-blue.png" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a></p>
+            <br/>
+            <p><!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/"><img alt="Creative Commons License" src="{{ MEDIA_URL }}images/somerights20.png"/></a><br/>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+                    <Work rdf:about="">
+
+                    <license rdf:resource="http://creativecommons.org/licenses/by-nc/2.5/" />
+
+                    </Work>
+
+                    <License rdf:about="http://creativecommons.org/licenses/by-nc/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/><permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/></License></rdf:RDF> -->
+            </p>
+        </div>
+        <!-- end #footer -->
+    </div>
+    <script type="text/javascript">
+        var disqus_developer = 1;
+        //<![CDATA[
+        (function() {
+            var links = document.getElementsByTagName('a');
+            var query = '?';
+            for(var i = 0; i < links.length; i++) {
+                if(links[i].href.indexOf('#disqus_thread') >= 0) {
+                    query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+                }
+            }
+            document.write('<script type="text/javascript" src="http://disqus.com/forums/ryochansasylum/get_num_replies.js' + query + '"></' + 'script>');
+            })();
+    //]]>
+    </script>
+
+    </body>
+</html>
+
