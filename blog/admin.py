@@ -9,8 +9,11 @@ class PostAdmin (admin.ModelAdmin):
     list_filter = ('pub_date', 'published')
 
     class Media (object):
-        js = ('js/wmd-textareas.js', 'wmd/wmd.js',)
+        js = (
+            "wymeditor/jquery/jquery.js",
+            "wymeditor/wymeditor/jquery.wymeditor.js",
+            "js/admin_textarea.js",
+        )
 
 admin.site.register (Post, PostAdmin)
-
 
