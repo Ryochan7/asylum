@@ -1,7 +1,7 @@
 from django.contrib.syndication.feeds import Feed
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
-from tagging.models import Tag, TaggedItem
+from taggit.models import Tag
 from blog.models import Post
 from blog.conf import settings
 
@@ -35,5 +35,5 @@ class LatestEntriesByTag (Feed):
         return "Recent posts tagged %s" % obj.name
 
     def items (self, obj):
-        return TaggedItem.objects.get_by_model (Post, obj).filter (published=True)[:settings.PAGINATE_BY]
+        return Post.objects.filter (tags__name__in=[obj]).filter (published=True)[:settings.PAGINATE_BY]
 

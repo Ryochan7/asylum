@@ -133,10 +133,11 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'blog',
     'pagination',
-    'tagging',
     'djangosphinx',
     'pingback',
     "markitup",
+    'taggit',
+    'taggit_templatetags',
     'django_extensions',
     "debug_toolbar",
 )

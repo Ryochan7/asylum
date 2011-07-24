@@ -137,9 +137,9 @@ as well as information about some of my software projects.</p>
                     
                     <li>
                         <h2>Tag Cloud</h2>
-                        {% load tagging_tags %}
-                        {% tag_cloud_for_model blog.post as tag_cloud with steps=5 %}
-                        {% for tag in tag_cloud %}<span class="tag_size{{ tag.font_size }}"><a href="{% url blog_tag_view tag.name %}">{{ tag }}</a></span>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}<br/><br/>
+                        {% load taggit_extras %}
+                        {% get_tagcloud as tag_cloud for "blog.post" %}
+                        {% for tag in tag_cloud %}<span class="tag_size{{ tag.weight|floatformat:0 }}"><a href="{% url blog_tag_view tag.name %}">{{ tag }}</a></span>{% if forloop.last %}{% else %}, {% endif %}{% endfor %}<br/><br/>
                     </li>
                     <li>
                         <h2>Find Me</h2>

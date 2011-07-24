@@ -7,7 +7,7 @@ from django.http import Http404
 from django.core.urlresolvers import reverse
 import datetime, calendar
 from time import strptime
-from tagging.models import Tag, TaggedItem
+from taggit.models import Tag
 from blog.models import Post
 from blog.forms import SearchForm
 
@@ -150,7 +150,8 @@ def day_view (request, year, month, day):
 def tag_view (request, tag):
     current_tag = get_object_or_404 (Tag, name=tag)
     context = {
-        "post_list": TaggedItem.objects.get_by_model (Post, current_tag).select_related ().filter (published=True),
+        "post_list": Post.objects.filter (tags__id__in=[current_tag.id]).select_related ().filter (published=True),
+        #"post_list": TaggedItem.objects.get_by_model (Post, current_tag).select_related ().filter (published=True),
         "tag": current_tag,
         "tag_feed": "tag/%s" % current_tag.name,
         "search_form": SearchForm ()

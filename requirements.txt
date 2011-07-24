@@ -1,6 +1,7 @@
 django==1.3
 django-pagination
-django-tagging
+django-taggit
+django-taggit-templatetags
 BeautifulSoup
 django-extensions
 django-sphinx

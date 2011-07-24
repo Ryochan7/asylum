@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.comments.models import Comment
 from django.contrib.contenttypes import generic
 from django.core.urlresolvers import reverse
-from tagging.fields import TagField
-from tagging.models import Tag
+from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase
 from markitup.fields import MarkupField
 from blog.conf import settings
 if getattr (settings.site_settings, "PINGBACK_LINKS", False):
@@ -29,7 +29,7 @@ class Post (models.Model):
     edit_date = models.DateTimeField (default=datetime.datetime.now)
     enable_comments = models.BooleanField (default=False)
     published = models.BooleanField (default=False, help_text=u"Should the post be seen by the public")
-    tags = TagField ()
+    tags = TaggableManager ()
     author = models.ForeignKey (User)
     comment_count = models.PositiveIntegerField (default=0, editable=False)
     comments = generic.GenericRelation (Comment, object_id_field="object_pk")
@@ -71,10 +71,6 @@ class Post (models.Model):
         md = markdown.Markdown (extensions=[ext])
         self.body = md.convert (self.body_raw.raw).strip ()
         super (Post, self).save (*args, **kwargs)
-
-    def delete (self, *args, **kwargs):
-        Tag.objects.update_tags (self, "")
-        super (Post, self).delete (*args, **kwargs)
 
     def comments_open (self):
         if self.enable_comments:
