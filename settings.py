@@ -167,6 +167,7 @@ LOGGING = {
 INTERNAL_IPS = ('127.0.0.1',)
 ANALYTICS = False
 DISQUS_DEVELOPER = 1
+PAGINATE_BY = 1
 
 try:
     from local_settings import *

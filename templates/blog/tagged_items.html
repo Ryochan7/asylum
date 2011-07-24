@@ -6,7 +6,7 @@
 {% load blog_tags %}
 {% block rss_feeds %}{{ block.super }}
                         <li>
-					        <a href="{% url blog_feeds_view "latest" %}"><img src="{{ MEDIA_URL }}images/feed-icon-14x14.png" alt="Feed for tag {{ tag }}" title="Feed for tag {{ tag }}"/></a>&nbsp;
+					        <a href="{% url blog_feeds_view "latest" %}"><img src="{{ STATIC_URL }}images/feed-icon-14x14.png" alt="Feed for tag {{ tag }}" title="Feed for tag {{ tag }}"/></a>&nbsp;
                             <a href="{% url blog_feeds_view tag_feed %}">Tagged with {{ tag }}</a>
                         </li>
 {% endblock %}

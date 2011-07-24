@@ -24,6 +24,7 @@ Released   : 20081210
         {% endblock %}
         {% block extra_css %}
             <link href="{{ STATIC_URL }}css/calendar.css" rel="stylesheet" type="text/css" />
+            <link href="{{ STATIC_URL }}css/pagination.css" rel="stylesheet" type="text/css" />
         {% endblock %}
         <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Blog Feed" href="{% url blog_feeds_view "latest" %}" />
         {% if ANALYTICS %}
