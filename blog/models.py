@@ -7,6 +7,7 @@ from django.contrib.contenttypes import generic
 from django.core.urlresolvers import reverse
 from tagging.fields import TagField
 from tagging.models import Tag
+from markitup.fields import MarkupField
 from blog.conf import settings
 if getattr (settings.site_settings, "PINGBACK_LINKS", False):
     from pingback.client import ping_external_links
@@ -21,7 +22,9 @@ class Post (models.Model):
     title = models.CharField (max_length=50)
     slug = models.SlugField (max_length=50, unique=True)
     body = models.TextField (editable=False, default=u"")
-    body_raw = models.TextField ('Body', help_text=u"Enter the post using <a href='http://daringfireball.net/projects/markdown/syntax'>Markdown</a> syntax")
+    #body_raw = models.TextField ('Body', help_text=u"Enter the post using <a href='http://daringfireball.net/projects/markdown/syntax'>Markdown</a> syntax")
+    body_raw = MarkupField ('Body', help_text=u"Enter the post using <a href='http://daringfireball.net/projects/markdown/syntax'>Markdown</a> syntax")
+
     pub_date = models.DateTimeField (default=datetime.datetime.now)
     edit_date = models.DateTimeField (default=datetime.datetime.now)
     enable_comments = models.BooleanField (default=False)
@@ -64,10 +67,9 @@ class Post (models.Model):
                 ctype.model, self.id)
 
     def save (self, *args, **kwargs):
-        md = markdown.Markdown ()
-        extension = YouTubeEmbedExtension ()
-        extension.extendMarkdown (md)
-        self.body = md.convert (self.body_raw).strip ()
+        ext = YouTubeEmbedExtension ()
+        md = markdown.Markdown (extensions=[ext])
+        self.body = md.convert (self.body_raw.raw).strip ()
         super (Post, self).save (*args, **kwargs)
 
     def delete (self, *args, **kwargs):

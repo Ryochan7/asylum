@@ -12,6 +12,7 @@ urlpatterns = patterns ('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^markitup/', include('markitup.urls')),
     url (r'^$', 'blog.views.home_view', name='home_view'),
     url (r'^blog/', include ('blog.urls')),
     url (r'^about/', 'django.views.generic.simple.direct_to_template', {"template": "about.html"}, name="about_view"),

@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'tagging',
     'djangosphinx',
     'pingback',
+    "markitup",
     'django_extensions',
     "debug_toolbar",
 )
@@ -167,6 +168,13 @@ INTERNAL_IPS = ('127.0.0.1',)
 ANALYTICS = False
 DISQUS_DEVELOPER = 1
 PAGINATE_BY = 1
+MARKITUP_FILTER = (
+    'markdown.markdown', {
+        'safe_mode': True,
+    }
+)
+MARKITUP_SET = 'markitup/sets/markdown'
+MARKITUP_SKIN = 'markitup/skins/markitup'
 
 try:
     from local_settings import *
