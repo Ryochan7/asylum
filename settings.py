@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     "markitup",
     'taggit',
     'taggit_templatetags',
+    "contact_form",
     'django_extensions',
     "debug_toolbar",
 )
@@ -176,6 +177,7 @@ MARKITUP_FILTER = (
 )
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markitup/skins/markitup'
+BLOG_NAME = "Ryochan's Asylum"
 
 try:
     from local_settings import *

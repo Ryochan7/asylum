@@ -11,3 +11,5 @@ Markdown
 django-debug-toolbar
 django-pingback
 django-markitup
+akismet
+

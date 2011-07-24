@@ -148,10 +148,9 @@ def day_view (request, year, month, day):
 #   return archive_day (request, year=year, month=month, day=day, **entries_day)
 
 def tag_view (request, tag):
-    current_tag = get_object_or_404 (Tag, name=tag)
+    current_tag = get_object_or_404 (Tag, slug=tag)
     context = {
         "post_list": Post.objects.filter (tags__id__in=[current_tag.id]).select_related ().filter (published=True),
-        #"post_list": TaggedItem.objects.get_by_model (Post, current_tag).select_related ().filter (published=True),
         "tag": current_tag,
         "tag_feed": "tag/%s" % current_tag.name,
         "search_form": SearchForm ()

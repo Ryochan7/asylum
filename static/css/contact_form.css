@@ -1,0 +1,33 @@
+div#content div.entry {
+	padding-top: 0px;
+	margin-top: 20px;
+}
+
+form ul {
+	list-style: none;
+	width: 450px;
+	padding-left: 10px;
+}
+
+form ul li {
+	margin-top: 10px;
+}
+
+form ul li label {
+	float: left;
+	width: 200px;
+}
+
+form ul li textarea[id="id_body"] {
+	width: 400px;
+	margin-top: 10px;
+}
+
+form ul li ul.errorlist {
+	color: #FF0000;
+	
+}
+
+form input[type="submit"] {
+	margin-left: 10px;
+}

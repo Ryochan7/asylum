@@ -23,17 +23,17 @@ class LatestEntriesByTag (Feed):
     def get_object (self, bits):
         if len (bits) != 1:
             raise ObjectDoesNotExist
-        return Tag.objects.get (name=bits[0])
+        return Tag.objects.get (slug=bits[0])
 
     def title (self, obj):
         return "Tag: %s | Ryochan's Asylum" % obj.name
 
     def link (self, obj):
-        return reverse ("blog_tag_view", args=[obj.name])
+        return reverse ("blog_tag_view", args=[obj.slug])
 
     def description (self, obj):
         return "Recent posts tagged %s" % obj.name
 
     def items (self, obj):
-        return Post.objects.filter (tags__name__in=[obj]).filter (published=True)[:settings.PAGINATE_BY]
+        return Post.objects.filter (tags__id__in=[obj.id]).filter (published=True)[:settings.PAGINATE_BY]
 

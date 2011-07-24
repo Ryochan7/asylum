@@ -13,7 +13,7 @@ Released   : 20081210
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         {% block meta_tags %}
-        <meta name="keywords" content="" />
+        <meta name="keywords" content="Django, Dreamcast" />
         <meta name="description" content="" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         {% endblock %}
@@ -74,6 +74,7 @@ Released   : 20081210
                 <li><a href="{% url about_view %}">About</a></li>
                 <li><a href="{% url blog_home_view %}">Blog</a></li>
                 <li><a href="{% url projects_view %}">Projects</a></li>
+                <li><a href="{% url custom_contact_form %}">Contact</a></li>
             </ul>
         </div>
         <!-- end #menu -->
