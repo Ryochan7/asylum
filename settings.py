@@ -104,7 +104,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
@@ -140,7 +140,7 @@ INSTALLED_APPS = (
     'taggit_templatetags',
     "contact_form",
     'django_extensions',
-    "debug_toolbar",
+    #"debug_toolbar",
 )
 
 # A sample logging configuration. The only tangible logging
