@@ -41,7 +41,7 @@ def home_view (request):
     if request.GET.get ("page"):
         return HttpResponseRedirect ("%s?page=%s" % (reverse ("blog_home_view"), request.GET.get ("page")))
 
-    return blog_home_view (request, "base.html")
+    return blog_home_view (request, "index.html")
 
 
 def blog_home_view (request, template="blog/base.html"):

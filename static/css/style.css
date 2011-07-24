@@ -57,17 +57,14 @@ a:hover {
 }
 
 /* Header */
-
 #header {
 	width: 910px;
 	height: 172px;
 	margin: 0 auto;
-/*	background: #FFDA2A url(images/img01.jpg) no-repeat left top;*/
 	background: #FFDA2A url(../images/img01.jpg) no-repeat left top;
 }
 
 /* Logo */
-
 #logo {
 	float: left;
 	width: 640px;
@@ -79,16 +76,16 @@ a:hover {
 
 #logo h1 {
 	float: left;
-	padding: 70px 0 0 20px;
+	padding: 30px 0 0 20px;
 	letter-spacing: -1px;
 	text-transform: uppercase;
 	font-size: 2.6em;
 }
 
 #logo p {
-	float: left;
-	margin: 0;
-	padding: 80px 0 0 5px;
+	clear: left;
+	margin: 0px;
+	padding: 4px 0px 0px 30px;
 	text-transform: uppercase;
 	font: bold 14px Arial, Helvetica, sans-serif;	
 } 
@@ -101,23 +98,26 @@ a:hover {
 }
 
 /* Search */
-
 #search {
 	float: right;
-	width: 230px;
+	width: 310px;
 	padding-top: 16px;
 }
 
 #search form {
 	height: 41px;
 	margin: 0;
-	padding: 90px 0 0 0px;
 }
 
 #search fieldset {
 	margin: 0;
 	padding: 0;
 	border: none;
+}
+
+#search fieldset #id_search {
+	width: 200px;
+	margin-right: 10px;
 }
 
 #search-text {
@@ -134,14 +134,16 @@ a:hover {
 }
 
 /* Menu */
-
 #menu {
 	width: 910px;
 	height: 50px;
 	margin: 0 auto;
+	margin-top: 4px;
 	padding: 0;
 	border-top: 1px #FFFFFF solid;
 	background: #565F68;
+	border-radius: 6px;
+	box-shadow: 0 6px 4px #888888;
 }
 
 #menu ul {
@@ -176,14 +178,12 @@ a:hover {
 }
 
 /* Page */
-
 #page {
 	width: 910px;
 	margin: 0 auto;
 }
 
 /* Content */
-
 #content {
 	float: right;
 	width: 600px;
@@ -221,7 +221,6 @@ a:hover {
 }
 
 /* Sidebar */
-
 #sidebar {
 	float: left;
 	width: 220px;
@@ -268,11 +267,20 @@ a:hover {
 }
 
 #sidebar img {
-    border: none;
+	border: none;
+}
+
+#sidebar ul#findme {
+	margin-top: 10px;
+}
+
+#sidebar ul#findme li {
+	float: left;
+	border-bottom: 0px;
+	width: 42px;
 }
 
 /* Calendar */
-
 #calendar {
 }
 
@@ -293,11 +301,10 @@ a:hover {
 }
 
 /* Footer */
-
 #footer {
 	width: 910px;
-	height: 90px;
-	margin: 0 auto;
+	height: 100px;
+	margin: 0px auto;
 	padding: 10px 0 10px 0;
 	background: #565F68;
 	font-family: Arial, Helvetica, sans-serif;
@@ -305,9 +312,9 @@ a:hover {
 }
 
 #footer p {
-	margin: 0;
+	margin: 10px 0px;
 	line-height: normal;
-	font-size: 9px;
+	font-size: 0.8em;
 	text-transform: uppercase;
 	text-align: center;
 }
@@ -321,7 +328,6 @@ a:hover {
 }
 
 /* Tag Cloud */
-
 .tag_size1 {
     font-size: 10px;
 }
@@ -341,7 +347,6 @@ a:hover {
 .tag_size5 {
     font-size: 20px;
 }
-
 
 pre {
     background-color: #f0f0f0;

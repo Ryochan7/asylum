@@ -6,15 +6,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns ('',
-    # Example:
-    # (r'^ryochan_asylum/', include('ryochan_asylum.foo.urls')),
-
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    (r'^admin/(.*)', admin.site.root),
+    url(r'^admin/', include(admin.site.urls)),
     url (r'^$', 'blog.views.home_view', name='home_view'),
     url (r'^blog/', include ('blog.urls')),
     url (r'^about/', 'django.views.generic.simple.direct_to_template', {"template": "about.html"}, name="about_view"),

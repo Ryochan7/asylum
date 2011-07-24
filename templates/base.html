@@ -12,14 +12,20 @@ Released   : 20081210
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        {% block meta_tags %}
         <meta name="keywords" content="" />
         <meta name="description" content="" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        {% endblock %}
+        {% block extra_meta_tags %}{% endblock %}
         <title>{% block title %}Ryochan's Asylum{% endblock %}</title>
-        <link href="{{ MEDIA_URL }}css/style.css" rel="stylesheet" type="text/css" media="screen" />
-        {% block extra_css %}<link href="{{ MEDIA_URL }}css/calendar.css" rel="stylesheet" type="text/css" />{% endblock %}
+        {% block css %}
+            <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet" type="text/css" media="screen" />
+        {% endblock %}
+        {% block extra_css %}
+            <link href="{{ STATIC_URL }}css/calendar.css" rel="stylesheet" type="text/css" />
+        {% endblock %}
         <link rel="alternate" type="application/rss+xml" title="RSS 2.0 Blog Feed" href="{% url blog_feeds_view "latest" %}" />
-	{#<link rel="pingback" href={% url xmlrpc %}" />#}
         {% if ANALYTICS %}
            <script type="text/javascript">
 
@@ -36,14 +42,17 @@ Released   : 20081210
             </script>
         {% endif %}
         {% block extra_head %}{% endblock %}
+        {% block extra_js %}{% endblock %}
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
+                {% block logo %}
                 <div id="logo">
                     <h1><a href="{% url home_view %}">Ryochan's Asylum</a></h1>
-                    <p> I write a fast song</p>
+                    <p>Random ranting from a Techie</p>
                 </div>
+                {% endblock %}
                 {% block search %}
                 <div id="search">
                     <form method="get" action="{% url blog_search_view %}">
@@ -56,15 +65,19 @@ Released   : 20081210
                 {% endblock %}
             </div>
         <!-- end #header -->
+        {% block top_nav %}
         <div id="menu">
             <ul>
                 <li><a href="{% url home_view %}">Home</a></li>
+                {% if user.is_superuser %}<li><a href="/admin/">Admin</a>{% endif %}
                 <li><a href="{% url about_view %}">About</a></li>
                 <li><a href="{% url blog_home_view %}">Blog</a></li>
                 <li><a href="{% url projects_view %}">Projects</a></li>
             </ul>
         </div>
         <!-- end #menu -->
+        {% endblock %}
+
         <div id="page">
             <div id="content">
                 {% load pagination_tags %}
@@ -86,19 +99,21 @@ Released   : 20081210
 
             </div>
             <!-- end #content -->
+            {% block sidebar %}
             {% load blog_tags %}
             <div id="sidebar">
                 <ul>
                     <li>
                         <h2>Ryochan's Asylum</h2>
-                        <p>This is a test blog written in Django. Obviously, there isn't much here.</p>
+                        <p>This blog and web site will contain a collection of my thoughts
+as well as information about some of my software projects.</p>
                     </li>
                     <li>
                         <h2>RSS Feeds</h2>
                         <ul>
                             {% block rss_feeds %}
                             <li>
-                                <a href="{% url blog_feeds_view "latest" %}"><img src="{{ MEDIA_URL }}images/feed-icon-14x14.png" alt="Latest Posts" title="Latest Posts"/></a>&nbsp;
+                                <a href="{% url blog_feeds_view "latest" %}"><img src="{{ STATIC_URL }}images/feed-icon-14x14.png" alt="Latest Posts" title="Latest Posts"/></a>&nbsp;
                                 <a href="{% url blog_feeds_view "latest" %}">Latest Posts</a>
                             </li>
                             {% endblock %}
@@ -116,7 +131,8 @@ Released   : 20081210
                         <h2>Calendar</h2>
                         {% month_calendar %}
                         <br/><br/>
-                    </li>{% endblock %}
+                    </li>
+                    {% endblock %}
                     
                     <li>
                         <h2>Tag Cloud</h2>
@@ -126,22 +142,31 @@ Released   : 20081210
                     </li>
                     <li>
                         <h2>Find Me</h2>
-                        <ul>
-                            <li><a href="http://twitter.com/ryochan7">Twitter</a></li>
-                            <li><a href="http://www.facebook.com/profile.php?id=738212647">Facebook</a></li>
+                        <ul id="findme">
+                            <li><a href="http://www.facebook.com/profile.php?id=738212647"><img src="{{ STATIC_URL }}images/facebook.png" alt="Facebook" /></a></li>
+                            <li><a href="http://twitter.com/ryochan7"><img src="{{ STATIC_URL }}images/twitter.png" alt="Twitter" /></a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
             <!-- end #sidebar -->
             <div style="clear: both;">&nbsp;</div>
+            {% endblock %}
         </div>
         <!-- end #page -->
+        {% block footer %}
         <div id="footer">
-            <p>Copyright (c) {% now "Y" %} Ryochan7 &nbsp;&bull;&nbsp; Original design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.&nbsp;&nbsp;<a href="http://www.djangoproject.com/"><img src="{{ MEDIA_URL }}images/djangomade124x25_grey.gif" alt="Made with Django." title="Made with Django." /></a>
-                    &nbsp;&nbsp; <a href="http://validator.w3.org/check?uri=referer"><img src="{{ MEDIA_URL }}images/valid-xhtml10-blue.png" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a></p>
-            <br/>
-            <p><!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/"><img alt="Creative Commons License" src="{{ MEDIA_URL }}images/somerights20.png"/></a><br/>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+            <p>Copyright (c) {% now "Y" %} Ryochan7 &nbsp;&bull;&nbsp; Original design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+            <p>
+                <a href="http://www.djangoproject.com/">
+                    <img src="{{ STATIC_URL }}images/djangomade124x25_grey.gif" alt="Made with Django." title="Made with Django." />
+                </a>
+                    &nbsp;&nbsp; <a href="http://validator.w3.org/check?uri=referer"><img src="{{ STATIC_URL }}images/valid-xhtml10-blue.png" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>&nbsp;&nbsp;
+            <!--Creative Commons License-->
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/">
+                    <img alt="Creative Commons License" src="{{ STATIC_URL }}images/somerights20.png"/>
+                </a>
+                <p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/2.5/">Creative Commons Attribution-NonCommercial 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 
                     <Work rdf:about="">
 
@@ -153,9 +178,11 @@ Released   : 20081210
             </p>
         </div>
         <!-- end #footer -->
+        {% endblock %}
     </div>
+    {% block disqus %}
     <script type="text/javascript">
-        var disqus_developer = 1;
+        var disqus_developer = {{ DISQUS_DEVELOPER }};
         //<![CDATA[
         (function() {
             var links = document.getElementsByTagName('a');
@@ -169,7 +196,7 @@ Released   : 20081210
             })();
     //]]>
     </script>
-
+    {% endblock %}
     </body>
 </html>
 

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}Blog | {{ block.super }}{% endblock %}
 
 {% block paginator_block %}
     {% load pagination_tags %}
