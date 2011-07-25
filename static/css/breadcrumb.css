@@ -1,0 +1,16 @@
+#breadcrumb {
+	height: 16px;
+	line-height: 16px;
+}
+
+#breadcrumb ul {
+	list-style: none;
+	padding: 0px 0px 10px 0px;
+}
+
+#breadcrumb li {
+	float: left;
+	margin-right: 10px;
+	background: url("/static/images/breadcrumb_arrow.png") no-repeat scroll 0 0 transparent;
+	padding-left: 20px;
+}

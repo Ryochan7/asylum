@@ -6,5 +6,6 @@ nbproject/
 wordpress.2008-11-08.xml
 local_settings.py
 test.db
+media/project_images/*
 *.*~
 

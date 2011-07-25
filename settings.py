@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'django.contrib.markup',
     'blog',
+    "projects",
     'pagination',
     'djangosphinx',
     'pingback',
@@ -139,6 +140,7 @@ INSTALLED_APPS = (
     'taggit',
     'taggit_templatetags',
     "contact_form",
+    "easy_thumbnails",
     'django_extensions',
     #"debug_toolbar",
 )

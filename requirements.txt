@@ -13,4 +13,5 @@ django-pingback
 django-markitupc
 django-contact-form
 akismet
+easy-thumbnails
 
