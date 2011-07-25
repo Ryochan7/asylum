@@ -10,7 +10,7 @@ PIL
 Markdown
 django-debug-toolbar
 django-pingback
-django-markitupc
+django-markitup
 django-contact-form
 akismet
 easy-thumbnails

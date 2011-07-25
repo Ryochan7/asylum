@@ -44,7 +44,7 @@ LightboxOptions.fileBottomNavCloseImage = "{{ STATIC_URL }}lightbox/images/close
         </div>
                 <div id="description">
                     <p>Description:</p>
-                    {{ project.description }}
+                    {{ project.description|safe }}
                 </div>
     </div>
 {% endblock main_content %}
