@@ -1,0 +1,38 @@
+{% load pagination_tags %}
+{% load thumbnail %}
+<div class="entry">
+            <ul id="video_list">
+            {% for video in video_list %}
+                <li class="video_panel">
+                    <a href="{{ video.get_absolute_url }}">
+                        {% thumbnail video.photo 200x110 crop as im %}
+                        {% if im %}
+                            <img src="{{ im.url }}" alt="{{ video.title }}" />
+                        {% else %}
+                            <img src="{{ STATIC_URL }}images/default_video.png" alt="{{ video.title }}" />
+                        {% endif %}
+                        <div class="summary_info">
+                            <h4>{{ video.title }}</h4>
+                            <p class="summary">{{ video.summary }}</p>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+{% if is_paginated %}{% paginate %}{% endif %}
+        <script type="text/javascript">
+        $(document).ready (function () {
+            $("#content .pagination a").click (function (e) {
+                e.preventDefault ();
+                $("#content .post div.loading").show ();
+                var block = $("div.post .entry");
+                block.hide ();
+                $.get (this.href, function (data) {
+                    $("#content .post div.loading").hide ();
+                    block.replaceWith (data);
+                });
+            });
+        });
+        </script>
+</div>
+

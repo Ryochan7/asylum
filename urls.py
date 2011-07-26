@@ -20,6 +20,7 @@ urlpatterns = patterns ('',
     url (r'^blog/', include ('blog.urls')),
     url (r'^about/', 'django.views.generic.simple.direct_to_template', {"template": "about.html"}, name="about_view"),
     url (r'^projects/', include('projects.urls')),
+    url (r'^videos/', include('videos.urls')),
 )
 
 

@@ -1,0 +1,126 @@
+#content {
+	float: none;
+	width: 900px;
+	padding: 20px;
+}
+
+.post {
+	clear: both;
+	padding-top: 10px;
+}
+
+.post .entry {
+	padding-bottom: 0px;
+	overflow: hidden;
+}
+
+#content .post div.loading {
+	display: none;
+	text-align: center;
+	margin: 0px auto;
+}
+
+#content #edit_link {
+	margin-bottom: 10px;
+}
+
+#content .entry ul#video_list {
+	list-style: none;
+	padding-left: 10px;
+}
+
+#content .entry ul#video_list li.video_panel {
+	position: relative;
+	overflow: hidden;
+	padding: 10px 0px;
+	border-bottom: 1px solid #787878;
+	border-top: 1px solid #A8A8A8;
+}
+
+#content .entry ul#video_list li.video_panel:first-child {
+	border-top: none;
+}
+
+#content .entry ul#video_list li.video_panel:last-child {
+	border-bottom: none;
+}
+
+#content .video_panel img {
+	float: left;
+	width: 200px;
+	height: auto;
+}
+
+#content .video_panel div.summary_info {
+	margin-left: 220px;
+}
+
+#content .video_panel h4 {
+	margin: 0px;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+#content .video_panel a {
+	overflow: hidden;
+	display: block;
+	border-bottom: none;
+}
+
+#content .video_panel p.summary {
+	color: #787878;
+	margin: 8px 0px;
+}
+
+#content #video_detail .video_embed {
+	float: left;
+	width: 600px;
+}
+
+#content #video_detail #video_info {
+	float: left;
+	width: 200px;
+	background: none repeat scroll 0 0 rgba(235, 235, 235, 0.8);
+	border-radius: 6px;
+	padding: 10px 20px;
+}
+
+#content #video_detail #video_info #description {
+	margin: 10px 0px 0px 0px;
+	display: none;
+}
+
+#content #video_detail #video_info #description a {
+	display: none;
+}
+
+#content #video_detail #video_info #description p {
+	margin: 0px;
+	font-size: 0.8em;
+}
+
+#content #video_detail #video_info #description.show {
+	display: block;
+}
+
+.pagination {
+	clear: both;
+}
+
+#breadcrumb {
+	height: 16px;
+	line-height: 16px;
+}
+
+#breadcrumb ul {
+	list-style: none;
+	padding: 0px 0px 10px 0px;
+}
+
+#breadcrumb li {
+	float: left;
+	margin-right: 10px;
+	background: url("/static/images/breadcrumb_arrow.png") no-repeat scroll 0 0 transparent;
+	padding-left: 20px;
+}

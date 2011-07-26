@@ -1,0 +1,52 @@
+{% extends "videos/base.html" %}
+{% block title %}Video: {{ video.title }} | {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+    <div id="breadcrumb">
+        <ul>
+            <li><a href="{% url home_view %}">Home</a></li>
+            <li><a href="{% url videos_index %}">Videos</a></li>
+            <li>{{ video.title }}</li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content_header_title %}{{ video.title }}{% endblock %}
+{% block main_content %}
+    {% if perms.videos.can_add_video %}<div id="edit_link"><a href="{{ video.edit_link }}">Edit {{ video.title }}</a></div>{% endif %}
+    <div class="entry">
+        {% load thumbnail %}
+        <div id="video_detail">
+            {{ video.embed_code }}
+            <div id="video_info">
+                <p>Posted by: tanickl</p>
+                <a href="#" id="description_link">Show Description</a>
+                <div id="description" class="show"><p>{{ video.description|safe }}</p></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready (function () {
+            var block = $("div#video_info #description");
+            // Hide description div and show description_link
+            $("div#video_info a#description_link").show ();
+            block.removeClass ("show");
+
+            // Set onclick function
+            $("div#video_info a#description_link").click (function (e) {
+                e.preventDefault();
+                var block = $("div#video_info #description");
+                if (!block.hasClass ("show")) {
+                    // Display will become shown.
+                    $(this).text ("Hide Description");
+                }
+                else {
+                    // Display will become hidden.
+                    $(this).text ("Show Description");
+                }
+                block.toggleClass ("show");
+            });
+        });
+    </script>
+{% endblock main_content %}
+

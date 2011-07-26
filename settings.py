@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'blog',
     "projects",
+    "videos",
     'pagination',
     'djangosphinx',
     'pingback',
