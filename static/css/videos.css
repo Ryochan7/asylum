@@ -117,6 +117,16 @@
 	display: block;
 }
 
+.addthis_toolbox {
+	float: left;
+	margin-top: 20px;
+}
+
+#at20mc a {
+	border: none;
+	text-decoration: none;
+}
+
 .pagination {
 	clear: both;
 }

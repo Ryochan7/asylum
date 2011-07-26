@@ -1,5 +1,10 @@
 {% extends "videos/base.html" %}
 {% block title %}Video: {{ video.title }} | {{ block.super }}{% endblock %}
+{% load addthis_tags %}
+{% block extra_js %}
+    {{ block.super }}
+    {% addthis_header %}
+{% endblock %}
 
 {% block breadcrumb %}
     <div id="breadcrumb">
@@ -22,8 +27,11 @@
                 <p class="posted_by">Posted by: tanickl</p>
                 <p class="origin">Origin URL: <br/><input type="text" value="{{ video.video_url }}" /></p>
                 <a href="#" id="description_link">Show Description</a>
-                <div id="description" class="show"><p>{{ video.description|safe }}</p></div>
+                <div id="description" class="show">
+                    <p>{{ video.description|safe }}</p>
+                </div>
             </div>
+            {% addthis_share %}
         </div>
     </div>
     <script type="text/javascript">

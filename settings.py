@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'blog',
     "projects",
     "videos",
+    "addthis",
     'pagination',
     'djangosphinx',
     'pingback',
