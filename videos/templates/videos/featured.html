@@ -1,0 +1,21 @@
+{% load thumbnail %}
+<div id="featured_videos">
+    <ul>
+        {% for video in latest_video_list %}
+        {% thumbnail video.photo 120x90 crop as im %}
+        <li>
+            <a href="{{ video.get_absolute_url }}" title="{{ video.title }}">
+                {% if im %}
+                    <img src="{{ im.url }}" alt="{{ video.title }}" />
+                {% else %}
+                    <img src="/static/images/default_video_120x90.png" alt="{{ video.title }}" />
+                {% endif %}
+                <div class="play_icon">
+                    <img src="{{ STATIC_URL }}images/play.png" alt="Play Video" />
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+

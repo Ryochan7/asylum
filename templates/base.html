@@ -88,6 +88,7 @@ Released   : 20081210
         {% endblock %}
 
         <div id="page">
+            {% block top_content %}{% endblock %}
             <div id="content">
                 {% load pagination_tags %}
                 {% autoescape off %}
@@ -175,10 +176,11 @@ as well as information about some of my software projects.</p>
                 <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">
                     <img alt="Creative Commons License" style="border-width:0" src="{{ STATIC_URL }}images/creativecommons_3.png" />
                 </a>
+            </p>
 
-                <p>
-                    This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
-                </p>
+            <p>
+                This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+            </p>
 
         </div>
         <!-- end #footer -->

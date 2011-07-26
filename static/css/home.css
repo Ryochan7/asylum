@@ -1,0 +1,32 @@
+#featured_videos {
+	overflow: hidden;
+	width: 750px;
+	margin: 10px auto;
+	padding: 10px;
+}
+
+#featured_videos ul {
+	list-style: none;
+	padding-left: 0px;
+}
+
+#featured_videos ul li {
+	float: left;
+	width: 150px;
+	height: 100px;
+	position: relative;
+}
+
+#featured_videos ul li a {
+	border: none;
+}
+
+#featured_videos .play_icon {
+	position: absolute;
+	top: 40px;
+	left: 48px;
+}
+
+#content, #sidebar {
+	padding-top: 10px;
+}
