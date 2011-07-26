@@ -86,12 +86,25 @@
 	padding: 10px 20px;
 }
 
+#content #video_detail #video_info p.posted_by {
+	margin-bottom: 4px;
+}
+
+#content #video_detail #video_info p.origin {
+	margin-bottom: 14px;
+}
+
 #content #video_detail #video_info #description {
 	margin: 10px 0px 0px 0px;
 	display: none;
 }
 
-#content #video_detail #video_info #description a {
+#content #video_detail #video_info a#description_link {
+	display: none;
+}
+
+#content #video_detail #video_info #description {
+	margin: 10px 0px 0px 0px;
 	display: none;
 }
 

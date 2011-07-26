@@ -19,7 +19,8 @@
         <div id="video_detail">
             {{ video.embed_code }}
             <div id="video_info">
-                <p>Posted by: tanickl</p>
+                <p class="posted_by">Posted by: tanickl</p>
+                <p class="origin">Origin URL: <br/><input type="text" value="{{ video.video_url }}" /></p>
                 <a href="#" id="description_link">Show Description</a>
                 <div id="description" class="show"><p>{{ video.description|safe }}</p></div>
             </div>
