@@ -1,6 +1,26 @@
 {% extends "videos/base.html" %}
 {% block title %}Video: {{ video.title }} | {{ block.super }}{% endblock %}
 {% load addthis_tags %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <link href="{{ STATIC_URL }}css/tabs.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #tabsF {
+            width: 560px;
+            height: 40px;
+            background: none;
+            float: none;
+        }
+        #tabsF ul {
+            padding-left: 10px;
+        }
+        #tabsF a {
+            border-bottom: none;
+        }
+    </style>
+{% endblock %}
+
 {% block extra_js %}
     {{ block.super }}
     {% addthis_header %}
@@ -18,7 +38,15 @@
 
 {% block content_header_title %}{{ video.title }}{% endblock %}
 {% block main_content %}
-    {% if perms.videos.can_add_video %}<div id="edit_link"><a href="{{ video.edit_link }}">Edit {{ video.title }}</a></div>{% endif %}
+    {% if perms.videos.can_add_video %}
+    <div id="edit_link">
+        <div id="tabsF">
+            <ul>
+                <li><a href="{{ video.edit_link }}"><span>Edit</span></a></li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
     <div class="entry">
         {% load thumbnail %}
         <div id="video_detail">

@@ -4,6 +4,20 @@
 {% block extra_css %}
 {{ block.super }}
 <link rel="stylesheet" href="{{ STATIC_URL }}lightbox/css/lightbox.css" type="text/css" media="screen" />
+<link href="{{ STATIC_URL }}css/tabs.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        #tabsF {
+            height: 40px;
+            background: none;
+            float: none;
+        }
+        #tabsF ul {
+            padding-left: 10px;
+        }
+        #tabsF a {
+            border-bottom: none;
+        }
+    </style>
 {% endblock %}
 
 {% block extra_js %}
@@ -28,7 +42,17 @@ LightboxOptions.fileBottomNavCloseImage = "{{ STATIC_URL }}lightbox/images/close
 
 {% block content_header_title %}{{ project.title }}{% endblock %}
 {% block main_content %}
-    {% if perms.projects.can_add_project %}<div id="edit_link"><a href="{{ project.edit_link }}">Edit {{ project.title }}</a></div>{% endif %}
+    {% if perms.projects.can_add_project %}
+    <div id="edit_link">
+        <div id="tabsF">
+            <ul>
+                <li>
+                    <a href="{{ project.edit_link }}"><span>Edit</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
     <div class="entry">
         {% load thumbnail %}
         <div class="project details">
