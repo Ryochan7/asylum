@@ -1,4 +1,5 @@
 import re
+import datetime
 from django.db import models
 from django.core import urlresolvers
 from django.template.loader import render_to_string
@@ -9,6 +10,7 @@ blip_id_re = re.compile (r"http://(?:www\.)?blip.tv/\S+/.*-(\d+)")
 class Video (models.Model):
     title = models.CharField (max_length=200)
     slug = models.SlugField (max_length=50, unique=True)
+    pub_date = models.DateTimeField (default=datetime.datetime.now, db_index=True)
     photo = models.ImageField (upload_to="video_images", max_length=512, blank=True)
     video_url = models.CharField (max_length=256)
     summary = models.CharField (max_length=200, blank=True, help_text=u"If summary is left blank, a truncated version of the description will be used")

@@ -51,6 +51,17 @@
 	height: auto;
 }
 
+#content .video_panel div.pub_date {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.8);
+	border-radius: 10px;
+	position: absolute;
+	bottom: 14px;
+	color: #FFFFFF;
+	font-size: 0.8em;
+	left: 6px;
+	padding: 2px 4px;
+}
+
 #content .video_panel div.summary_info {
 	margin-left: 220px;
 }
@@ -86,7 +97,7 @@
 	padding: 10px 20px;
 }
 
-#content #video_detail #video_info p.posted_by {
+#content #video_detail #video_info p.posted_by, #content #video_detail #video_info p.pub_date {
 	margin-bottom: 4px;
 }
 

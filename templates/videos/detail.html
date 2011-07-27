@@ -53,6 +53,7 @@
             {{ video.embed_code }}
             <div id="video_info">
                 <p class="posted_by">Posted by: tanickl</p>
+                <p class="pub_date">Date: {{ video.pub_date|date:"N d, Y" }}</p>
                 <p class="origin">Origin URL: <br/><input type="text" value="{{ video.video_url }}" /></p>
                 <a href="#" id="description_link">Show Description</a>
                 <div id="description" class="show">
