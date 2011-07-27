@@ -133,6 +133,17 @@
 	margin-top: 20px;
 }
 
+.addthis_toolbox a {
+	border: none;
+}
+
+#content #video_detail iframe.like_button {
+	border: none;
+	width: 260px;
+	height: 80px;
+	margin-top: 20px;
+}
+
 #at20mc a {
 	border: none;
 	text-decoration: none;

@@ -2,18 +2,21 @@
 {% load thumbnail %}
 
 {% block title %}Video: {{ video.title }} | {{ block.super }}{% endblock %}
-{% block extra_xmlns %}xmlns:og="http://ogp.me/ns#"{% endblock %}
+{% block extra_xmlns %}xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"{% endblock %}
 
 {% block meta_tags %}
     {% thumbnail video.photo 200x110 crop as im %}
     <meta property="og:title" content="{{ video.title }}" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{ current_site }}{{ video.get_absolute_url }}" />
+    <meta property="og:url" content="http://{{ current_site.domain }}{{ video.get_absolute_url }}" />
     {% if im %}
         <meta property="og:image" content="{{ im.url }}" />
     {% else %}
         <meta property="og:image" content="{{ STATIC_URL }}images/default_video.png" />
     {% endif %}
+    <meta property="og:site_name" content="{{ current_site.name }}" />
+    <meta property="fb:admins" content="738212647" />
+    <meta property="og:description" content="{{ video.description }}" />
     <meta name="keywords" content="" />
     <meta name="description" content="{{ video.description }}" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -78,6 +81,8 @@
                 </div>
             </div>
             {% addthis_share %}
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http://{{ current_site.domain }}{{ video.get_absolute_url }}"
+            scrolling="no" frameborder="0" class="like_button"></iframe>
         </div>
     </div>
     <script type="text/javascript">
