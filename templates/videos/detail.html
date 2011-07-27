@@ -1,5 +1,23 @@
 {% extends "videos/base.html" %}
+{% load thumbnail %}
+
 {% block title %}Video: {{ video.title }} | {{ block.super }}{% endblock %}
+{% block extra_xmlns %}xmlns:og="http://ogp.me/ns#"{% endblock %}
+
+{% block meta_tags %}
+    {% thumbnail video.photo 200x110 crop as im %}
+    <meta property="og:title" content="{{ video.title }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{ current_site }}{{ video.get_absolute_url }}" />
+    {% if im %}
+        <meta property="og:image" content="{{ im.url }}" />
+    {% else %}
+        <meta property="og:image" content="{{ STATIC_URL }}images/default_video.png" />
+    {% endif %}
+    <meta name="keywords" content="" />
+    <meta name="description" content="{{ video.description }}" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+{% endblock %}
 {% load addthis_tags %}
 
 {% block extra_css %}
@@ -48,7 +66,6 @@
     </div>
     {% endif %}
     <div class="entry">
-        {% load thumbnail %}
         <div id="video_detail">
             {{ video.embed_code }}
             <div id="video_info">

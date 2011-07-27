@@ -1,0 +1,3 @@
+A new feedback was posted by {{ instance.email }} with an id of
+{{ instance.id }}. Pleast visit the admin section at
+{{ edit_url }} to check that state of the message.

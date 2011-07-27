@@ -104,12 +104,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
     "django.core.context_processors.request",
     "blog.context_processors.paginate_setting",
+    "context_processors.current_site",
 )
 
 ROOT_URLCONF = 'asylum.urls'
@@ -144,7 +145,7 @@ INSTALLED_APPS = (
     "contact_form",
     "easy_thumbnails",
     'django_extensions',
-    #"debug_toolbar",
+    "debug_toolbar",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -183,6 +184,7 @@ MARKITUP_FILTER = (
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markitup/skins/markitup'
 BLOG_NAME = "Ryochan's Asylum"
+CONTACT_SEND_ADMIN_MAIL = False
 
 try:
     from local_settings import *
