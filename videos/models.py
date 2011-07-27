@@ -16,6 +16,9 @@ class Video (models.Model):
     summary = models.CharField (max_length=200, blank=True, help_text=u"If summary is left blank, a truncated version of the description will be used")
     description = models.TextField ()
 
+    class Meta (object):
+        ordering = ("-pub_date",)
+
     def __unicode__ (self):
         return self.title
 
