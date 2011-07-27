@@ -1,6 +1,7 @@
 import re
 import logging
 from django import forms
+from markitup.widgets import MarkItUpWidget
 from videos.models import Video
 
 logger = logging.getLogger ("videos.forms")
@@ -8,6 +9,9 @@ logger = logging.getLogger ("videos.forms")
 class VideoAdminForm (forms.ModelForm):
     class Meta (object):
         model = Video
+        widgets = {
+            "description": MarkItUpWidget (markitup_set="markitup/sets/default"),
+        }
 
     def clean (self):
         if self.cleaned_data["summary"] == "":

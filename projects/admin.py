@@ -1,10 +1,12 @@
 from django.contrib import admin
 from projects.models import Project, ProjectType
+from projects.forms import ProjectAdminForm
 
 class ProjectTypeAdmin (admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 class ProjectAdmin (admin.ModelAdmin):
+    form = ProjectAdminForm
     prepopulated_fields = {"slug": ("title",)}
 
 #class PostAdmin (admin.ModelAdmin):
