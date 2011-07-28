@@ -149,6 +149,65 @@
 	text-decoration: none;
 }
 
+#adjacent_videos {
+	overflow: hidden;
+	height: 150px;
+	margin: 6px 0px 0px 0px;
+}
+
+#adjacent_videos a {
+	border: none;
+	text-decoration: none;
+}
+
+#adjacent_videos h4 {
+	display: inline-block;
+	margin: 0px 0px 6px;
+	min-width: 540px;
+	padding: 4px 10px;
+}
+
+#adjacent_videos div.loading {
+	display: none;
+}
+
+#adjacent_videos ul {
+	padding-left: 0px;
+	list-style: none;
+}
+
+#adjacent_videos ul li {
+	float: left;
+	width: 120px;
+	margin-right: 30px;
+	height: 90px;
+}
+
+#adjacent_videos ul li.previous, #adjacent_videos ul li.next {
+	height: 50px;
+	margin: 30px 0px;
+	width: 50px;
+}
+
+#adjacent_videos .adjacent_video.active {
+	background: none repeat scroll 0 0 #F0F0F0;
+	padding: 6px;
+}
+
+#adjacent_videos a.paginate.previous, #adjacent_videos a.paginate.next {
+	background: url("../images/previous_arrow.png") repeat scroll 0 0 transparent;
+	border: none;
+	display: block;
+	height: 32px;
+	width: 32px;
+	text-indent: -9999px;
+}
+
+#adjacent_videos a.paginate.next {
+	background: url("../images/next_arrow.png");
+}
+
+
 .pagination {
 	clear: both;
 }

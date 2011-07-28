@@ -1,0 +1,32 @@
+{% load thumbnail %}
+<div id="adjacent_videos">
+    <h4>Related Videos</h4>
+    <div class="loading">
+       <img src="{{ STATIC_URL }}images/ajax-loader.gif" alt="loading icon" />
+    </div>
+    <ul>
+{% if page_obj.has_previous %}
+        <li class="previous">
+            <a href="{% url videos_adjacent active_video.id page_obj.previous_page_number %}" class="paginate previous">Previous</a>
+        </li>
+{% endif %}
+{% for video in video_list %}
+        <li class="adjacent_video{% if video == active_video %} active{% endif %}">
+            <a href="{{ video.get_absolute_url }}" title="{{ video.title }}">
+            {% thumbnail video.photo 120x90 crop as im %}
+            {% if im %}
+                <img src="{{ im.url }}" alt="{{ video.title }}" />
+            {% else %}
+                <img src="{{ STATIC_URL }}images/default_video_120x90.png" alt="{{ video.title }}" />
+            {% endif %}
+            </a>
+        </li>
+{% endfor %}
+{% if page_obj.has_next %}
+        <li class="next">
+            <a href="{% url videos_adjacent active_video.id page_obj.next_page_number %}" class="paginate next">Next</a>
+        </li>
+{% endif %}
+    </ul>
+</div>
+

@@ -1,5 +1,6 @@
 {% extends "videos/base.html" %}
 {% load thumbnail %}
+{% load videos_tags %}
 
 {% block title %}Video: {{ video.title }} | {{ block.super }}{% endblock %}
 {% block extra_xmlns %}xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"{% endblock %}
@@ -45,6 +46,25 @@
 {% block extra_js %}
     {{ block.super }}
     {% addthis_header %}
+    <script type="text/javascript">
+        function adjacent_paginate () {
+            $("#adjacent_videos a.paginate").click (function (e) {
+                e.preventDefault ();
+                $("#adjacent_videos div.loading").show ();
+                var list_block = $("#adjacent_videos ul");
+                var parent_block = $("#adjacent_videos");
+                list_block.hide ();
+                $.get (this.href, function (data) {
+                    $("#adjacent_videos div.loading").hide ();
+                    parent_block.replaceWith (data);
+                    adjacent_paginate ();
+                }).error (function () {
+                    alert ("Could not complete request");
+                });
+            });
+        }
+        $(document).ready (adjacent_paginate);
+    </script>
 {% endblock %}
 
 {% block breadcrumb %}
@@ -108,5 +128,6 @@
             });
         });
     </script>
+    {% adjacent_videos video %}
 {% endblock main_content %}
 

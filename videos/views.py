@@ -24,4 +24,15 @@ class VideoDetailView (DetailView):
     model = Video
     template_name = "videos/detail.html"
 
+class AjaxAdjacentView (ListView):
+    model = Video
+    template_name="videos/adjacent_list.html"
+    paginate_by = settings.ADJACENT_PAGINATE_BY
+
+    def get_context_data (self, **kwargs):
+        context = super (AjaxAdjacentView, self).get_context_data (**kwargs)
+        print context
+        context["active_video"] = get_object_or_404 (Video, id=self.kwargs["id"])
+        print context["active_video"]
+        return context
 
