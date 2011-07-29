@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'taggit_templatetags',
     "contact_form",
     "easy_thumbnails",
+    "south",
     'django_extensions',
 )
 
