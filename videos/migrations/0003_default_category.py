@@ -1,32 +1,19 @@
 # encoding: utf-8
 import datetime
 from south.db import db
-from south.v2 import SchemaMigration
+from south.v2 import DataMigration
 from django.db import models
 
-class Migration(SchemaMigration):
+class Migration(DataMigration):
 
     def forwards(self, orm):
-        
-        # Adding model 'VideoCategory'
-        db.create_table('videos_videocategory', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, db_index=True)),
-        ))
-        db.send_create_signal('videos', ['VideoCategory'])
-
-        # Adding field 'Video.category'
-        db.add_column('videos_video', 'category', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['videos.VideoCategory']), keep_default=False)
+        "Write your forwards methods here."
+        orm["videos.VideoCategory"].objects.create (title="Uncategorized", slug="uncategorized")
 
 
     def backwards(self, orm):
-        
-        # Deleting model 'VideoCategory'
-        db.delete_table('videos_videocategory')
-
-        # Deleting field 'Video.category'
-        db.delete_column('videos_video', 'category_id')
+        "Write your backwards methods here."
+        orm["videos.VideoCategory"].objects.delete ()
 
 
     models = {
