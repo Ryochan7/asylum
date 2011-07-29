@@ -21,8 +21,8 @@ def latest_videos ():
 def adjacent_videos (video):
     STATIC_URL = site_settings.STATIC_URL
     paginate_by = settings.ADJACENT_PAGINATE_BY
-    video_list = Video.objects.all ()
-    placement_count = Video.objects.filter (pub_date__gte=video.pub_date).count ()
+    video_list = Video.objects.filter (category=video.category)
+    placement_count = Video.objects.filter (category=video.category).filter (pub_date__gte=video.pub_date).count ()
     paginator = Paginator (video_list, paginate_by)
     page = divmod (placement_count, paginate_by)
     page = int (page[0] + math.ceil (page[1] / float (paginate_by)))

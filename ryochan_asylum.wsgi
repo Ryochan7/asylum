@@ -17,7 +17,7 @@ if ROOT_FILE_PATH not in sys.path:
 if PROJECT_PATH not in sys.path:
     sys.path.insert (1, PROJECT_PATH)
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "settings.production"
  
 from django.core.handlers.wsgi import WSGIHandler
 application = WSGIHandler ()

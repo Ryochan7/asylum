@@ -3,7 +3,9 @@
 import os
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
-PROJECT_ROOT = os.path.abspath (os.path.dirname (__file__))
+PROJECT_ROOT = os.path.abspath (
+   os.path.join (os.path.dirname (__file__), "..")
+)
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -88,7 +90,7 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 # Override this key in local_settings.py with a different
 # value
-SECRET_KEY = 'ri+f&-5d_t!nivhv)k-u8@mw9_m&p6v4)_bgsae(%z(=_6-8^1'
+SECRET_KEY = '=&w%)(*6eocv1#pseo34%i*ic#l*+7k8p*w_nrevnv^=9pmgo*'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -104,7 +106,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
@@ -145,7 +146,6 @@ INSTALLED_APPS = (
     "contact_form",
     "easy_thumbnails",
     'django_extensions',
-    #"debug_toolbar",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -171,8 +171,9 @@ LOGGING = {
     }
 }
 
-INTERNAL_IPS = ('127.0.0.1',)
 ANALYTICS = False
+CONTACT_SEND_ADMIN_MAIL = False
+ADD_THIS_PROFILE_ID = "ra-4e2e83b10c45efee"
 DISQUS_SHORTNAME = "ryochansasylum"
 DISQUS_DEVELOPER = 1
 PAGINATE_BY = 1
@@ -184,10 +185,4 @@ MARKITUP_FILTER = (
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markitup/skins/markitup'
 BLOG_NAME = "Ryochan's Asylum"
-CONTACT_SEND_ADMIN_MAIL = False
-
-try:
-    from local_settings import *
-except ImportError:
-    pass
 

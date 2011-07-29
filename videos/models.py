@@ -7,9 +7,21 @@ from django.template.loader import render_to_string
 video_id_re = re.compile (r"http://(?:www\.)?youtube\.com/watch\?v=(\S+)(&)?.*")
 blip_id_re = re.compile (r"http://(?:www\.)?blip.tv/\S+/.*-(\d+)")
 
+class VideoCategory (models.Model):
+    title = models.CharField (max_length=200)
+    slug = models.SlugField (max_length=50, unique=True)
+    #parent = models.ForeignKey ("self", null=True, blank=True)
+
+    def __unicode__ (self):
+        return self.title
+
+    class Meta (object):
+        verbose_name_plural = u"Video Categories"
+
 class Video (models.Model):
     title = models.CharField (max_length=200)
     slug = models.SlugField (max_length=50, unique=True)
+    category = models.ForeignKey (VideoCategory, default=1)
     pub_date = models.DateTimeField (default=datetime.datetime.now, db_index=True)
     photo = models.ImageField (upload_to="video_images", max_length=512, blank=True)
     video_url = models.CharField (max_length=256)

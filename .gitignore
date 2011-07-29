@@ -9,5 +9,6 @@ test.db
 media/*_images/*
 site_static/*
 !site_static/blank.txt
+settings/secrets.py
 *.*~
 
