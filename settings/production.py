@@ -3,7 +3,7 @@ from settings.common import *
 # to produce an error if DATABASES is not configured in secrets.py
 DATABASES = {
 }
-from settings.secerts import *
+from settings.secrets import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
