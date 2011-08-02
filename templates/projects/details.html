@@ -56,9 +56,12 @@ LightboxOptions.fileBottomNavCloseImage = "{{ STATIC_URL }}lightbox/images/close
     <div class="entry">
         {% load thumbnail %}
         <div class="project details">
-            <a href="{% thumbnail project.picture 1000x1000 %}" rel="lightbox" title="{{ project.summary }}" >
-                <img src="{% thumbnail project.picture 200x200 crop="0,0" %}" alt="{{ project.title }}" />
-            </a>
+            <div id="preview">
+                <a href="{% thumbnail project.picture 1000x1000 %}" rel="lightbox" title="{{ project.summary }}" >
+                    <img src="{% thumbnail project.picture 200x200 crop="0,0" %}" alt="{{ project.title }}" />
+                    <p>Click to enlarge</p>
+                </a>
+            </div>
                 <div id="base_info">
                     <p class="title">Title: {{ project.title }}</p>
                     <p>Project URL: <a href="{{ project.url }}">{{ project.url }}</a></p>

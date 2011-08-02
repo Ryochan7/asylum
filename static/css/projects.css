@@ -72,6 +72,14 @@
 	margin: 0px;
 }
 
+#content .project.details #preview {
+	float: left;
+}
+
+#content .project.details #preview p {
+	text-align: center;
+}
+
 #footer {
 	clear: both;
 }

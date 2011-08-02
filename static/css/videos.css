@@ -151,6 +151,10 @@
 	width: 200px;
 }
 
+#content #video_detail #video_options {
+	margin-left: 600px;
+}
+
 #at20mc a {
 	border: none;
 	text-decoration: none;
@@ -200,6 +204,7 @@
 	background: none repeat scroll 0 0 #F0F0F0;
 	padding: 6px;
 	margin-top: -6px;
+	border-radius: 6px;
 }
 
 #adjacent_videos a.paginate.previous, #adjacent_videos a.paginate.next {
