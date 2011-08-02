@@ -141,7 +141,8 @@
 #content #video_detail iframe.like_button {
 	border: none;
 	width: 260px;
-	height: 40px;
+	max-height: 80px;
+	overflow: hidden;
 	margin-top: 20px;
 }
 
