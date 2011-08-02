@@ -4,6 +4,7 @@ from django.views.generic import (TemplateView, ListView, DetailView,
     FormView, CreateView)
 from django.shortcuts import get_object_or_404
 from videos.models import Video, VideoCategory
+from videos.forms import VideoOptions
 from videos.conf import settings
 
 logger = logging.getLogger ("videos.views")
@@ -28,6 +29,21 @@ class IndexView (ListView):
 class VideoDetailView (DetailView):
     model = Video
     template_name = "videos/detail.html"
+
+    def get_context_data (self, **kwargs):
+        context = super (VideoDetailView, self).get_context_data (**kwargs)
+        form = VideoOptions ()
+        if self.request.COOKIES.get ("autoplay", None):
+            form = VideoOptions (self.request.COOKIES)
+            # If form is not valid, reset form
+            if not form.is_valid ():
+                form = VideoOptions ()
+
+        context["video_options"] = form
+        if context.get ("video", None):
+            context["next_video"] = context["video"].next_video ()
+            context["previous_video"] = context["video"].previous_video ()
+        return context
 
 class AjaxAdjacentView (ListView):
     model = Video

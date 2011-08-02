@@ -62,3 +62,20 @@ class Video (models.Model):
             args=(self.id,))
         return url
 
+    def next_video (self):
+        next = None
+        try:
+            next = self.get_next_by_pub_date (category__id=self.category.id)
+        except self.__class__.DoesNotExist:
+            return None
+
+        return next
+
+    def previous_video (self):
+        previous = None
+        try:
+            previous = self.get_previous_by_pub_date (category__id=self.category.id)
+        except self.__class__.DoesNotExist:
+            return None
+
+        return previous

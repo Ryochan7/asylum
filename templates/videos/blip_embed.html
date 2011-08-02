@@ -1,9 +1,18 @@
-<div class="video_embed">
+<div id="video_embed">
+    <script type="text/javascript">
+        function getUpdate (changeType, param1, params2) {
+            switch (changeType) {
+                case "playlist_complete": 
+                    check_playlist ();
+                    break;
+            }
+        }
+    </script>
     <object data="http://blip.tv/scripts/flash/stratos.swf" width="560" height="450" type="application/x-shockwave-flash">
         <param name="movie" value="http://blip.tv/scripts/flash/stratos.swf" />
 	    <param name="allowscriptaccess" value="always"/>
 	    <param name="allowfullscreen" value="true"/>
-	    <param name="flashvars" value="autostart=true&amp;brandname=Hellfire Commentaries&amp;file={{ alias }}&amp;brandlink=http://www.hellfirecomms.com/" />
+	    <param name="flashvars" value="autostart=true&amp;enablejs=true&brandname=Need New Brand&amp;file={{ alias }}&amp;brandlink=http://www.ryochan7.com/" />
     </object>
 </div>
 

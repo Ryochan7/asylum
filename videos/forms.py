@@ -23,3 +23,6 @@ class VideoAdminForm (forms.ModelForm):
 
         return self.cleaned_data
 
+class VideoOptions (forms.Form):
+    autoplay = forms.BooleanField (initial=False)
+

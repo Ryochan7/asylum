@@ -84,7 +84,7 @@
 	margin: 8px 0px;
 }
 
-#content #video_detail .video_embed {
+#content #video_detail #video_embed {
 	float: left;
 	width: 600px;
 }
@@ -141,7 +141,7 @@
 #content #video_detail iframe.like_button {
 	border: none;
 	width: 260px;
-	height: 80px;
+	height: 40px;
 	margin-top: 20px;
 }
 
