@@ -145,10 +145,10 @@
             });
             $("#video_options input#id_autoplay").click (function () {
                 if ($(this).attr ("checked")) {
-                    $.cookie ("autoplay", "true");
+                    $.cookie ("autoplay", "true", {path: "/"});
                 }
                 else {
-                    $.cookie ("autoplay", null);
+                    $.cookie ("autoplay", null, {path: "/"});
                 }
             });
         });
