@@ -147,6 +147,8 @@ INSTALLED_APPS = (
     "easy_thumbnails",
     "south",
     'django_extensions',
+    "treemenus",
+    "menu_extension",
 )
 
 # A sample logging configuration. The only tangible logging
