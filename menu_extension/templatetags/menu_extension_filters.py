@@ -5,8 +5,14 @@ from django.core.urlresolvers import reverse
 register = template.Library()
 
 def check_path_lists (item_list, path_list):
-    if len (item_list) > len (path_list):
+    item_list_length = len (item_list)
+    path_list_length = len (path_list)
+    # Child can't be selected when parent is the active page
+    if item_list_length > path_list_length:
         return False
+    # Handle case of /
+    elif item_list_length == path_list_length and item_list_length == 0:
+        return True
 
     selected = False
     for i, part in enumerate (item_list):
