@@ -5,9 +5,9 @@
     {% if user.is_superuser or not menu_item.extension.protected %}
         {% if menu_item.has_children %}
             {% if menu_item.named_url %}
-                <li class="parent"><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
+                <li class="parent {{ menu_item.extension.css_classes|default:"" }}"><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
             {% else %}
-            <li class="parent"><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
+                <li class="parent {{ menu_item.extension.css_classes|default:"" }}"><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
             {% endif %}
             <ul>
                 {% for child in menu_item.children %}
@@ -17,9 +17,9 @@
             </li>
         {% else %}
             {% if menu_item.named_url %}
-                <li><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
+                <li{% if menu_item.extension.css_classes %}class="{{ menu_item.extension.css_classes }}"{% endif %}><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
             {% else %}
-                <li><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
+                <li{% if menu_item.extension.css_classes %}class="{{ menu_item.extension.css_classes }}"{% endif %}><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
             {% endif %}
         {% endif %}
     {% endif %}
@@ -30,9 +30,9 @@
     {% if user.is_authenticated or not menu_item.extension.protected %}
         {% if menu_item.has_children %}
             {% if menu_item.named_url %}
-                <li class="parent"><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
+                <li class="parent  {{ menu_item.extension.css_classes|default:"" }}"><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
             {% else %}
-                <li class="parent"><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
+                <li class="parent  {{ menu_item.extension.css_classes|default:"" }}"><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a>
             {% endif %}
             <ol>
                 {% for child in menu_item.children %}
@@ -42,9 +42,9 @@
             </li>
         {% else %}
             {% if menu_item.named_url %}
-                <li><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
+                <li{% if menu_item.extension.css_classes %}class="{{ menu_item.extension.css_classes }}"{% endif %}><a href="{% reverse_named_url menu_item.named_url %}"{% if menu_item.named_url|contains_named_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
             {% else %}
-                <li><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
+                <li{% if menu_item.extension.css_classes %}class="{{ menu_item.extension.css_classes }}"{% endif %}><a href="{{ menu_item.url }}"{% if menu_item.url|contains_url_path:request.path %} class="selected"{% endif %}>{{ menu_item.caption }}</a></li>
             {% endif %}
         {% endif %}
     {% endif %}
