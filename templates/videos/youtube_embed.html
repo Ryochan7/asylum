@@ -14,7 +14,9 @@
           width: '560',
           videoId: "{{ alias }}",
           playerVars: {
+            "wmode": "opaque",
             "showinfo": "0",
+            "autohide": "1",
           },
           events: {
             'onReady': onPlayerReady,
