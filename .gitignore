@@ -5,7 +5,7 @@ dist/
 nbproject/
 local_settings.py
 dev.db
-static/*
-!static/media
 static/media/*
+!static/media/blank.txt
+!static/robots.txt
 *.*~
