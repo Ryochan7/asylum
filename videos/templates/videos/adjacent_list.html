@@ -1,0 +1,35 @@
+{% load mezzanine_tags %}
+
+<div id="video-list-container" class="clearfix">
+    <div class="loading">
+       <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading icon" />
+    </div>
+
+    <ul>
+{% if page_obj.has_previous %}
+        <li class="previous clearfix row">
+            <a href="{% url videos_adjacent active_video.category.slug active_video.id page_obj.previous_page_number %}" class="paginate previous span3">Previous</a>
+        </li>
+{% endif %}
+{% for video in video_list %}
+        <li class="adjacent_video clearfix row">
+	    <a class="alignleft video-thumbnail-link span2" href="{{ video.get_absolute_url }}" title="{{ video.title }}">
+		{% if video.featured_image %}
+		    <img src="{{ MEDIA_URL }}{% thumbnail video.featured_image 120 90 %}" alt="{{ video.title }}" class="{% if video.get_absolute_url == active_video.get_absolute_url %}block-dark{% else %}thumbnail{% endif %}" />
+		{% else %}
+		    <img src="{{ STATIC_URL }}img/default_video_120x90.png" alt="{{ video.title }}" />
+		{% endif %}
+	    </a>
+
+	    <div class="video-title span1">
+	       <h5><a href="{{ video.get_absolute_url }}" title="{{ video.title }}">{{ video.title }}</a></h5>
+	    </div>
+	</li>
+{% endfor %}
+{% if page_obj.has_next %}
+        <li class="next clearfix">
+            <a href="{% url videos_adjacent active_video.category.slug active_video.id page_obj.next_page_number %}" class="paginate next alignright">Next</a>
+        </li>
+{% endif %}
+    </ul>
+</div>

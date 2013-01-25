@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+{% load pages_tags mezzanine_tags i18n future keyword_tags project_tags %}
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"{% block extra_xmlns %}{% endblock %}> <!--<![endif]-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;" />
+    <meta name="keywords" content="{% block meta_keywords %}{% metablock %}
+    {% if page and page.get_absolute_url == request.path %}
+    {% keywords_for page as keywords %}
+    {% for keyword in keywords %}
+	{% if not forloop.first %}, {% endif %}
+	{{ keyword }}
+    {% endfor %}
+    {% endif %}
+    {% endmetablock %}{% endblock meta_keywords %}">
+    <meta name="description" content="{% block meta_description %}{% metablock %}
+    {% if page and page.get_absolute_url == request.path %}
+    {{ page.description }}
+    {% endif %}
+    {% endmetablock %}{% endblock meta_description %}">
+
+    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+
+    <link rel="icon" href="{{ STATIC_URL }}asylum_theme/img/ryoohki.ico" type="image/png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}asylum_theme/img/ryoohki.ico" type="image/png" />
+
+    {% compress css %}
+    <link href="{{ STATIC_URL }}asylum_theme/css/bootstrap.css" type="text/css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}asylum_theme/css/prettyPhoto.css" type="text/css" rel="stylesheet"/>
+    {% block extra_css %}{% endblock %}
+    {% endcompress %}
+
+    <link href="{{ STATIC_URL }}asylum_theme/css/style.css" type="text/css" rel="stylesheet"/>
+
+    {% compress js %}
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.quicksand.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/superfish.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/hoverIntent.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.hoverdir.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jflickrfeed.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.elastislide.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.tweet.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/smoothscroll.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.ui.totop.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/main.js"></script>
+    {#<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/ajax-mail.js"></script>#}
+    {#<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/accordion.settings.js"></script>#}
+    {% block extra_js %}{% endblock %}
+    {% endcompress %}
+
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <link href="{{ STATIC_URL }}asylum_theme/asylum_theme/css/ie.css" type="text/css" rel="stylesheet"/>
+    <![endif]-->
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}{% spaceless %}
+    {% if page and page.get_absolute_url == request.path %}
+	page-{{ page.id }}
+    {% else %}body
+    {% endif %}{% endspaceless %}{% endblock %}">
+
+<!-- top menu -->
+{% comment %}<section id="top-menu">
+    <div class="container">
+        <div class="row">
+            <div class="span6 hidden-phone">
+                <ul class="top-menu">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                    <li><a href="#">Shorcodes</a></li>
+                    <li><a href="#" class="last">Contact</a></li>
+                </ul>
+            </div>
+            <div class="span6">
+                <ul class="top-social">
+                    <li><a href="#" class="twitter2"></a></li>
+                    <li><a href="#" class="facebook"></a></li>
+                    <li><a href="#" class="google last"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>{% endcomment %}
+
+<!-- header -->
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="span4 logo clearfix">
+                <a href="{% url "home" %}">{% comment %}<img src="{{ STATIC_URL}}asylum_theme/img/logo.png" alt="logo"/>{% endcomment %}<h2>Ryochan's Asylum</h2></a>
+            </div>
+            <div class="span3 offset5 top-social-links">
+	        <ul class="top-social clearfix">
+		    <li><a href="http://www.facebook.com/profile.php?id=738212647" class="facebook" target="_blank"></a></li>
+                    <li><a href="http://twitter.com/ryochan7" class="twitter2 last" target="_blank"></a></li>
+                </ul>
+            </div>
+        </div>
+        <nav id="menu">
+	    {% page_menu "pages/menus/dropdown.html" %}
+        </nav>
+    </div>
+</header>
+
+<!-- container -->
+<section id="container">
+    <div class="container">
+	{% nevercache %}
+	    {% for message in messages %}
+	    <div class="alert alert-{{ message.tags }}" data-alert="alert">
+		<a class="close" href="#" onclick="$(this).parent().fadeOut('fast'); return false;">×</a>{{ message }}
+	    </div>
+	    {% endfor %}
+	{% endnevercache %}
+
+	{% block breadcrumb_wrapper %}
+	<ul class="breadcrumb">
+	{% spaceless %}
+	{% block breadcrumb_menu %}{% page_menu "pages/menus/breadcrumb.html" %}{% endblock %}
+	{% endspaceless %}
+	</ul>
+	{% endblock breadcrumb_wrapper %}
+    </div>
+
+    <div class="container">
+	<div class="row">
+	    {% block container_region_placeholder %}
+	    <!-- page content -->
+	    <section id="page-content" class="alignleft span8">
+		{% block left_panel %}
+		    <!-- slider -->
+		    <div class="row">
+			<div class="span8">
+
+			    {% block title_wrapper %}
+			    <div class="title-divider">
+				<h3>{% block title %}{% endblock %}</h3>
+				<div class="divider-arrow"></div>
+			    </div>
+			    {% endblock title_wrapper %}
+
+			    {% block main_wrapper %}
+			    <div class="block-grey">
+				<div class="block-light wrapper">
+				    {% block main %}{% endblock main %}
+				</div>
+			    </div>
+			    {% endblock main_wrapper %}
+			</div>
+		    </div>
+		{% endblock left_panel %}
+	    </section>
+
+	    <!-- sidebar -->
+	    <aside id="sidebar" class="alignright span4">
+		{% comment %}{% nevercache %}
+		{% include "includes/user_panel.html" %}
+		{% endnevercache %}{% endcomment %}
+
+		<!-- Search -->
+		<section class="search clearfix">
+		    {% search_form "" %}
+		</section>
+
+		{% block right_panel %}
+		    {% include "blog/blog_summary_block.html" %}
+
+		    <div class="title-divider">
+			<h3>Featured Project</h3>
+			<div class="divider-arrow"></div>
+		    </div>
+
+		    {% latest_project %}
+		{% endblock %}
+	    </aside>
+	    {% endblock container_region_placeholder %}
+	</div>
+    </div>
+</section>
+
+<!--footer-->
+<footer id="footer">
+    <div class="container">
+    <div class="row">
+        {% comment %}<div class="span4">
+            <h3>Flickr Photos</h3>
+            <ul class="flickr clearfix"></ul>
+        </div>{% endcomment %}
+
+	<div class="span4">
+	    <h3>About</h3>
+	    <div class="block-grey wrap15">
+	    <p>
+		This blog and web site will contain a collection of my thoughts
+		as well as information about some of my software projects.
+	    </p>
+	    </div>
+	</div>
+
+        <div class="span4 offset4">
+            <h3>Contact Form</h3>
+            <form id="contact" class="form-horizontal" method="post" action="/contact/">
+		{% csrf_token %}
+                <div class="controls">
+                    <input type="text" id="inputName" placeholder="Name" name="field_1">
+                </div>
+                <div class="controls">
+                    <input type="text" id="inputEmail" placeholder="Email" name="field_2">
+                </div>
+		<div class="controls clearfix">
+		    <label for="id_field_3" class="alignleft">Subject:</label>
+		    <select id="id_field_3" name="field_3" class="alignright">
+			<option selected="selected" value="Feedback">Feedback</option>
+			<option value="Consulting">Consulting</option>
+		    </select>
+		</div>
+
+                <div class="controls">
+                    <textarea rows="3" id="inputMessage" placeholder="Message" name="field_4"></textarea>
+                </div>
+                <div class="controls">
+                    <input type="submit" class="btn btn-success btn-large footer-button" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</footer>
+
+<!--footer menu-->
+<section id="footer-menu">
+    <div class="container">
+	<div class="row">
+            {% comment %}<p class="span12"><span>&copy; Copyright 2012, <span class="color2">CITYpress</span> | All Rights Reserved</span></p>{% endcomment %}
+
+	    <div class="span6">
+	    <p>
+		Copyright (c) {% now "Y" %} Ryochan7 &nbsp;&bull;&nbsp; Using theme <a href="https://wrapbootstrap.com/theme/citypress-responsive-blog-WB052C9L0" target="_blank"><span class="color2">CITYpress</span></a>.
+	    </p>
+
+	    <p>
+		This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+	    </p>
+
+
+	    </div>
+	    <div class="span6">
+		<p>
+		    <a href="http://www.djangoproject.com/">
+			<img src="{{ STATIC_URL }}img/djangomade124x25_grey.gif" alt="Made with Django." title="Made with Django." />
+		    </a>
+			&nbsp;&nbsp; <a href="http://validator.w3.org/check?uri=referer"><img src="{{ STATIC_URL }}img/valid-xhtml10-blue.png" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>&nbsp;&nbsp;
+		    <!--Creative Commons License-->
+		    <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="{{ STATIC_URL }}img/creativecommons_3.png" />
+		    </a>
+		</p>
+
+		<p class="mezzanine-footer-message">
+		    {% trans "Powered by" %}
+		    <a href="http://mezzanine.jupo.org" target="_blank">Mezzanine</a>{% ifinstalled cartridge.shop %},
+		    <a href="http://cartridge.jupo.org" target="_blank">Cartridge</a>{% endifinstalled %}
+		    {% trans "and" %}
+		    <a href="http://www.djangoproject.com" target="_blank">Django</a>
+		    <span class="separator">|</span>
+		    {% trans "Theme by" %} <a href="http://twitter.github.com/bootstrap/" target="_blank">Bootstrap</a>
+		    {% ifinstalled mezzanine.mobile %}
+		    <span class="separator">|</span>
+		    <a href="{% url "set_device" "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
+		    {% endifinstalled %}
+		</p>
+
+	    </div>
+        </div>
+    </div>
+</section>
+
+{% include "includes/footer_scripts.html" %}
+
+{% block extra_footer %}{% endblock %}
+
+</body>
+</html>

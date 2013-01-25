@@ -1,0 +1,47 @@
+{% extends "videos/base.html" %}
+{% load mezzanine_tags i18n %}
+
+{% block meta_title %}Category: {{ category.title }}{% endblock meta_title %}
+{% block title %}Category: {{ category.title }}{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+function list_paginate () {
+    $(".pagination a").click (function (e) {
+	e.preventDefault ();
+	$("#page-content div.loading").show ();
+	var block = $("#page-content #video_list_container");
+	block.hide ();
+	var scroll_offset = $("body").offset().top
+        $("html, body").animate({scrollTop:scroll_offset}, 200);
+	$.get (this.href, function (data) {
+	    $("#page-content div.loading").hide ();
+	    block.replaceWith (data);
+	    list_paginate ();
+	}).error (function () {
+	    alert ("Could not complete request");
+	});
+    });
+}
+$(document).ready (list_paginate);
+</script>
+{% endblock extra_js %}
+
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+{% if page.get_absolute_url != category.get_absolute_url %}
+  <li class="active">{{ category.title }}</li>
+{% endif %}
+{% endblock breadcrumb_menu %}
+
+
+{% block video_page_description %}
+{% if page.get_absolute_url == request.path %}
+    {{ block.super }}
+{% else %}
+    {% editable category.summary %}
+    {{ category.summary }}
+    {% endeditable %}
+{% endif %}
+{% endblock video_page_description %}

@@ -1,0 +1,36 @@
+{% extends "videos/base.html" %}
+{% load mezzanine_tags i18n %}
+
+{% block meta_title %}{% if page %}{{ page.richtextpage.meta_title }}{% else %}Videos{% endif %}{% endblock  %}
+
+{% block extra_js %}
+<script type="text/javascript">
+function list_paginate () {
+    $(".pagination a").click (function (e) {
+	e.preventDefault ();
+	$("#page-content div.loading").show ();
+	var block = $("#page-content #video_list_container");
+	block.hide ();
+	var scroll_offset = $("body").offset().top
+        $("html, body").animate({scrollTop:scroll_offset}, 200);
+	$.get (this.href, function (data) {
+	    $("#page-content div.loading").hide ();
+	    block.replaceWith (data);
+	    list_paginate ();
+	}).error (function () {
+	    alert ("Could not complete request");
+	});
+    });
+}
+$(document).ready (list_paginate);
+</script>
+{% endblock extra_js %}
+
+{% block title %}
+{% if page %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% else %}
+{% trans "Videos" %}
+{% endif %}
+{% endblock title %}
+

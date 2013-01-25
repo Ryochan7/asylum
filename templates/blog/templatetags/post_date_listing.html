@@ -1,5 +1,0 @@
-{% if postlist %}
-				{% for group in postlist %}
-					<li><a href="{% url blog_month_view group.year group|date:"m" %}">{{ group|date:"F Y" }}</a></li>
-				{% endfor %}
-{% endif %}

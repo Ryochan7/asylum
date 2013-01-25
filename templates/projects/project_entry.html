@@ -1,8 +1,0 @@
-{% load thumbnail %}
-<div class="project">
-    <a href="{{ project.get_absolute_url }}">
-        <img src="{% thumbnail project.picture 200x200 crop="0,0" %}" alt="{{ project.title }}" />
-        <div class="summary"><p>{{ project.title }}</p></div>
-    </a>
-</div>
-

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load mezzanine_tags i18n keyword_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}videos/css/videos.css" type="text/css" />
+{% endblock %}
+
+{% comment %}{% block meta_description %}{% spaceless %}
+{% if page.get_absolute_url == request.path %}
+{% metablock %}
+{{ page.description }}
+{% endmetablock %}
+{% endif %}
+{% endspaceless %}{% endblock meta_description %}
+
+
+{% block meta_keywords %}{% spaceless %}
+{% if page.get_absolute_url == request.path %}
+{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}
+{% endif %}
+{% endspaceless %}{% endblock meta_keywords %}{% endcomment %}
+
+
+{% block main %}
+
+{% block video_page_description %}
+{% if page.get_absolute_url == request.path %}
+{% editable page.richtextpage.content %}
+{{ page.richtextpage.content|richtext_filter|safe }}
+{% endeditable %}
+{% endif %}
+{% endblock video_page_description %}
+
+<div class="loading">
+    <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading icon" />
+</div>
+
+{% include "videos/list_display.html" %}
+{% endblock main %}
+
+{% block right_panel %}
+    <!-- Video Categories -->
+    <div class="title-divider">
+	<h3>Categories</h3>
+	<div class="divider-arrow"></div>
+    </div>
+
+    <section id="block-video-categories" class="post-widget block-grey">
+	<ul class="clearfix block-light wrap15">
+	    {% for category in category_list %}
+	    <li>
+		<a href="{% url videos_category category.slug %}">
+		    {{ category.title }}
+		</a>
+	    </li>
+	    {% endfor %}
+	</ul>
+    </section>
+{% endblock %}
+

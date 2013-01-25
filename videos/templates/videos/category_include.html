@@ -1,0 +1,19 @@
+{% load mezzanine_tags i18n %}
+
+ <!-- Video Categories -->
+    <div class="title-divider">
+	<h3>Categories</h3>
+	<div class="divider-arrow"></div>
+    </div>
+
+    <section id="block-video-categories" class="post-widget block-grey">
+	<ul class="clearfix block-light wrap15">
+	    {% for category in category_list %}
+	    <li>
+		<a href="{% url videos_category category.slug %}">
+		    {{ category.title }}
+		</a>
+	    </li>
+	    {% endfor %}
+	</ul>
+    </section> 

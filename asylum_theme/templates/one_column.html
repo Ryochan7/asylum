@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block container_region_placeholder %}
+    <!-- page content -->
+    <section id="page-content" class="alignleft span12">
+	<!-- slider -->
+	<div class="row">
+	    <div class="span12">
+
+		{% block title_wrapper %}
+		<div class="title-divider">
+		    <h3>{% block title %}{% endblock %}</h3>
+		    <div class="divider-arrow"></div>
+		</div>
+		{% endblock title_wrapper %}
+
+		{% block main_wrapper %}
+		<div class="block-grey">
+		    <div class="block-light wrapper">
+			{% block main %}{% endblock main %}
+		    </div>
+		</div>
+		{% endblock main_wrapper %}
+	    </div>
+	</div>
+    </section>
+{% endblock container_region_placeholder %}
+

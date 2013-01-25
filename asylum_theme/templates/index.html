@@ -1,0 +1,52 @@
+{% extends "two_column.html" %}
+{% load mezzanine_tags i18n blog_tags videos_tags %}
+
+{% block meta_title %}{% trans "Home" %}{% endblock %}
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block breadcrumb_wrapper %}{% endblock %}
+
+{% block title_wrapper %}
+{% endblock title_wrapper %}
+
+{% block left_panel %}
+    <div id="mainslider" class="flexslider">
+	{% latest_videos %}
+    </div>
+
+    <div class="title-divider">
+	<h3>Recent Posts</h3>
+	<div class="divider-arrow"></div>
+    </div>
+
+    {% blog_recent_posts 5 as blog_posts %}
+    <div class="row">
+	{% for blog_post in blog_posts %}
+	    <article class="blog-post span4">
+		<div class="block-grey">
+		    <div class="block-light">
+			{% if blog_post.featured_image %}
+			    <a href="{{ blog_post.get_absolute_url }}" title="{{ blog_post.title }}">
+				<img src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 356 235 %}" alt="{{ blog_post.title }}" />
+			    </a>
+			{% endif %}
+			<div class="wrapper">
+			    <h2 class="post-title">
+				<a href="{{ blog_post.get_absolute_url }}" title="{{ blog_post.title }}">
+				    {{ blog_post.title }}
+				</a>
+			    </h2>
+			    <p>
+				{{ blog_post.description }}
+				<a class="read-more" href="{{ blog_post.get_absolute_url }}" title="Read {{ blog_post.title }}">[...]</a>
+			    </p>
+			</div>
+		    </div>
+		</div>
+	    </article>
+	{% endfor %}
+    </div>
+
+{% endblock left_panel %}
+
+{% block main %}{% endblock main %}

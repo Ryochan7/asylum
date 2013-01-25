@@ -3,17 +3,23 @@ import time
 from django.views.generic import (TemplateView, ListView, DetailView,
     FormView, CreateView)
 from django.shortcuts import get_object_or_404
-from videos.models import Video, VideoCategory
-from videos.forms import VideoOptions
-from videos.conf import settings
+
+from mezzanine.utils.views import paginate
+
+from asylum_custom.views import CustomMezListView
+
+from .models import Video, VideoCategory
+from .forms import VideoOptions
+from .conf import settings
 
 logger = logging.getLogger ("videos.views")
 
-class IndexView (ListView):
+class IndexView (CustomMezListView):
     model = Video
     template_name = "videos/index.html"
     ajax_template_name = "videos/list_display.html"
     paginate_by = settings.PAGINATE_BY
+    max_paging_links = 10
 
     def get_template_names (self):
         if self.request.is_ajax ():
@@ -25,6 +31,7 @@ class IndexView (ListView):
         context = super (IndexView, self).get_context_data (**kwargs)
         context["category_list"] =  VideoCategory.objects.all ().order_by ("title")
         return context
+
 
 class VideoDetailView (DetailView):
     model = Video
@@ -40,10 +47,14 @@ class VideoDetailView (DetailView):
                 form = VideoOptions ()
 
         context["video_options"] = form
+
         if context.get ("video", None):
             context["next_video"] = context["video"].next_video ()
             context["previous_video"] = context["video"].previous_video ()
+            context["editable_obj"] = context["video"]
+
         return context
+
 
 class AjaxAdjacentView (ListView):
     model = Video
@@ -58,6 +69,7 @@ class AjaxAdjacentView (ListView):
         context["active_video"] = get_object_or_404 (Video, id=self.kwargs["id"])
         return context
 
+
 class CategoryView (IndexView):
     template_name = "videos/category.html"
 
@@ -66,6 +78,7 @@ class CategoryView (IndexView):
 
     def get_context_data (self, **kwargs):
         context = super (CategoryView, self).get_context_data (**kwargs)
-        context["category"] = get_object_or_404 (VideoCategory, slug=self.kwargs["slug"])
+        context["category"] = get_object_or_404 (VideoCategory,
+            slug=self.kwargs["slug"])
         return context
 

@@ -1,0 +1,8 @@
+{% load mezzanine_tags i18n %} 
+
+<section class="block-grey">
+    <a href="{{ latest_project.get_absolute_url }}" title="{{ latest_project.title }}">
+	<img src="{{ MEDIA_URL }}{% thumbnail latest_project.featured_image 370 0 %}" alt="{{ latest_project.title }}" />
+    </a>
+</section>
+

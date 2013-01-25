@@ -1,11 +1,16 @@
+import datetime
+
 from django import forms
-from markitup.widgets import MarkItUpWidget
-from projects.models import Project
 
-class ProjectAdminForm (forms.ModelForm):
-    class Meta (object):
+from .models import Project
+
+class ProjectForm(forms.ModelForm):
+    class Meta(object):
         model = Project
-        widgets = {
-            "description": MarkItUpWidget (markitup_set="markitup/sets/default"),
-        }
 
+    def __init__(self, *args, **kwargs):
+        super(ProjectForm, self).__init__(*args, **kwargs)
+
+        if "initial" not in kwargs or not kwargs["initial"]:
+            self.fields["publish_date"].initial = datetime.datetime.now
+ 

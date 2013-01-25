@@ -1,20 +1,37 @@
+from copy import deepcopy
+
 from django.contrib import admin
-from projects.models import Project, ProjectType
-from projects.forms import ProjectAdminForm
+from django.utils.translation import ugettext_lazy as _
+#from mezzanine.pages.admin import PageAdmin
+from mezzanine.core.admin import DisplayableAdmin
 
-class ProjectTypeAdmin (admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
+from .models import Project, ProjectCategory
 
-class ProjectAdmin (admin.ModelAdmin):
-    form = ProjectAdminForm
-    prepopulated_fields = {"slug": ("title",)}
+project_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
+project_fieldsets[0][1]["fields"].extend([("begin_date", "end_date"), "ongoing", "featured_image", "category", "content"])
 
-#class PostAdmin (admin.ModelAdmin):
-#    list_display = ('title', 'slug', 'author', 'pub_date', 'edit_date', 'published',)
-#    prepopulated_fields = {"slug": ("title",)}
-#    search_fields = ['title', 'body_raw']
-#    list_filter = ('pub_date', 'published')
+project_list_display = list(DisplayableAdmin.list_display)
+project_list_display.insert(0, "admin_thumb")
 
-admin.site.register (ProjectType, ProjectTypeAdmin)
+class ProjectAdmin(DisplayableAdmin):
+    #form = ProjectForm
+
+    fieldsets = project_fieldsets
+    list_display = project_list_display
+
+class ProjectCategoryAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            "fields": ["title", "summary", "description"]
+        }),
+        (_("Optional"), {
+            "fields": ["slug"],
+            "classes": ("collapse-closed",),
+        }),
+    )
+    list_display = ("title", "summary",)
+
+
+admin.site.register (ProjectCategory, ProjectCategoryAdmin)
 admin.site.register (Project, ProjectAdmin)
 

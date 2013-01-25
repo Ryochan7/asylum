@@ -1,0 +1,52 @@
+{% extends "projects/base.html" %}
+{% load mezzanine_tags i18n %}
+
+{% block meta_title %}{% if page %}{{ page.richtextpage.meta_title }}{% else %}Projects{% endif %}{% endblock %}
+
+{% block title %}
+{% if page and page.get_absolute_url == request.path %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% else %}
+{% trans "Projects" %}
+{% endif %}
+{% endblock title %}
+
+{% block main_wrapper %}
+    {% block project_page_description %}
+    {% if page.get_absolute_url == request.path %}
+    {% editable page.richtextpage.content %}
+    {{ page.richtextpage.content|richtext_filter|safe }}
+    {% endeditable %}
+    {% endif %}
+    {% endblock project_page_description %}
+
+    <ul id="filtrable">
+	<li class="current all"><a href="#">All</a></li>
+	{% for category in project_categories %}
+	    <li class="{{ category.title|lower }}"><a href="#">{{ category.title }}</a></li>
+	{% endfor %}
+    </ul>
+    <div class="clear"></div>
+    {% block main %}
+	<section class="row portfolio filtrable">
+	    {% for project in project_list %}
+		<article data-id="id-{{ project.id }}" data-type="{{ project.category.title|lower }}" class="span4">
+		    <div class="block-grey">
+			<div class="block-light">
+			    <a href="{{ project.get_absolute_url }}" title="{{ project.title }}">
+				<div class="portfolio-img">
+				    <img src="{{ MEDIA_URL }}{% thumbnail project.featured_image 356 235 %}" alt="{{ project.title }}" />
+				    <div class="project-title-container">
+					<span class="project-title">{{ project.title }}</span>
+				    </div>		    
+			        </div>
+			    </a>
+			</div>
+		    </div>
+		</article>
+	    {% endfor %}
+	</section>
+
+	{% if is_paginated %}{% pagination_for page_obj  %}{% endif %}
+    {% endblock %}
+{% endblock main_wrapper %}

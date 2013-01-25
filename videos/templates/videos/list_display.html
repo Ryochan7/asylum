@@ -1,0 +1,27 @@
+{% load mezzanine_tags i18n %}
+<div id="video_list_container">
+    <ul id="video_list" class="clearfix">
+    {% for video in video_list %}
+        <li class="video_panel">
+	    <div class="row">
+		<a href="{{ video.get_absolute_url }}">
+		    <div class="span3 video_list_left_panel">
+			<img src="{{ MEDIA_URL }}{% thumbnail video.featured_image 270 149 %}" alt="{{ video.title }}" />
+			<div class="pub_date">
+			    <span>{{ video.publish_date|date:"m/d/Y" }}</span>
+			</div>
+		    </div>
+		    <div class="summary_info span4">
+			<h4>{{ video.title }}</h4>
+			<p class="summary">
+			    {{ video.description }}
+			</p>
+		    </div>
+		</a>
+	    </div>
+        </li>
+    {% endfor %}
+    </ul>
+    {% pagination_for page_obj %}
+</div>
+

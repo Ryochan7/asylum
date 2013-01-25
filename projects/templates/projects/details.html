@@ -1,0 +1,54 @@
+{% extends "projects/base.html" %}
+{% load mezzanine_tags %}
+
+{% comment %}{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}lightbox/css/lightbox.css" type="text/css" media="screen" />
+{% endblock extra_css %}{% endcomment %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li class="active">{{ project.title }}</li>
+{% endblock breadcrumb_menu %}
+
+{% block title %}{% editable project.title %}{{ project.title }}{% endeditable %}{% endblock %}
+{% block meta_title %}Project: {{ project.meta_title }}{% endblock %}
+
+{% block project_page_description %}
+    {% editable category.summary %}
+    {{ category.summary }}
+    {% endeditable %}
+{% endblock project_page_description %}
+
+{% block main %}
+    <div id="project-page">
+	<div id="project-details" class="row">
+	    <div id="project-preview" class="span7">
+		    <a href="{{ MEDIA_URL }}{% thumbnail project.featured_image 1000 0 %}" data-rel="prettyPhoto" rel="yPhoto" title="{{ project.summary }}" >
+			<div class="project-image-container">
+			    <img src="{{ MEDIA_URL }}{% thumbnail project.featured_image 500 300 %}" alt="{{ project.title }}" />
+			    <div class="project-enlarge-container">
+				<span>Click to enlarge</span>
+			    </div>
+			</div>
+		    </a>
+	    </div>
+	    <div id="project-base-info" class="span4">
+		<p class="title">Title: {{ project.title }}</p>
+		<p>Project URL: <a href="{{ project.url }}" target="_blank">{{ project.url }}</a></p>
+		<p>Developed During: {{ project.dev_dates }}</p>
+	    </div>
+	</div>
+
+	<div id="project-description">
+	    <div class="title-divider">
+		<h4>Description:</h4>
+		<div class="divider-arrow"></div>
+	    </div>
+	    {% editable project.content %}
+	    {{ project.content|richtext_filter|safe }}
+	    {% endeditable %}
+	</div>
+    </div>
+{% endblock main %}
+

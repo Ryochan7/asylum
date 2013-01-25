@@ -1,0 +1,224 @@
+{% extends "videos/base.html" %}
+{% load mezzanine_tags pages_tags keyword_tags videos_tags comment_tags %}
+
+{% block extra_xmlns %} xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml"{% endblock %}
+
+{% block meta_title %}Video: {{ video.meta_title }}{% endblock meta_title %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for video as tags %}
+{% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
+{% endmetablock %}{% endblock meta_keywords %}
+
+{% block meta_description %}{% metablock %}
+{{ video.description }}
+{% endmetablock %}{% endblock meta_description %}
+
+{% block extra_head %}
+    <meta property="og:title" content="{{ video.title }}" />
+    <meta property="og:type" content="video" />
+    <meta property="og:url" content="http://{{ request.get_host }}{{ video.get_absolute_url }}" />
+    {% if video.featured_image %}
+        <meta property="og:image" content="{{ MEDIA_URL }}{{ video.featured_image }}" />
+    {% else %}
+        <meta property="og:image" content="{{ STATIC_URL }}img/default_video.png" />
+    {% endif %}
+    
+    {% if video.meta_embed_url %}
+	<meta property="og:video" content="{{ video.meta_embed_url }}" />
+	<meta property="og:video:width" content="640" />
+	<meta property="og:video:height" content="360" ?>
+    {% endif %}
+    
+    <meta property="og:site_name" content="{{ settings.SITE_TITLE }}" />
+    <meta property="fb:admins" content="738212647" />
+    <meta property="og:description" content="{{ video.description }}" />
+{% endblock extra_head %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery_cookie/jquery.cookie.js"></script>
+{% endblock extra_js %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li><a href="{% url videos_category video.category.slug %}">{{ video.category.title }}</a><span class="divider">/</span></li>
+<li class="active">{{ video.title }}</li>
+{% endblock breadcrumb_menu %}
+
+{% block title %}
+{% editable video.title %}
+{{ video.title }}
+{% endeditable %}
+{% endblock title %}
+
+
+{% block main %}
+        <div id="video_detail">
+            {% editable video.video_url %}{{ video.embed_code }}{% endeditable %}
+            <div id="video_info" class="block-dark wrap15">
+		<div class="row">
+		    <div class="span3">
+			<p class="pub_date">Date: {{ video.publish_date|date:"N d, Y" }}</p>
+			<p class="category">Category: <a href="{% url videos_category video.category.slug %}">{{ video.category.title }}</a></p>
+                
+			<a href="#" id="description_link" class="hide">Show Description</a>
+
+			<div id="description">
+			    <p>{{ video.description|safe }}</p>
+			</div>
+		    </div>
+
+		    <div class="span3 offset1">
+			<p class="origin">
+			    Origin URL: <br/>
+			    <input type="text" value="{{ video.video_url }}" />
+			</p>
+
+			<div id="video_options">
+			    <form method="post" action="">
+				{% csrf_token %}
+				{{ video_options.as_p }}
+			    </form>
+			</div>
+		    </div>
+		</div>
+
+		<div class="row">
+
+		<div class="span7">
+		    <h3>Share This:</h3>
+		    <!-- AddThis Button BEGIN -->
+		    <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+		    <a class="addthis_button_preferred_1"></a>
+		    <a class="addthis_button_preferred_2"></a>
+		    <a class="addthis_button_preferred_3"></a>
+		    <a class="addthis_button_preferred_4"></a>
+		    <a class="addthis_button_compact"></a>
+		    <a class="addthis_counter addthis_bubble_style"></a>
+		    </div>
+		    <!-- AddThis Button END -->
+		    </div>
+		</div>
+            </div>
+        </div>
+{% endblock main %}
+
+
+{% block left_panel %}
+    <div class="row">
+	<div class="span8">
+	    {% block title_wrapper %}{{ block.super }}{% endblock %}
+	    {% block main_wrapper %}{{ block.super }}{% endblock %}
+	</div>
+    </div>
+
+    {% if video.allow_comments %}
+	<div class="row">
+	    <div class="span8">
+		{% comments_for video %}
+	    </div>
+	</div>
+    {% endif %}
+{% endblock left_panel %}
+
+{% block right_panel %}
+    <div class="title-divider">
+	<h3>Related Videos</h3>
+	<div class="divider-arrow"></div>
+    </div>
+
+    <section id="adjacent_videos" class="block-grey">
+	<div class="block-light wrap15">
+	    {% adjacent_videos video %}
+	</div>
+    </section>
+
+    {% video_categories_block %}
+{% endblock right_panel %}
+
+{% block extra_footer %}
+<script type="text/javascript">
+    $(document).ready (function () {
+	var block = $("div#video_info #description");
+
+	// Hide description div and show description_link
+	$("div#video_info a#description_link").show ();
+	block.toggleClass ("hide");
+
+	// Set onclick function
+	$("div#video_info a#description_link").click (function (e) {
+	    e.preventDefault();
+	    var block = $("div#video_info #description");
+	    if (block.hasClass ("hide")) {
+		// Display will become visible.
+		$(this).text ("Hide Description");
+		block.slideToggle("slow");
+	    }
+	    else {
+		// Display will become hidden.
+		$(this).text ("Show Description");
+		block.slideToggle("slow");
+	    }
+
+	    block.toggleClass ("hide");
+	});
+	$("#video_options input#id_autoplay").click (function () {
+	    if ($(this).attr ("checked")) {
+		$.cookie ("autoplay", "true", {path: "/"});
+	    }
+	    else {
+		$.cookie ("autoplay", null, {path: "/"});
+	    }
+	});
+    });
+</script>
+
+<script type="text/javascript">
+    function check_playlist () {
+	{% if previous_video %}
+	if ($.cookie ("autoplay")) {
+	    window.location.href = "{{ previous_video.get_absolute_url }}";
+	}
+	{% endif %}
+    }
+
+    function adjacent_paginate () {
+	$("#video-list-container a.paginate").click (function (e) {
+	    e.preventDefault ();
+	    $("#video-list-container div.loading").show ();
+	    var list_block = $("#video-list-container ul");
+	    var parent_block = $("#video-list-container");
+	    list_block.hide ();
+	    $.get (this.href, function (data) {
+		$("#video-list-container div.loading").hide ();
+		parent_block.replaceWith (data);
+		adjacent_paginate ();
+	    }).error (function () {
+		alert ("Could not complete request");
+	    });
+	});
+    }
+    $(document).ready (adjacent_paginate);
+
+    $(window).resize(function(e) {
+	var height = $(window).height();
+	var width = $(window).width();
+	var adj_height = Math.floor(height * 0.6);
+	$("iframe#video_embed, div#video_embed > object#embed_player").css("height", adj_height + "px");
+    });
+
+    $(window).ready(function(e) {
+	var height = $(window).height();
+	var adj_height = Math.floor(height * 0.6);
+	$("iframe#video_embed, div#video_embed > object#embed_player").css("height", adj_height + "px");
+    });
+
+</script>
+
+<script type="text/javascript">
+    var addthis_config = {"data_track_clickback":true};
+</script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e2e83b10c45efee">
+</script>
+{% endblock extra_footer %}
+
