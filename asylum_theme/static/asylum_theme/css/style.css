@@ -2011,5 +2011,5 @@ pre {
 }
 
 #menu > ul > li.current {
-	border-right: none;
+	border-right: 1px solid rgb(205, 205, 205) !important;
 }
