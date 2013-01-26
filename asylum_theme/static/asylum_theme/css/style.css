@@ -1992,3 +1992,24 @@ aside .search form {
 pre {
 	font-size: 10px;
 }
+
+#menu li:hover, #menu li.current {
+	border-top: 4px solid rgb(131, 164, 0);
+	margin-top: -4px;
+	background: linear-gradient(to bottom, rgb(247, 247, 247) 0%, rgb(241, 241, 241) 100%) repeat scroll 0 0 transparent;
+}
+
+#menu > ul > li > a {
+	border-top: none;
+	display: inline-block;
+	margin-right: 4px;
+	margin-top: 0px;
+}
+
+#menu > ul > li > .caret {
+ 	margin: 20px 20px 0px 0px;	
+}
+
+#menu > ul > li.current {
+	border-right: none;
+}
