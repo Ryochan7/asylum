@@ -37,6 +37,9 @@ env.key_filename = conf.get("SSH_KEY_PATH", None)
 env.hosts = conf.get("HOSTS", [])
 
 env.proj_name = conf.get("PROJECT_NAME", os.getcwd().split(os.sep)[-1])
+env.database_name = conf.get("DB_NAME", env.proj_name)
+env.database_user = conf.get("DB_USER", "postgres")
+env.apache_path = conf.get("APACHE_PATH", None)
 env.venv_home = conf.get("VIRTUALENV_HOME", "/home/%s" % env.user)
 env.venv_path = "%s/%s" % (env.venv_home, env.proj_name)
 env.proj_dirname = "project"
@@ -253,7 +256,8 @@ def pip(packages):
     Installs one or more Python packages within the virtual environment.
     """
     with virtualenv():
-        return sudo("pip install %s" % packages)
+        #return sudo("pip install %s" % packages)
+	return run("pip install %s" % packages)
 
 
 def postgres(command):
@@ -261,7 +265,8 @@ def postgres(command):
     Runs the given command as the postgres user.
     """
     show = not command.startswith("psql")
-    return run("sudo -u root sudo -u postgres %s" % command, show=show)
+    #return run("sudo -u root sudo -u postgres %s" % command, show=show)
+    return run("PGUSER=%s %s" % (env.database_user, command), show=show)
 
 
 @task
@@ -280,7 +285,8 @@ def backup(filename):
     """
     Backs up the database.
     """
-    return postgres("pg_dump -Fc %s > %s" % (env.proj_name, filename))
+    #return postgres("pg_dump -Fc %s > %s" % (env.proj_name, filename))
+    return postgres("pg_dump -Fc %s > %s" % (env.database_name, filename))
 
 
 @task
@@ -288,7 +294,8 @@ def restore(filename):
     """
     Restores the database.
     """
-    return postgres("pg_restore -c -d %s %s" % (env.proj_name, filename))
+    #return postgres("pg_restore -c -d %s %s" % (env.proj_name, filename))
+    return postgres("pg_restore -c -d %s %s" % (env.database_name, filename))
 
 
 @task
@@ -363,7 +370,8 @@ def create():
                 return False
             remove()
         run("virtualenv %s --distribute" % env.proj_name)
-        vcs = "git" if env.repo_url.startswith("git") else "hg"
+	git = env.repo_url.startswith("git") or env.repo_url.endswith(".git")
+        vcs = "git" if git else "hg"
         run("%s clone %s %s" % (vcs, env.repo_url, env.proj_path))
 
     # Create DB and DB user.
@@ -449,12 +457,14 @@ def restart():
     """
     Restart gunicorn worker processes for the project.
     """
-    pid_path = "%s/gunicorn.pid" % env.proj_path
+    """pid_path = "%s/gunicorn.pid" % env.proj_path
     if exists(pid_path):
         sudo("kill -HUP `cat %s`" % pid_path)
     else:
         start_args = (env.proj_name, env.proj_name)
-        sudo("supervisorctl start %s:gunicorn_%s" % start_args)
+        sudo("supervisorctl start %s:gunicorn_%s" % start_args)"""
+    if env.apache_path:
+	run(env.apache_path, show=True)
 
 
 @task
@@ -467,19 +477,19 @@ def deploy():
     collect any new static assets, and restart gunicorn's work
     processes for the project.
     """
-    if not exists(env.venv_path):
+    """if not exists(env.venv_path):
         prompt = raw_input("\nVirtualenv doesn't exist: %s\nWould you like "
                            "to create it? (yes/no) " % env.proj_name)
         if prompt.lower() != "yes":
             print "\nAborting!"
             return False
-        create()
-    for name in get_templates():
-        upload_template_and_reload(name)
+        create()"""
+    """for name in get_templates():
+        upload_template_and_reload(name)"""
     with project():
         backup("last.db")
         run("tar -cf last.tar %s" % static())
-        git = env.repo_url.startswith("git")
+        git = env.repo_url.startswith("git") or env.repo_url.endswith(".git")
         run("%s > last.commit" % "git rev-parse HEAD" if git else "hg id -i")
         with update_changed_requirements():
             run("git pull origin master -f" if git else "hg pull && hg up -C")
@@ -502,7 +512,7 @@ def rollback():
     """
     with project():
         with update_changed_requirements():
-            git = env.repo_url.startswith("git")
+            git = env.repo_url.startswith("git") or env.repo_url.endswith(".git")
             update = "git checkout" if git else "hg up -C"
             run("%s `cat last.commit`" % update)
         with cd(os.path.join(static(), "..")):
