@@ -5,3 +5,4 @@ mezzanine-slides
 south
 django-compressor
 django-debug-toolbar
+fabric
