@@ -8,7 +8,7 @@ from mezzanine.core.admin import DisplayableAdmin
 from .models import Project, ProjectCategory
 
 project_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
-project_fieldsets[0][1]["fields"].extend([("begin_date", "end_date"), "ongoing", "featured_image", "category", "content"])
+project_fieldsets[0][1]["fields"].extend([("begin_date", "end_date"), "ongoing", "url", "featured_image", "category", "content"])
 
 project_list_display = list(DisplayableAdmin.list_display)
 project_list_display.insert(0, "admin_thumb")
