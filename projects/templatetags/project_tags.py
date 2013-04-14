@@ -13,7 +13,11 @@ class LatestProject(InclusionTag):
     template = "projects/latest_video.html"
 
     def get_context(self, context):
-	latest = Project.objects.order_by("-publish_date")[:1]
+        try:
+            latest = Project.objects.order_by("-publish_date")[:1].get()
+        except Project.DoesNotExist:
+	    latest = None
+	
 	return {
 	    "latest_project": latest,
 	    "STATIC_URL": context["STATIC_URL"],

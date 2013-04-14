@@ -1,8 +1,10 @@
 {% load mezzanine_tags %}
+
 <div class="project">
+{% if project %}
     <a href="{{ project.get_absolute_url }}">
         <img src="{{ MEDIA_URL }}{% thumbnail project.featured_image 200 200 %}" alt="{{ project.title }}" />
-        <div class="summary"><p>{{ project.title }}</p></div>
+            <div class="summary"><p>{{ project.title }}</p></div>
     </a>
+{% endif %}
 </div>
-
