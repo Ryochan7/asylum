@@ -467,8 +467,8 @@ def restart():
     if env.apache_stop_bin:
 	run(env.apache_stop_bin, show=True)
 	
-    if env.apache_stop_bin:
-        run(env.apache_stop_bin, show=True)
+    if env.apache_start_bin:
+        run(env.apache_start_bin, show=True)
 
 
 @task
