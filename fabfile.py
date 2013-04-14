@@ -39,7 +39,8 @@ env.hosts = conf.get("HOSTS", [])
 env.proj_name = conf.get("PROJECT_NAME", os.getcwd().split(os.sep)[-1])
 env.database_name = conf.get("DB_NAME", env.proj_name)
 env.database_user = conf.get("DB_USER", "postgres")
-env.apache_path = conf.get("APACHE_PATH", None)
+env.apache_start_bin = conf.get("APACHE_START_BIN", None)
+env.apache_stop_bin = conf.get("APACHE_STOP_BIN", None)
 env.venv_home = conf.get("VIRTUALENV_HOME", "/home/%s" % env.user)
 env.venv_path = "%s/%s" % (env.venv_home, env.proj_name)
 env.proj_dirname = "project"
@@ -463,8 +464,11 @@ def restart():
     else:
         start_args = (env.proj_name, env.proj_name)
         sudo("supervisorctl start %s:gunicorn_%s" % start_args)"""
-    if env.apache_path:
-	run(env.apache_path, show=True)
+    if env.apache_stop_bin:
+	run(env.apache_stop_bin, show=True)
+	
+    if env.apache_stop_bin:
+        run(env.apache_stop_bin, show=True)
 
 
 @task
