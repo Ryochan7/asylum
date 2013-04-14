@@ -184,6 +184,23 @@
 
 		    {% latest_project %}
 		{% endblock %}
+		
+		{% if not debug %}
+		<section id="sidebar_ad_placeholder" class="block-grey">
+		  <div class="block-light wrapper">
+		      <script type="text/javascript">
+		      <!--
+			  google_ad_client = "ca-pub-7043743280687200";
+			  /* Sidebar ad */
+			  google_ad_slot = "1076987392";
+			  google_ad_width = 200;
+			  google_ad_height = 200;
+		      //-->
+		      </script>
+		      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+		  </div>
+		</section>
+	      {% endif %}
 	    </aside>
 	    {% endblock container_region_placeholder %}
 	</div>
