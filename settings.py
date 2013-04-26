@@ -145,6 +145,7 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+ALLOWED_HOSTS = ["www.ryochan7.com", "ryochan7.com"]
 
 #############
 # DATABASES #
@@ -338,6 +339,7 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 
 ADMIN_THUMB_SIZE="64x64"
 BLOG_URLS_USE_DATE = True
+BLOG_RSS_LIMIT = 20
 
 VIDEO_PAGINATE_BY = 5
 
