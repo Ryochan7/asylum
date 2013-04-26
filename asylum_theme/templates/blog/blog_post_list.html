@@ -1,6 +1,12 @@
 {% overextends "blog/blog_post_list.html" %}
 {% load mezzanine_tags i18n %}
 
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="alternate" type="application/rss+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog RSS Feed" href="{% url blog_post_feed "rss" %}" />
+        <link rel="alternate" type="application/atom+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog Atom Feed" href="{% url blog_post_feed "atom" %}" />
+{% endblock %}
+
 {% block right_panel %}
     {% include "blog/blog_summary_block.html" %}
 {% endblock right_panel %}

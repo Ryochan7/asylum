@@ -1,6 +1,7 @@
 *.pyc
 .*.swp
 .directory
+.DS_Store
 build/
 dist/
 nbproject/
