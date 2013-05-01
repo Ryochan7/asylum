@@ -5,10 +5,8 @@
   {{ block.super }}
 
 <script type="text/javascript">
-  $(document).ready (function () {
-    $("#page-content iframe").each(function () {
-      $(this).attr("width", "100%");
-    });
-  });
+(function () {
+    $("#page-content iframe").attr("width", "100%");
+})()
 </script>
 {% endblock %}
