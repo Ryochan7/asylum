@@ -54,9 +54,9 @@
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/main.js"></script>
     {#<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/ajax-mail.js"></script>#}
     {#<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/accordion.settings.js"></script>#}
-    {% block extra_js %}{% endblock %}
     {% endcompress %}
-
+    {% block extra_js %}{% endblock %}
+ 
     <!--[if lt IE 9]>
     <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <link href="{{ STATIC_URL }}asylum_theme/asylum_theme/css/ie.css" type="text/css" rel="stylesheet"/>
@@ -306,7 +306,9 @@
 
 {% include "includes/footer_scripts.html" %}
 
-{% block extra_footer %}{% endblock %}
+{% block extra_footer %}
+  {% block extra_footer_js %}{% endblock %}
+{% endblock %}
 
 </body>
 </html>

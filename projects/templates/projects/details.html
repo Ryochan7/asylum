@@ -1,10 +1,5 @@
 {% extends "projects/base.html" %}
-{% load mezzanine_tags %}
-
-{% comment %}{% block extra_css %}
-{{ block.super }}
-<link rel="stylesheet" href="{{ STATIC_URL }}lightbox/css/lightbox.css" type="text/css" media="screen" />
-{% endblock extra_css %}{% endcomment %}
+{% load mezzanine_tags i18n keyword_tags %}
 
 {% block breadcrumb_menu %}
 {{ block.super }}
@@ -14,11 +9,12 @@
 {% block title %}{% editable project.title %}{{ project.title }}{% endeditable %}{% endblock %}
 {% block meta_title %}Project: {{ project.meta_title }}{% endblock %}
 
-{% block project_page_description %}
-    {% editable category.summary %}
-    {{ category.summary }}
-    {% endeditable %}
-{% endblock project_page_description %}
+{% block meta_keywords %}{% metablock %}
+{% keywords_for project as tags %}
+{% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{{ project.description }}{% endblock %}
 
 {% block main %}
     <div id="project-page">

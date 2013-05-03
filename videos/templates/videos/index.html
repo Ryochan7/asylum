@@ -5,12 +5,12 @@
 
 {% block extra_js %}
 <script type="text/javascript">
-var page_loaded = false;
+var popped = ('state' in window.history && window.history.state !== null);
+var initialURL = location.href;
 
 function list_paginate () {
     $(".pagination a").click (function (e) {
         e.preventDefault ();
-        page_loaded = true;
         $("#page-content div.loading").show ();
         var block = $("#page-content #video_list_container");
         block.hide ();
@@ -23,6 +23,7 @@ function list_paginate () {
             $("#page-content div.loading").hide ();
             block.replaceWith (data);
             history.pushState(null, null, link_save);
+            popped = true;
             list_paginate ();
         }).error (function () {
             alert ("Could not complete request");
@@ -32,32 +33,27 @@ function list_paginate () {
 
 $(document).ready (list_paginate);
 
-    $(window).bind('popstate', function() {
-        if (page_loaded)
-        {    
-            $("#page-content div.loading").show ();
-            var block = $("#page-content #video_list_container");
-            block.hide ();
-            var scroll_offset = $("body").offset().top    
-            $("html, body").animate({scrollTop:scroll_offset}, 200);
-            var link_save = document.location.href;
-            var sep = (link_save.indexOf("?")===-1)?"?":"&";
-            var link_href = link_save + sep + "ajax=true";
-            $.get (link_href, function (data) {
-                $("#page-content div.loading").hide ();
-                block.replaceWith (data);
-                list_paginate ();
-            }).error (function () {
-                alert ("Could not complete request");
-            });
-        }
-        else
-        {
-            page_loaded = true;
-        }
-    });
-
-$(document).ready(function () {
+$(window).bind('popstate', function() {
+    var initialPop = (!popped && (location.href == initialURL));
+    popped = true;
+    if (!initialPop)
+    {    
+        $("#page-content div.loading").show ();
+        var block = $("#page-content #video_list_container");
+        block.hide ();
+        var scroll_offset = $("body").offset().top    
+        $("html, body").animate({scrollTop:scroll_offset}, 200);
+        var link_save = document.location.href;
+        var sep = (link_save.indexOf("?")===-1)?"?":"&";
+        var link_href = link_save + sep + "ajax=true";
+        $.get (link_href, function (data) {
+            $("#page-content div.loading").hide ();
+            block.replaceWith (data);
+            list_paginate ();
+        }).error (function () {
+            alert ("Could not complete request");
+        });
+    }
 });
 </script>
 {% endblock extra_js %}
