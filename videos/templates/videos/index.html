@@ -5,6 +5,8 @@
 
 {% block extra_js %}
 <script type="text/javascript">
+var history_edited = false;
+
 function list_paginate () {
     $(".pagination a").click (function (e) {
 	e.preventDefault ();
@@ -12,12 +14,13 @@ function list_paginate () {
 	var block = $("#page-content #video_list_container");
 	block.hide ();
 	var scroll_offset = $("body").offset().top
-        $("html, body").animate({scrollTop:scroll_offset}, 200);
+    $("html, body").animate({scrollTop:scroll_offset}, 200);
 	var link_href = this.href;
 	$.get (this.href, function (data) {
 	    $("#page-content div.loading").hide ();
 	    block.replaceWith (data);
 	    history.pushState(null, null, link_href);
+        history_edited = true;
 	    list_paginate ();
 	}).error (function () {
 	    alert ("Could not complete request");
@@ -29,18 +32,21 @@ $(document).ready (list_paginate);
 
 $(document).ready(function () {
     $(window).bind('popstate', function() {
-        $("#page-content div.loading").show ();
-        var block = $("#page-content #video_list_container");
-        block.hide ();
-        var scroll_offset = $("body").offset().top    
-        $("html, body").animate({scrollTop:scroll_offset}, 200);
-        $.get (document.location, function (data) {
-            $("#page-content div.loading").hide ();
-            block.replaceWith (data);
-            list_paginate ();
-        }).error (function () {
-            alert ("Could not complete request");
-        });
+        if (history_edited)
+        {
+            $("#page-content div.loading").show ();
+            var block = $("#page-content #video_list_container");
+            block.hide ();
+            var scroll_offset = $("body").offset().top    
+            $("html, body").animate({scrollTop:scroll_offset}, 200);
+            $.get (document.location, function (data) {
+                $("#page-content div.loading").hide ();
+                block.replaceWith (data);
+                list_paginate ();
+            }).error (function () {
+                alert ("Could not complete request");
+            });
+        }
     });
 });
 </script>
