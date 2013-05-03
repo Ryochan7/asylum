@@ -1,4 +1,4 @@
-{% load mezzanine_tags i18n %}
+{% load mezzanine_tags i18n asylum_tags %}
 <div id="video_list_container">
     <ul id="video_list" class="clearfix">
     {% for video in video_list %}
@@ -22,6 +22,6 @@
         </li>
     {% endfor %}
     </ul>
-    {% pagination_for page_obj %}
+    {% custom_pagination_for page_obj %}
 </div>
 

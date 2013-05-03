@@ -14,3 +14,26 @@ class BigDummy(InclusionTag):
 
 register.tag(BigDummy)
 
+class CustomPaginationFor(InclusionTag):
+    name = "custom_pagination_for"
+    template = "includes/pagination.html"
+    options = Options (
+        Argument("current_page"),
+        Argument("page_var", required=False, default="page"),
+    )
+    
+    def get_context(self, context, current_page, page_var):
+        querystring = context["request"].GET.copy()
+        if page_var in querystring:
+            del querystring[page_var]
+        if "ajax" in querystring:
+            del querystring["ajax"]
+
+        querystring = querystring.urlencode()
+        return {
+            "current_page": current_page,
+            "querystring": querystring,
+            "page_var": page_var,
+        }
+    
+register.tag(CustomPaginationFor)
