@@ -68,22 +68,13 @@ ul#video_list li.video_panel p.summary {
 	display: none;
 }
 
-#adjacent_videos a.paginate.previous, #adjacent_videos a.paginate.next {
-	background: url("/static/img/previous_arrow.png") repeat scroll 0 0 transparent;
-	border: none;
-	display: block;
-	height: 32px;
-	width: 32px;
-	text-indent: -9999px;
-}
-
-#adjacent_videos a.paginate.next {
-	background: url("/static/img/next_arrow.png");
-}
-
 #adjacent_videos .adjacent_video .video-title {
 	float: left;
 	width: 120px;
+}
+
+#adjacent_videos .next i {
+	margin-left: 2%;
 }
 
 #block-video-categories li {

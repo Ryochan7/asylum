@@ -7,8 +7,8 @@
 
     <ul>
 {% if page_obj.has_previous %}
-        <li class="previous clearfix row">
-            <a href="{% url videos_adjacent active_video.category.slug active_video.id page_obj.previous_page_number %}" class="paginate previous span3">Previous</a>
+        <li class="previous row">
+            <a href="{% url videos_adjacent active_video.category.slug active_video.id page_obj.previous_page_number %}" class="btn btn-primary paginate previous span3"><i class="icon-arrow-left"></i> Previous</a>
         </li>
 {% endif %}
 {% for video in video_list %}
@@ -27,8 +27,8 @@
 	</li>
 {% endfor %}
 {% if page_obj.has_next %}
-        <li class="next clearfix">
-            <a href="{% url videos_adjacent active_video.category.slug active_video.id page_obj.next_page_number %}" class="paginate next alignright">Next</a>
+        <li class="next row">
+            <a href="{% url videos_adjacent active_video.category.slug active_video.id page_obj.next_page_number %}" class="btn btn-primary paginate next span3">Next <i class="icon-arrow-right"></i></a>
         </li>
 {% endif %}
     </ul>
