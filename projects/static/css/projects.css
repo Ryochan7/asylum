@@ -36,3 +36,12 @@
 .pp_social .facebook {
 	width: 100px;
 }
+
+@media screen and (min-width: 425px) and (max-width: 767px) {
+  .portfolio img {
+    width: 75%;
+    height: auto;
+    margin: 0px auto;
+  }
+}
+
