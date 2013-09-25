@@ -2017,3 +2017,7 @@ pre {
 #paypal-donate-placeholder, #sidebar-ad-placeholder {
 	text-align: center;
 }
+
+.breadcrumb .divider {
+  color: #ABABAB;
+}
