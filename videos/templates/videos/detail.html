@@ -35,8 +35,14 @@
     <meta property="og:description" content="{{ video.description }}" />
 {% endblock extra_head %}
 
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{{ STATIC_URL }}asylum_theme/css/bootstrap-switch.css"  type="text/css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}asylum_theme/css/flat-ui-fonts.css"  type="text/css" />
+{% endblock extra_css %}
+
 {% block extra_js %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery_cookie/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery_cookie/jquery.cookie.js"></script>
 {% endblock extra_js %}
 
 {% block breadcrumb_menu %}
@@ -64,7 +70,9 @@
 			<a href="#" id="description_link" class="hide">Show Description</a>
 
 			<div id="description">
-			    <p>{{ video.description|safe }}</p>
+			    {% editable video.content %}
+			    {{ video.content|richtext_filter|safe }}
+			    {% endeditable %}
 			</div>
 		    </div>
 
@@ -77,7 +85,12 @@
 			<div id="video_options">
 			    <form method="post" action="">
 				{% csrf_token %}
-				{{ video_options.as_p }}
+				<div>
+				    <label for="{{ video_options.autoplay.html_name }}">{{ video_options.autoplay.label }}:</label>
+				    <div id="autoplay-switch" class="make-switch" data-on="on" data-off="off">
+				        {{ video_options.autoplay }}
+				    </div>
+				</div>
 			    </form>
 			</div>
 		    </div>
@@ -212,7 +225,17 @@
 	var adj_height = Math.floor(height * 0.6);
 	$("iframe#video_embed, div#video_embed > object#embed_player").css("height", adj_height + "px");
     });
-
+    
+    $("#video_options #autoplay-switch").on("switch-change", function(e, data) {       
+        if (data.value == true) {
+            $("#video_options input#id_autoplay").attr("checked", "checked");
+	    $.cookie ("autoplay", "true", {path: "/"});
+	}
+	else {
+	    $("#video_options input#id_autoplay").removeAttr("checked");
+	    $.cookie ("autoplay", null, {path: "/"});
+	}
+    });
 </script>
 
 <script type="text/javascript">
@@ -220,5 +243,8 @@
 </script>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e2e83b10c45efee">
 </script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/bootstrap-switch.min.js"></script>
+
 {% endblock extra_footer %}
 
