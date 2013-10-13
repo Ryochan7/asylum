@@ -10,3 +10,11 @@
 })()
 </script>
 {% endblock %}
+
+{% block main_wrapper %}
+  <div class="block-grey">
+      <div class="block-light wrapper">
+	  {% block main %}{{ block.super }}{% endblock main %}
+      </div>
+  </div>
+{% endblock %}

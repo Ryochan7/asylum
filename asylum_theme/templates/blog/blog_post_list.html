@@ -1,11 +1,148 @@
 {% overextends "blog/blog_post_list.html" %}
-{% load mezzanine_tags i18n %}
+{% load i18n mezzanine_tags blog_tags keyword_tags disqus_tags %}
 
 {% block extra_head %}
-    {{ block.super }}
-    <link rel="alternate" type="application/rss+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog RSS Feed" href="{% url blog_post_feed "rss" %}" />
-        <link rel="alternate" type="application/atom+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog Atom Feed" href="{% url blog_post_feed "atom" %}" />
+  {{ block.super }}
+  <link rel="alternate" type="application/rss+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog RSS Feed" href="{% url blog_post_feed "rss" %}" />
+  <link rel="alternate" type="application/atom+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog Atom Feed" href="{% url blog_post_feed "atom" %}" />
 {% endblock %}
+
+{% block main_wrapper %}
+  {% block main %}
+  {% if tag or category or year or month or author %}
+    {% block blog_post_list_filterinfo %}
+      {{ block.super }}
+    {% endblock blog_post_list_filterinfo %}
+  {% else %}
+    {% if page %}
+      {% block blog_post_list_pagecontent %}
+	{{ block.super }}
+      {% endblock blog_post_list_pagecontent %}
+    {% endif %}
+  {% endif %}
+  
+  
+  {% for blog_post in blog_posts.object_list %}
+    <article class="block-grey blog-post{% if forloop.last %} last{% endif %}">
+      <div class="block-light wrapper">
+	<div class="well">
+	{% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+	  {% block blog_post_list_post_featured_image %}
+	    <img class="thumbnail featured-thumb" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 726 400 %}" style="margin-bottom: 20px;" />
+	  {% endblock blog_post_list_post_featured_image %}
+	{% endif %}
+	  
+	  {% block blog_post_list_post_metainfo %}
+	  <div class="row-fluid">
+	    <div class="span3">
+	      <div class="span3">
+		<i class="icon-user"></i>
+	      </div>
+	      
+	      <p class="span9">
+		<strong>{% trans "Posted by" %}</strong>:
+		{% with blog_post.user as author %}
+		<span class="span">
+		  <a href="{% url blog_post_list_author author %}">
+		    {{ author.get_full_name|default:author.username|capfirst }}
+		  </a>
+		</span>    
+		{% endwith %}
+	      </p>
+	    </div>
+	    
+	    <div class="span3">
+	      <div class="span3">
+		<i class="icon-time"></i>
+	      </div>
+	      
+	      <p class="span9">
+		<strong>{% trans "Date Since" %}</strong>:
+		<span class="span">
+		  {% blocktrans with sometime=blog_post.publish_date|timesince %}
+		  {{ sometime }} ago{% endblocktrans %}
+		</span>
+	      </p>
+	    </div>
+	    
+	    {% with blog_post.categories.all as categories %}
+	    {% if categories %}
+	    <div class="span3">
+	      <div class="span3">
+		<i class="icon-tag"></i>
+	      </div>
+	      
+	      <p class="span9">
+		<strong>{% trans "In" %}</strong>:
+		<span class="span">
+		  {% for category in categories %}
+		    <a href="{% url blog_post_list_category category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
+		  {% endfor %}
+		</span>
+	      </p>
+	    </div>
+	    {% endif %}
+	    {% endwith %}
+	    
+	    <div class="span3">
+	      <div class="span3">
+		<i class="icon-comment"></i>
+	      </div>
+	      
+	      <p class="span9">
+		<strong>Comments</strong>:
+		<span class="span">
+		{% if settings.COMMENTS_DISQUS_SHORTNAME %}
+		  <a href="{{ blog_post.get_absolute_url }}#disqus_thread"
+		    data-disqus-identifier="{% disqus_id_for blog_post %}">
+		    {% trans "Comments" %}
+		  </a>
+		{% else %}
+		  <a href="{{ blog_post.get_absolute_url }}#comments">
+		    {% blocktrans count comments_count=blog_post.comments_count %}
+		      {{ comments_count }} comment{% plural %}{{ comments_count }} comments
+		    {% endblocktrans %}
+		  </a>
+		{% endif %}
+		</span>
+	      </p>
+	    </div>
+	  </div>
+	  {% endblock blog_post_list_post_metainfo %}
+	</div>
+	
+	{% block blog_post_list_post_title %}
+	  {{ block.super }}
+	{% endblock blog_post_list_post_title %}
+	
+	{% block blog_post_list_post_content %}
+	  {{ block.super }}
+	{% endblock blog_post_list_post_content %}
+	
+	{% block blog_post_list_post_links %}
+	<p class="blog-list-detail">
+	  <a href="{{ blog_post.get_absolute_url }}" class="badge badge-success">{% trans "read more" %}</a>
+	{% keywords_for blog_post as tags %}
+	{% if tags %}
+	  <br />
+	  <br />
+	{% trans "Tags" %}:
+	{% spaceless %}
+	{% for tag in tags %}
+	  <a href="{% url blog_post_list_tag tag.slug %}" class="tag badge badge-info">{{ tag }}</a>
+	{% endfor %}
+	{% endspaceless %}
+	{% endif %}
+      </p>
+      {% endblock %}	
+	
+      </div>
+    </article>
+  {% endfor %}
+  
+  {% pagination_for blog_posts %}
+  {% endblock main %}
+{% endblock main_wrapper %}
 
 {% block right_panel %}
     {% include "blog/blog_summary_block.html" %}
