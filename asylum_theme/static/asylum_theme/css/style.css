@@ -2026,7 +2026,7 @@ pre {
   margin-bottom: 0px;
 }
 
-/* Landscape phones and down */
+/* Landscape phone to portrait tablet */
 @media  only screen and (max-width: 767px) {
     #blog-post-list .row-fluid.post-metainfo > [class*="span"] {
       float: left;

@@ -59,8 +59,10 @@
 	      <p class="span9">
 		<strong>{% trans "Date Since" %}</strong>:
 		<span class="span">
-		  {% blocktrans with sometime=blog_post.publish_date|timesince %}
-		  {{ sometime }} ago{% endblocktrans %}
+		  <time pubdate datetime="{{ blog_post.publish_date|date:"c" }}" title="{{ blog_post.publish_date|date:"D d M Y" }} {{ blog_post.publish_date|time:"H:i:s" }}">
+		    {% blocktrans with sometime=blog_post.publish_date|timesince %}
+{{ sometime }} ago{% endblocktrans %}
+		  </time>
 		</span>
 	      </p>
 	    </div>
@@ -121,7 +123,7 @@
 	
 	{% block blog_post_list_post_links %}
 	<p class="blog-list-detail">
-	  <a href="{{ blog_post.get_absolute_url }}" class="badge badge-success">{% trans "read more" %}</a>
+	  <a href="{{ blog_post.get_absolute_url }}" class="btn btn-large btn-success">{% trans "read more" %}</a>
 	{% keywords_for blog_post as tags %}
 	{% if tags %}
 	  <br />
