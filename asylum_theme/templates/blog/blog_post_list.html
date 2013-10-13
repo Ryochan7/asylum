@@ -21,7 +21,7 @@
     {% endif %}
   {% endif %}
   
-  
+  <section id="blog-post-list">
   {% for blog_post in blog_posts.object_list %}
     <article class="block-grey blog-post{% if forloop.last %} last{% endif %}">
       <div class="block-light wrapper">
@@ -33,7 +33,7 @@
 	{% endif %}
 	  
 	  {% block blog_post_list_post_metainfo %}
-	  <div class="row-fluid">
+	  <div class="row-fluid post-metainfo">
 	    <div class="span3">
 	      <div class="span3">
 		<i class="icon-user"></i>
@@ -139,6 +139,7 @@
       </div>
     </article>
   {% endfor %}
+  </section>
   
   {% pagination_for blog_posts %}
   {% endblock main %}

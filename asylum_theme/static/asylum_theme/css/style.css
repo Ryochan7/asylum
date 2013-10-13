@@ -2021,3 +2021,7 @@ pre {
 .breadcrumb .divider {
   color: #ABABAB;
 }
+
+#blog-post-list .row-fluid.post-metainfo [class*="span"] {
+  margin-bottom: 0px;
+}
