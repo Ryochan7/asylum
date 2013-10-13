@@ -2025,3 +2025,11 @@ pre {
 #blog-post-list .row-fluid.post-metainfo [class*="span"] {
   margin-bottom: 0px;
 }
+
+/* Landscape phones and down */
+@media  only screen and (max-width: 767px) {
+    #blog-post-list .row-fluid.post-metainfo > [class*="span"] {
+      float: left;
+      width: 50%;
+    }
+}
