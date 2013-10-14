@@ -29,7 +29,7 @@
 	{% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
 	  {% block blog_post_list_post_featured_image %}
 	    <a href="{{ blog_post.get_absolute_url }}">
-	      <img class="thumbnail featured-thumb" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 726 400 %}" style="margin-bottom: 20px;" />
+	      <img class="thumbnail featured-thumb" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 726 400 %}" alt="{{ blog_post.title }} Featured Image" />
 	    </a>
 	  {% endblock blog_post_list_post_featured_image %}
 	{% endif %}
