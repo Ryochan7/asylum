@@ -125,7 +125,9 @@
 	
 	{% block blog_post_list_post_links %}
 	<p class="blog-list-detail">
-	  <a href="{{ blog_post.get_absolute_url }}" class="btn btn-large btn-success">{% trans "read more" %}</a>
+	  <a href="{{ blog_post.get_absolute_url }}" class="btn btn-large btn-success">
+	    <i class="icon-book"></i>{% trans "read more" %}
+	  </a>
 	{% keywords_for blog_post as tags %}
 	{% if tags %}
 	  <br />
