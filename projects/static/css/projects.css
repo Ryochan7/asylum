@@ -29,6 +29,10 @@
 	position: relative;
 }
 
+#page-content .project-image-container img {
+  width: 100%;
+}
+
 .pp_social .twitter {
 	margin-top: 0px;
 }

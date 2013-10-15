@@ -13,7 +13,7 @@ $(document).ready(function(){
     $('.da-thumbs > li, .da-thumbs > article').hoverdir();
 
     //Menu
-    jQuery('#menu > ul').superfish({ 
+    jQuery('#top-nav-menu > ul').superfish({ 
         delay:       1000,                           
         animation:   {opacity:'show', height:'show'}, 
         speed:       'fast',                          
@@ -22,7 +22,7 @@ $(document).ready(function(){
     });
     $('.sf-sub-indicator').remove();
     (function() {
-		var $menu = $('#menu ul'),
+		var $menu = $('#top-nav-menu ul'),
 			optionsList = '<option value="" selected>Menu...</option>';
 
 		$menu.find('li').each(function() {
