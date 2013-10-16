@@ -245,8 +245,9 @@ h4.title a{
       box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
       border: solid 1px #cdcdcd;
       border-top: none;
-      margin-left: 9px;
+      padding-bottom: 0px;
   }
+  
   #top-nav-menu > ul > li > ul{}
   #top-nav-menu ul ul li {
       list-style: none;
@@ -266,9 +267,19 @@ h4.title a{
       color: #ffffff;
       background: #83a400;
   }
+  
+  #top-nav-menu-container .navbar-inner {
+    padding: 0px;
+    box-shadow: none;
+    border: none;
+  }
+  
+  #top-nav-menu .nav {
+    width: 100%;
+  }
 }
 
-#top-nav-menu li:hover {visibility: inherit;}
+/*#top-nav-menu li:hover {visibility: inherit;}
 #top-nav-menu li:hover ul,
 #top-nav-menu li.sfHover ul {
     left: -10px;
@@ -280,7 +291,7 @@ h4.title a{
     left: 141px;
     top: -1px;
     border-top: solid 1px #cdcdcd;
-}
+}*/
 
 /* Search Form */
 .phone{
@@ -1802,12 +1813,12 @@ blockquote p{
     body{padding:0 }
     .container{padding: 0 20px;}
 
-    #top-nav-menu > ul,
+    /*#top-nav-menu > ul,*/
     .slides h3,
     #top-menu > .span6{display: none;}
     #top-menu .top-social{float: none;}
 
-    .res-menu{display: block;}
+    /*.res-menu{display: block;}*/
     .logo{text-align:center; ;}
 
     .container > .row [class*="span"]{margin-bottom: 30px;}
@@ -1872,19 +1883,19 @@ blockquote p{
 /*-----------------------------------------------------------------------------------*/
 
 .breadcrumb {
-	background-color: rgba(125, 125, 125, 0.2);
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	margin-bottom: 30px;
+  background-color: rgba(125, 125, 125, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 #header {
-	padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 
 #sidebar .tags li {
-    display: inline-block;
-    margin-right: 5px;
-    white-space: nowrap;
+  display: inline-block;
+  margin-right: 5px;
+  white-space: nowrap;
 }
 
 .tag-weight-1 {
@@ -1987,15 +1998,15 @@ aside .search form {
 }
 
 .share-twitter {
-	background: none repeat scroll 0 0 rgb(0, 163, 212) !important;
+  background: none repeat scroll 0 0 rgb(0, 163, 212) !important;
 }
 
 .share-facebook {
-	background: none repeat scroll 0 0 rgb(70, 103, 166) !important;
+  background: none repeat scroll 0 0 rgb(70, 103, 166) !important;
 }
 
 pre {
-	font-size: 10px;
+  font-size: 10px;
 }
 
 @media (min-width: 980px) {
@@ -2012,25 +2023,30 @@ pre {
 	  margin-top: 0px;
   }
 
-  #top-nav-menu > ul > li > .caret {
-	  margin: 20px 20px 0px 0px;
-  }
-
-  #top-nav-menu > ul > li.current {
-	  border-right: 1px solid rgb(205, 205, 205) !important;
+  #top-nav-menu > ul > li > a.dropdown-toggle {
+    padding: 12px 8px;
+    margin-right: 0px;
   }
   
-  #top-nav-menu li > .dropdown-toggle + .base-link {
-    float: left;
+  #top-nav-menu > ul > li.current {
+    border-right: 1px solid rgb(205, 205, 205) !important;
+  }
+  
+  #top-nav-menu .dropdown > .base-link {
   }
 }
 
 @media (max-width: 979px) {
-  .navbar .nav > li.dropdown > .dropdown-toggle {
-    width: 20%;
-    float: right;
+  #top-nav-menu .nav > li.dropdown > .dropdown-toggle {
+    width: 10%;
+    display: inline-block;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.25);
+  }
+  
+  #top-nav-menu .dropdown > .base-link {
+    width: 70%;
+    display: inline-block;
   }
 }
 

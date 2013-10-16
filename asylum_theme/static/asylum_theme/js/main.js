@@ -1,6 +1,16 @@
+var openDropdownTimer = null;
+
+function checkOpenDropdown(item) {
+
+    if (item.hasClass("open"))
+    {
+      item.removeClass("open");
+      openDropdownTimer = null;
+    }
+};
+
 $(document).ready(function(){
-
-
+  
     $('.p2col .span6:even').addClass('no-margin-left');
 
     //prettyPhoto
@@ -12,40 +22,21 @@ $(document).ready(function(){
 
     $('.da-thumbs > li, .da-thumbs > article').hoverdir();
 
-    //Menu
-    jQuery('#top-nav-menu > ul').superfish({ 
-        delay:       1000,                           
-        animation:   {opacity:'show', height:'show'}, 
-        speed:       'fast',                          
-        autoArrows:  true
+    $("#top-nav-menu li.dropdown").hover(function () {
+      if (openDropdownTimer)
+      {
+	clearTimeout(openDropdownTimer);
+	openDropdownTimer = null;
+      }
+      
+      $(this).addClass("open");
+    }, function () {
+      var listItem = $(this);
 
+      openDropdownTimer = setTimeout(function(){
+	checkOpenDropdown(listItem);
+      }, 1000);
     });
-    $('.sf-sub-indicator').remove();
-    (function() {
-		var $menu = $('#top-nav-menu ul'),
-			optionsList = '<option value="" selected>Menu...</option>';
-
-		$menu.find('li').each(function() {
-			var $this   = $(this),
-				$anchor = $this.children('a'),
-				depth   = $this.parents('ul').length - 1,
-				indent  = '';
-
-			if( depth ) {
-				while( depth > 0 ) {
-					indent += ' - ';
-					depth--;
-				}
-			}
-			optionsList += '<option value="' + $anchor.attr('href') + '">' + indent + ' ' + $anchor.text() + '</option>';
-		}).end()
-		  .after('<select class="res-menu">' + optionsList + '</select>');
-
-		$('.res-menu').on('change', function() {
-			window.location = $(this).val();
-		});
-		
-	})();
     
     $(".our-blog article").hover(function () {
     	$(this).find("img").stop(true, true).animate({ opacity: 0.7 }, 300);
@@ -55,7 +46,7 @@ $(document).ready(function(){
     
     
     //Flickr Widget Footer
-    $('#footer .flickr').jflickrfeed({
+    /*$('#footer .flickr').jflickrfeed({
 		limit: 6,
 		qstrings: {
 			id: '36621592@N06'
@@ -73,11 +64,11 @@ $(document).ready(function(){
         }, function() {
     	   $(this).find("img").stop(true, true).animate({ opacity: 1.0 }, 800);
         });
-	});
+	});*/
 
 
 	//Flickr Widget Sidebar
-    $('#sidebar .sidebar-flickr').jflickrfeed({
+    /*$('#sidebar .sidebar-flickr').jflickrfeed({
 		limit: 8,
 		qstrings: {
 			id: '36621592@N06'
@@ -95,7 +86,7 @@ $(document).ready(function(){
         }, function() {
     	   $(this).find("img").stop(true, true).animate({ opacity: 1.0 }, 800);
         });
-	});
+	});*/
 
 
 	//Portfolio

@@ -22,6 +22,7 @@
     {{ page.description }}
     {% endif %}
     {% endmetablock %}{% endblock meta_description %}">
+    {% block extra_meta %}{% endblock extra_meta %}
 
     <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 
@@ -41,14 +42,14 @@
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.quicksand.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/superfish.js"></script>
+    {#<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/superfish.js"></script>#}
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/hoverIntent.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.hoverdir.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.flexslider.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jflickrfeed.min.js"></script>
+    {#<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jflickrfeed.min.js"></script>#}
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.prettyPhoto.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.elastislide.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.tweet.js"></script>
+    {#<script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.tweet.js"></script>#}
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/smoothscroll.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.ui.totop.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/main.js"></script>
@@ -98,10 +99,10 @@
 <header id="header">
     <div class="container">
         <div class="row">
-            <div class="span4 logo clearfix">
+            <div class="span4 logo clearfix visible-desktop">
                 <a href="{% url "home" %}">{% comment %}<img src="{{ STATIC_URL}}asylum_theme/img/logo.png" alt="logo"/>{% endcomment %}<h2>Ryochan's Asylum</h2></a>
             </div>
-            <div class="span3 offset5 top-social-links">
+            <div class="span3 offset5 top-social-links visible-desktop">
 	        <ul class="top-social clearfix">
 		    <li><a href="http://www.facebook.com/profile.php?id=738212647" class="facebook" target="_blank"></a></li>
                     <li><a href="http://twitter.com/tanickl" class="twitter2 last" target="_blank"></a></li>
@@ -109,9 +110,36 @@
                 </ul>
             </div>
         </div>
-        <nav id="top-nav-menu">
-	    {% page_menu "pages/menus/dropdown.html" %}
-        </nav>
+        
+        <div id="top-nav-menu-container" class="navbar">
+	  <div class="navbar-inner">
+	    <div class="container">
+	    
+	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	      </a>
+	      
+	      <!-- Be sure to leave the brand out there if you want it shown -->
+	      <a class="brand hidden-desktop" href="#">Ryochan's Asylum</a>  
+	      <div class="nav-collapse collapse">
+		<nav id="top-nav-menu">
+		  {% page_menu "pages/menus/dropdown.html" %}
+		</nav>
+	      </div>
+	    </div>
+	  </div>
+        </div>
+
+	<div class="span3 offset5 top-social-links hidden-desktop">
+	    <ul class="top-social clearfix">
+		<li><a href="http://www.facebook.com/profile.php?id=738212647" class="facebook" target="_blank"></a></li>
+		<li><a href="http://twitter.com/tanickl" class="twitter2 last" target="_blank"></a></li>
+		<li><a href="https://plus.google.com/114992825733416619180" class="google last"></a></li>
+	    </ul>
+	</div>
     </div>
 </header>
 
