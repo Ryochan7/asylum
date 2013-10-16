@@ -1,14 +1,3 @@
-var openDropdownTimer = null;
-
-function checkOpenDropdown(item) {
-
-    if (item.hasClass("open"))
-    {
-      item.removeClass("open");
-      openDropdownTimer = null;
-    }
-};
-
 $(document).ready(function(){
   
     $('.p2col .span6:even').addClass('no-margin-left');
@@ -22,28 +11,58 @@ $(document).ready(function(){
 
     $('.da-thumbs > li, .da-thumbs > article').hoverdir();
 
-    $("#top-nav-menu li.dropdown").hover(function () {
-      if (openDropdownTimer)
-      {
-	clearTimeout(openDropdownTimer);
-	openDropdownTimer = null;
-      }
-      
-      $(this).addClass("open");
-    }, function () {
-      var listItem = $(this);
-
-      openDropdownTimer = setTimeout(function(){
-	checkOpenDropdown(listItem);
-      }, 1000);
-    });
     
+    $(function() {
+
+      /* Do not enable the following functionality for
+       * mobile devices
+       */
+      if (!("ontouchstart" in document.documentElement))
+      {	
+	var openDropdownTimer = null;
+	var navMenuItem = null;
+
+	function checkOpenDropdown(item) {
+	  if (item.hasClass("open"))
+	  {
+	    item.removeClass("open");
+	    openDropdownTimer = null;
+	    navMenuItem = null;
+	  }
+	}
+
+	$("#top-nav-menu li.dropdown").hover(function() {
+	  if (openDropdownTimer)
+	  {
+	    // Disable currently active timer
+	    clearTimeout(openDropdownTimer);
+	    openDropdownTimer = null;
+	    
+	    if (navMenuItem && navMenuItem != this)
+	    {
+	      // Close currently open dropdown
+	      $(navMenuItem).toggleClass("open");
+	      navMenuItem = null;
+	    }
+	  }
+	  
+	  $(this).addClass("open");
+	  navMenuItem = this;
+	}, function() {
+	  var listItem = $(this);
+
+	  openDropdownTimer = setTimeout(function(){
+	    checkOpenDropdown(listItem);
+	  }, 1000);
+	});
+      }
+    });
+        
     $(".our-blog article").hover(function () {
     	$(this).find("img").stop(true, true).animate({ opacity: 0.7 }, 300);
     }, function() {
     	$(this).find("img").stop(true, true).animate({ opacity: 1 }, 300);
     });
-    
     
     //Flickr Widget Footer
     /*$('#footer .flickr').jflickrfeed({

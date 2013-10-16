@@ -277,21 +277,11 @@ h4.title a{
   #top-nav-menu .nav {
     width: 100%;
   }
+  
+  #top-nav-menu li.dropdown:hover ul {
+    display: block;
+  }
 }
-
-/*#top-nav-menu li:hover {visibility: inherit;}
-#top-nav-menu li:hover ul,
-#top-nav-menu li.sfHover ul {
-    left: -10px;
-    top: 45px;
-    z-index: 99;
-}
-#top-nav-menu li li:hover ul,
-#top-nav-menu li li.sfHover ul {
-    left: 141px;
-    top: -1px;
-    border-top: solid 1px #cdcdcd;
-}*/
 
 /* Search Form */
 .phone{
@@ -2031,22 +2021,33 @@ pre {
   #top-nav-menu > ul > li.current {
     border-right: 1px solid rgb(205, 205, 205) !important;
   }
-  
-  #top-nav-menu .dropdown > .base-link {
-  }
 }
 
 @media (max-width: 979px) {
   #top-nav-menu .nav > li.dropdown > .dropdown-toggle {
-    width: 10%;
-    display: inline-block;
+    width: 40px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.25);
   }
   
   #top-nav-menu .dropdown > .base-link {
-    width: 70%;
-    display: inline-block;
+    /*width: 70%;
+    display: inline-block;*/
+  }
+  
+  #top-nav-menu-container {
+    margin-left: -20px;
+    margin-right: -20px;
+    top: 0px;
+    position: static;
+    z-index: 1030;
+  }
+  
+  #header {
+    padding-top: 0px;
   }
 }
 
