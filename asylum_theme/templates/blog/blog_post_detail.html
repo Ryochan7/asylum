@@ -1,16 +1,6 @@
 {% overextends "blog/blog_post_detail.html" %}
 {% load mezzanine_tags i18n %}
 
-{% block extra_footer %}
-  {{ block.super }}
-
-<script type="text/javascript">
-(function () {
-    $("#page-content iframe").attr("width", "100%");
-})()
-</script>
-{% endblock %}
-
 {% block main_wrapper %}
   <div class="block-grey">
       <div class="block-light wrapper">
