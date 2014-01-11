@@ -1,9 +1,10 @@
+from __future__ import unicode_literals
 
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
-from mezzanine.pages.views import page
 
 
 admin.autodiscover()
@@ -12,11 +13,14 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
-urlpatterns = patterns("",
+urlpatterns = i18n_patterns("",
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
+)
+
+urlpatterns = patterns("",
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.

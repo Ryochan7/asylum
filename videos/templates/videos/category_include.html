@@ -10,7 +10,7 @@
 	<ul class="clearfix block-light wrap15">
 	    {% for category in category_list %}
 	    <li>
-		<a href="{% url videos_category category.slug %}">
+		<a href="{% url "videos_category" category.slug %}">
 		    {{ category.title }}
 		</a>
 	    </li>

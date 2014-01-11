@@ -24,8 +24,7 @@ class Project(Displayable, RichText, AdminThumbMixin):
     #    default=True)
     ongoing = models.BooleanField(verbose_name=_("Ongoing Project"),
         default=True)
-    url = models.URLField(verbose_name=_("Project URL"),
-        verify_exists=False)
+    url = models.URLField(verbose_name=_("Project URL"))
     category = models.ForeignKey(ProjectCategory)
     begin_date = models.DateField(verbose_name=_("Project Start Date"))
     end_date = models.DateField(verbose_name=_("Project End Date"))

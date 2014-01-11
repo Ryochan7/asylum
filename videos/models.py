@@ -30,7 +30,7 @@ class Video(Displayable, RichText, AdminThumbMixin):
         upload_to=upload_to("videos.Video.featured_image", "uploads/video_images/%Y%m"),
         format="Image", max_length=255)#, null=True, blank=True)
     category = models.ForeignKey(VideoCategory)
-    video_url = models.URLField(verbose_name=_("Video URL"), verify_exists=False,
+    video_url = models.URLField(verbose_name=_("Video URL"),
         max_length=256)
     allow_comments = models.BooleanField(verbose_name=_("Allow comments"),
         default=True)

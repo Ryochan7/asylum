@@ -3,8 +3,8 @@
 
 {% block extra_head %}
   {{ block.super }}
-  <link rel="alternate" type="application/rss+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog RSS Feed" href="{% url blog_post_feed "rss" %}" />
-  <link rel="alternate" type="application/atom+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog Atom Feed" href="{% url blog_post_feed "atom" %}" />
+  <link rel="alternate" type="application/rss+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog RSS Feed" href="{% url "blog_post_feed" "rss" %}" />
+  <link rel="alternate" type="application/atom+xml" title="{% if settings.SITE_TITLE %}{{ settings.SITE_TITLE }} | {% endif %}Blog Atom Feed" href="{% url "blog_post_feed" "atom" %}" />
 {% endblock %}
 
 {% block main_wrapper %}
@@ -45,7 +45,7 @@
 		<strong>{% trans "Posted by" %}</strong>:
 		{% with blog_post.user as author %}
 		<span class="span">
-		  <a href="{% url blog_post_list_author author %}">
+		  <a href="{% url "blog_post_list_author" author %}">
 		    {{ author.get_full_name|default:author.username|capfirst }}
 		  </a>
 		</span>    
@@ -80,7 +80,7 @@
 		<strong>{% trans "In" %}</strong>:
 		<span class="span">
 		  {% for category in categories %}
-		    <a href="{% url blog_post_list_category category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
+		    <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
 		  {% endfor %}
 		</span>
 	      </p>
@@ -135,7 +135,7 @@
 	{% trans "Tags" %}:
 	{% spaceless %}
 	{% for tag in tags %}
-	  <a href="{% url blog_post_list_tag tag.slug %}" class="tag badge badge-info">{{ tag }}</a>
+	  <a href="{% url "blog_post_list_tag" tag.slug %}" class="tag badge badge-info">{{ tag }}</a>
 	{% endfor %}
 	{% endspaceless %}
 	{% endif %}

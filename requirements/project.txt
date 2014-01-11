@@ -1,5 +1,5 @@
-django==1.4.6
-Mezzanine==1.4.12
+django==1.6.1
+Mezzanine==3.0.4
 django-classy-tags
 django-extensions
 mezzanine-slides

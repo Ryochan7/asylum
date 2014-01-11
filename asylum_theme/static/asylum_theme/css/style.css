@@ -990,6 +990,7 @@ article.span3 h4{
 #footer #contact{margin-bottom: 0;}
 #footer #contact .control-group {margin-bottom:5px;}
 #footer #contact input[type="text"],
+#footer #contact input[type="email"],
 #footer #contact textarea {
     border-color: #e0e0e0;
     color: #777777;
@@ -1217,14 +1218,19 @@ article.span3 h4{
     float: left;
     margin-right: 5px;
 }
-.pagination ul > li > a,
-.pagination ul > li > span {
+.pagination > li > a,
+.pagination > li > span {
     background-color: #fbfbfb;
     font-size: 0.9em;
     display: inline-block;
     border-left-width: 1px;
 }
+
 .pagination .disabled a {
+    background-color: #e7e7e7;
+}
+
+.pagination .page-info span {
     background-color: #e7e7e7;
 }
 
@@ -1462,7 +1468,8 @@ article.span3 h4{
 /*-----------------------------------------------------------------------------------*/
 /*	8.	Forms
 /*-----------------------------------------------------------------------------------*/
-#af-form  input[type="text"]{
+#af-form  input[type="text"],
+#af-form  input[type="email"] {
     color: #777;
     font-size: 12px !important;
     padding: 5px;
@@ -1475,6 +1482,7 @@ article.span3 h4{
 }
 
 #af-form input[type="text"],
+#af-form  input[type="email"],
 #af-form textarea{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1790,7 +1798,8 @@ blockquote p{
         margin-right: 0;
         width: 90%;
     }
-    #footer #contact input[type="text"], #footer #contact textarea{width: 90%}
+    #footer #contact input[type="text"], #footer #contact input[type="email"],
+    #footer #contact textarea {width: 90%}
     #footer [class^="icon-"]{display: none;}
     .service.img-border-bg {margin-top:50px;}
     .ident-bot-2 {margin-bottom:0;}
@@ -1908,6 +1917,11 @@ blockquote p{
 	padding: 0px;
 }
 
+.af-form-3 .help-block {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 5px;
+}
 
 #header .top-social a{display:block; width:32px; height:32px;}
 #header .top-social .twitter2{background: url(../img/twitter.png) no-repeat center left;}
@@ -2052,11 +2066,18 @@ pre {
 }
 
 #paypal-donate-placeholder, #sidebar-ad-placeholder {
-	text-align: center;
+  text-align: center;
 }
 
-.breadcrumb .divider {
+/*.breadcrumb .divider {
   color: #ABABAB;
+}
+*/
+
+.breadcrumb > li + li:before {
+    padding: 0px 5px 0px 5px;
+    color: #ababab;
+    content: "/\00a0";
 }
 
 #blog-post-list .row-fluid.post-metainfo [class*="span"] {
@@ -2069,6 +2090,10 @@ pre {
 
 #video_detail .origin input {
   width: 90%;
+}
+
+.form-group {
+    margin-bottom: 10px;
 }
 
 /* Landscape phone to portrait tablet */
