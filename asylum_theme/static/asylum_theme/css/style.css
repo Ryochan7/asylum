@@ -1998,6 +1998,10 @@ aside .search form {
     margin-right: 10px;
 }
 
+#page-content .rating .form-inline {
+    margin-bottom: 0px;
+}
+
 .share-twitter, .share-facebook, .share-twitter:hover, .share-facebook:hover {
     color: rgb(255, 255, 255);
     font-weight: bold;
