@@ -1986,12 +1986,16 @@ aside .search form {
 }
 
 #page-content .panel.rating * {
-	display: inline;
+	display: inline-block;
 	list-style-type: none;
 }
 
 #page-content .panel.rating label {
 	margin-right: 15px;
+}
+
+#page-content .panel-body > span:first-child {
+    margin-right: 10px;
 }
 
 .share-twitter, .share-facebook, .share-twitter:hover, .share-facebook:hover {
