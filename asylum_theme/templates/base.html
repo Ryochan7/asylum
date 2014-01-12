@@ -32,9 +32,10 @@
     {% compress css %}
     <link href="{{ STATIC_URL }}asylum_theme/css/bootstrap.css" type="text/css" rel="stylesheet"/>
     <link href="{{ STATIC_URL }}asylum_theme/css/prettyPhoto.css" type="text/css" rel="stylesheet"/>
-    <link href="{{ STATIC_URL }}asylum_theme/css/style.css" type="text/css" rel="stylesheet"/>
     {% block extra_css %}{% endblock %}
     {% endcompress %}
+
+    <link href="{{ STATIC_URL }}asylum_theme/css/style.css" type="text/css" rel="stylesheet"/>
 
     {% compress js %}
     <script type="text/javascript" src="{{ STATIC_URL }}asylum_theme/js/jquery.min.js"></script>
