@@ -1,3 +1,4 @@
+from __future__ import absolute_import, unicode_literals
 
 ######################
 # MEZZANINE SETTINGS #
@@ -98,7 +99,7 @@ MANAGERS = ADMINS
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = None
+TIME_ZONE = "US/Central"
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
@@ -106,6 +107,12 @@ USE_TZ = True
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = "en"
+
+# Supported languages
+_ = lambda s: s
+LANGUAGES = (
+    ('en', _('English')),
+)
 
 # A boolean that turns on/off debug mode. When set to ``True``, stack traces
 # are displayed for error pages. Should always be set to ``False`` in
@@ -146,6 +153,10 @@ STATICFILES_FINDERS = (
 )
 
 ALLOWED_HOSTS = ["www.ryochan7.com", "ryochan7.com"]
+# The numeric mode to set newly-uploaded files to. The value should be
+# a mode you'd pass directly to os.chmod.
+FILE_UPLOAD_PERMISSIONS = 0o644
+
 
 #############
 # DATABASES #
@@ -274,12 +285,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     "mezzanine.core.middleware.UpdateCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "mezzanine.core.request.CurrentRequestMiddleware",
+    "mezzanine.core.middleware.RedirectFallbackMiddleware",
     "mezzanine.core.middleware.TemplateForDeviceMiddleware",
     "mezzanine.core.middleware.TemplateForHostMiddleware",
     "mezzanine.core.middleware.AdminLoginInterfaceSelectorMiddleware",
@@ -288,7 +300,6 @@ MIDDLEWARE_CLASSES = (
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
-    #"mezzyblocks.middleware.BlocksTemplateContextMiddleware",
 )
 
 # Store these package names here as they may change in the future since
@@ -332,6 +343,8 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 #     "REPO_URL": "", # Git or Mercurial remote repo URL for the project
 #     "DB_PASS": "", # Live database password
 #     "ADMIN_PASS": "", # Live admin user password
+#     "SECRET_KEY": SECRET_KEY,
+#     "NEVERCACHE_KEY": NEVERCACHE_KEY,
 # }
 
 #RICHTEXT_WIDGET_CLASS = 'mezzanine_pagedown.widgets.PageDownWidget'
