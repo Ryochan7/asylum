@@ -2104,6 +2104,27 @@ pre {
     margin-bottom: 10px;
 }
 
+.application-teaser img {
+    display: block;
+    margin: 0px auto;
+}
+
+.application-details .boxart {
+    margin-bottom: 10px;
+}
+
+.application-details .download-button {
+    display: block;
+}
+
+.application-details #app-screenshot-carousel {
+    margin-bottom: 20px;
+}
+
+.application-details #featured-profile {
+    margin-bottom: 20px;
+}
+
 /* Landscape phone to portrait tablet */
 @media  only screen and (max-width: 767px) {
     #blog-post-list .row-fluid.post-metainfo > [class*="span"] {
