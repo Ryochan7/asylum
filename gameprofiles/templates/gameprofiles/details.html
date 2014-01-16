@@ -1,0 +1,119 @@
+{% extends "gameprofiles/base.html" %}
+{% load mezzanine_tags i18n %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li class="active">{{ application.title }}</li>
+{% endblock breadcrumb_menu %}
+
+{% block meta_title %}{{ application.title }}{% endblock meta_title %}
+
+{% block title %}
+    {{ application.title }}
+{% endblock title %}
+
+{% block main %}
+    <article class="application-details">
+        <section id="application-main-content" class="row-fluid" style="margin-bottom: 20px;">
+            <div class="span3">
+                <img src="{{ MEDIA_URL }}{% thumbnail application.boxart 250 0 %}" alt="{{ application.title }} Profile" class="img-rounded block-grey boxart" />
+                {% if featured_profile %}
+                    <a href="{% url "profiles_download" featured_profile.profile.id %}" class="btn btn-primary text-center download-button">Download Profile</a>
+                {% endif %}
+            </div>
+            
+            <div class="span9">
+                <div class="block-grey" style="margin-bottom: 20px;">
+                    <h3 class="text-center">Game Details</h3>
+                </div>
+                
+                {% if application.screenshot_set.count > 0 %}
+                    <div class="row-fluid">
+                        <div id="app-screenshot-carousel" class="carousel slide span9" data-interval="5000">
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+                            {% for screenshot in application.screenshot_set.all %}
+                                <div class="item{% if forloop.first %} active{% endif %}">
+                                    <img src="{{ MEDIA_URL }}{% thumbnail screenshot.image 623 0 %}" alt="{{ application.title }} Screenshot {{ forloop.counter }}" />
+                                </div>
+                            {% endfor %}
+                            </div>
+
+                            <!-- Carousel nav -->
+                            <a class="carousel-control left" href="#app-screenshot-carousel" data-slide="prev">&lsaquo;</a>
+                            <a class="carousel-control right" href="#app-screenshot-carousel" data-slide="next">&rsaquo;</a>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                {% editable application.content %}
+                {{ application.content|richtext_filter|safe }}
+                {% endeditable %}
+                
+                <table class="table table-bordered">
+                    <tr><th colspan="2" class="text-center">Profile Information</th></tr>
+                    <tr><td>Universal Profile Available<br/>(Gamepad support for Xbox 360, PS3, Logitech F710, and other controllers) </td><td>{{ application.has_gamecontroller_profile|yesno:"Yes,No" }}</td></tr>
+                    <tr><td># of Profiles</td><td>{{ application.profile_set.count }}</td></tr>
+                </table>           
+            </div>
+        </section>
+        
+        <section id="featured-profile" class="row-fluid">
+            <div class="span12">
+                {% if featured_profile %}
+                    <div class="block-grey">
+                        <h3 class="text-center">Featured Profile</h3>
+                    </div>
+                    
+                    <h4>Information</h4>
+                    <p>
+                        Author: {{ featured_profile.profile.author }}<br/>
+                        # of Downloads: {{ featured_profile.profile.download_count }}<br/>
+                        Controller: {{ featured_profile.profile.controller.name }}
+                            {% if profile.controller.filter_guid %}
+                            ({{ profile.controller.filter_guid }})
+                            {% endif %}
+                        {% if profile.controller.guid == profile.controller.GAMECONTROLLER_GUID %}
+                            <br/><strong>Universal Profile</strong>
+                        {% endif %}
+                    </p>
+                    
+                    <h4>Description</h4>
+                    
+                    {% editable featured_profile.profile.content %}
+                    {{ featured_profile.profile.content|richtext_filter|safe }}
+                    {% endeditable %}
+                    
+                    <a href="{% url "profiles_download" featured_profile.profile.id %}" class="btn btn-primary text-center">
+                        Download Profile
+                    </a>
+                {% endif %}
+            </div>
+        </section>
+        
+        {% if all_profiles and all_profiles_count > 1 %}
+            <section class="row-fluid">
+                <div class="span12">
+                    <div class="block-grey">
+                        <h3 class="text-center">All Profiles</h3>
+                    </div>
+                    <table class="table">
+                        <tr><th>Author</th><th>Controller</th><th># of Downloads</th><th></th>
+                        {% for profile in all_profiles %}
+                        <tr><td>{{ profile.author }}</td>
+                            <td>{{ profile.controller.name|default:"" }}
+                                {% if profile.controller.filter_guid %}
+                                ({{ profile.controller.filter_guid }})
+                                {% endif %}
+                            </td>
+                            <td>{{ profile.download_count }}</td>
+                            <td><a href="{% url "profiles_download" profile.id %}">Download</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </section>
+         {% endif %}
+        
+    </article>
+{% endblock main %}

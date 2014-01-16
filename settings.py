@@ -261,6 +261,7 @@ INSTALLED_APPS = (
     "mezzanine_slides",
     "projects",
     "videos",
+    "gameprofiles",
     "asylum_custom", # "Secret" sauce app
 )
 
@@ -365,6 +366,16 @@ ADMIN_MENU_ORDER = (
 )
 
 RICHTEXT_ALLOWED_TAGS  = ('a', 'abbr', 'acronym', 'address', 'area', 'b', 'bdo', 'big', 'blockquote', 'br', 'button', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'dd', 'del', 'dfn', 'dir', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'font', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'label', 'legend', 'li', 'map', 'menu', 'object', 'ol', 'optgroup', 'option', 'p', 'pre', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'tt', 'u', 'ul', 'var', 'wbr')
+
+
+FILEBROWSER_EXTENSIONS = {
+    'Folder': [''],
+    'Image': ['.jpg','.jpeg','.gif','.png',],
+    'Document': ['.pdf','.doc','.rtf','.txt','.xls','.csv', '.xml', '.json'],
+    'Video': ['.mov','.wmv','.mpeg','.mpg','.avi'],
+    'Audio': ['.mp3','.mp4','.wav',]
+}
+
 
 
 ##################

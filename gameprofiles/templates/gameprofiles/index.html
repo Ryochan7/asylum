@@ -1,0 +1,29 @@
+{% extends "gameprofiles/base.html" %}
+{% load mezzanine_tags i18n %}
+
+{% block meta_title %}{% if page %}{{ page.richtextpage.meta_title }}{% else %}Profiles{% endif %}{% endblock %}
+
+{% block title %}
+{% if page and page.get_absolute_url == request.path %}
+{% editable page.title %}{{ page.title }}{% endeditable %}
+{% else %}
+{% trans "Profiles" %}
+{% endif %}
+{% endblock title %}
+
+{% block main %}
+    {% comment %}{% block profile_page_description %}
+    {% endblock profile_page_description %}{% endcomment %}
+    <section id="application-list" class="row-fluid">
+        {% for application in application_list %}
+        <article class="span3 application-teaser">
+            <a href="{{ application.get_absolute_url }}"><img src="{{ MEDIA_URL }}{% thumbnail application.boxart 196 0 %}" alt="{{ application.title }} Profile" class="img-rounded block-grey" /></a>
+            <p class="text-center"><a href="{{ application.get_absolute_url }}">{{ application.title }}</a></p>
+        </article>
+        {% endfor %}        
+    </section>
+    
+    <div class="row-fluid">
+        {% pagination_for page_obj %}
+    </div>
+{% endblock main %}

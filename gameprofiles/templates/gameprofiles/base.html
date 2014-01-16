@@ -1,0 +1,18 @@
+{% extends "one_column.html" %}
+{% load mezzanine_tags %}
+
+{% block main_wrapper %}
+    <div class="block-grey">
+        <div class="block-light wrapper">
+            {% block profile_page_description %}
+            {% if page.get_absolute_url == request.path %}
+            {% editable page.richtextpage.content %}
+            {{ page.richtextpage.content|richtext_filter|safe }}
+            {% endeditable %}
+            {% endif %}
+            {% endblock profile_page_description %}
+        
+            {% block main %}{% endblock main %}
+        </div>
+    </div>
+{% endblock main_wrapper %}

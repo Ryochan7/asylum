@@ -34,8 +34,9 @@ urlpatterns += patterns("",
 
     url("^$", direct_to_template, {"template": "index.html"}, name="home"),
     #url("^blog/feeds/(?P<format>.*)/$", direct_to_template, {"template": "index.html"}, name="custom_blog_post_feed"),
-    url (r'^projects/', include('projects.urls')),
-    url (r'^videos/', include('videos.urls')),
+    url(r'^projects/', include('projects.urls')),
+    url(r'^videos/', include('videos.urls')),
+    url(r'^profiles/', include("gameprofiles.urls")),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------

@@ -1,0 +1,46 @@
+[
+{
+    "pk": 1, 
+    "model": "gameprofiles.platform", 
+    "fields": {
+        "slug": "linux", 
+        "icon": "uploads/uploads/platformicons/tux.jpg", 
+        "site": 1, 
+        "title": "Linux"
+    }
+},
+{
+    "pk": 2, 
+    "model": "gameprofiles.platform", 
+    "fields": {
+        "slug": "windows", 
+        "icon": "uploads/uploads/platformicons/win8_icon_32x32.png", 
+        "site": 1, 
+        "title": "Windows"
+    }
+},
+{
+    "pk": 1, 
+    "model": "gameprofiles.controller", 
+    "fields": {
+        "platforms": [
+            1, 
+            2
+        ], 
+        "guid": "00000000000000000000000000000000", 
+        "name": "Game Controller"
+    }
+},
+{
+    "pk": 2, 
+    "model": "gameprofiles.controller", 
+    "fields": {
+        "platforms": [
+            1, 
+            2
+        ], 
+        "guid": "", 
+        "name": "Unknown"
+    }
+}
+]
