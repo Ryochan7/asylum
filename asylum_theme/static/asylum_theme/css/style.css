@@ -2125,11 +2125,20 @@ pre {
     margin-bottom: 20px;
 }
 
+#application-list .application-teaser:nth-of-type(4n+1) {
+  clear: both;
+}
+
 /* Landscape phone to portrait tablet */
 @media  only screen and (max-width: 767px) {
     #blog-post-list .row-fluid.post-metainfo > [class*="span"] {
       float: left;
       width: 50%;
+    }
+
+    .application-details .boxart {
+        display: block;
+        margin: 0px auto 10px;
     }
 }
 
