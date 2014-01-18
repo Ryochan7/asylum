@@ -2104,6 +2104,10 @@ pre {
     margin-bottom: 10px;
 }
 
+.application-teaser {
+    margin-bottom: 20px;
+}
+
 .application-teaser img {
     display: block;
     margin: 0px auto;
