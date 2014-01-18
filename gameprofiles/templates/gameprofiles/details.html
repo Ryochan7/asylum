@@ -69,12 +69,17 @@
                     <p>
                         Author: {{ featured_profile.profile.author }}<br/>
                         # of Downloads: {{ featured_profile.profile.download_count }}<br/>
-                        Controller: {{ featured_profile.profile.controller.name }}
+                        Controller: {{ featured_profile.profile.controller.name }}<br/>
                             {% if profile.controller.filter_guid %}
                             ({{ profile.controller.filter_guid }})
                             {% endif %}
                         {% if profile.controller.guid == profile.controller.GAMECONTROLLER_GUID %}
-                            <br/><strong>Universal Profile</strong>
+                            <strong>Universal Profile</strong><br/>
+                        {% endif %}
+
+                        Created: {{ featured_profile.profile.created|date:"D d M Y" }}<br/>
+                        {% if featured_profile.profile.updated and featured_profile.profile.updated != featured_profile.profile.created %}
+                            Updated: {{ featured_profile.profile.updated|date:"D d M Y" }}
                         {% endif %}
                     </p>
                     

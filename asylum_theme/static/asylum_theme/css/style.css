@@ -2127,6 +2127,7 @@ pre {
 
 #application-list .application-teaser:nth-of-type(4n+1) {
   clear: both;
+  margin-left: 0px;
 }
 
 /* Landscape phone to portrait tablet */
