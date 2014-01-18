@@ -1,23 +1,17 @@
 from django.views.generic import ListView
 from mezzanine.utils.views import paginate
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 class CustomMezListView(ListView):
     max_paging_links = 0
     page_kwarg = "page"
-
-    """def paginate_queryset(self, queryset, page_size):
-	(paginator, page, queryset, is_paginated) = super(CustomMezListView, self).paginate_queryset(queryset, page_size)
-
-	page_range = paginator.page_range
-	max_paging_links = self.get_max_paging_links()
-	if max_paging_links > 0 and (paginator.num_pages > max_paging_links):
-	    start = min(paginator.num_pages - max_paging_links,
-		max(0, page.number - (max_paging_links / 2) - 1))
-
-	    page_range = page_range[start:start + max_paging_links]
-
-	page.visible_page_range = page_range
-	return (paginator, page, queryset, is_paginated)"""
 
     def get_max_paging_links(self):
 	return self.max_paging_links

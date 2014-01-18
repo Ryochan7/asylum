@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
-from asylum_custom.views import CustomMezListView
+from asylum_custom.views import CustomMezListView, get_client_ip
 
 from .models import (Application, FeaturedProfile, Profile,
     ProfileDownload)
@@ -31,6 +31,6 @@ class ApplicationDetailView(DetailView):
 class ProfileDownloadView(View):
     def get(self, request, *args, **kwargs):
         current_profile = get_object_or_404(Profile, id=self.kwargs["id"])
-        ProfileDownload.objects.get_or_create(ipaddress=request.META["REMOTE_ADDR"], profile=current_profile)
+        ProfileDownload.objects.get_or_create(ipaddress=get_client_ip(request), profile=current_profile)
         return redirect(current_profile.file.url)
 
