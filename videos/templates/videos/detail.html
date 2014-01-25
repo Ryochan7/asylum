@@ -5,14 +5,18 @@
 
 {% block meta_title %}Video: {{ video.meta_title }}{% endblock meta_title %}
 
-{% block meta_keywords %}{% metablock %}
+{% block meta_keywords %}
 {% keywords_for video as tags %}
-{% for tag in tags %}{% if not forloop.first %}, {% endif %}{{ tag }}{% endfor %}
-{% endmetablock %}{% endblock meta_keywords %}
 
-{% block meta_description %}{% metablock %}
+{% block meta_keywords_inner %}
+{{ block.super }}
+{% endblock meta_keywords_inner %}
+
+{% endblock meta_keywords %}
+
+{% block meta_description %}
 {{ video.description }}
-{% endmetablock %}{% endblock meta_description %}
+{% endblock meta_description %}
 
 {% block extra_head %}
     <meta property="og:title" content="{{ video.title }}" />

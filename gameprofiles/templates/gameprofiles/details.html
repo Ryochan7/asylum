@@ -1,5 +1,18 @@
 {% extends "gameprofiles/base.html" %}
-{% load mezzanine_tags i18n %}
+{% load mezzanine_tags keyword_tags i18n %}
+
+{% block meta_keywords %}
+{% keywords_for application as keywords %}
+
+{% block meta_keywords_inner %}
+{{ block.super }}
+{% endblock meta_keywords_inner %}
+
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+{{ application.description }}
+{% endblock meta_description %}
 
 {% block breadcrumb_menu %}
 {{ block.super }}

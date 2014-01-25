@@ -8,20 +8,24 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;" />
-    <meta name="keywords" content="{% block meta_keywords %}{% metablock %}
+    <meta name="keywords" content="{% metablock %}{% block meta_keywords %}
     {% if page and page.get_absolute_url == request.path %}
     {% keywords_for page as keywords %}
+    {% endif %}
+
+    {% block meta_keywords_inner %}
     {% for keyword in keywords %}
 	{% if not forloop.first %}, {% endif %}
 	{{ keyword }}
     {% endfor %}
-    {% endif %}
-    {% endmetablock %}{% endblock meta_keywords %}">
-    <meta name="description" content="{% block meta_description %}{% metablock %}
+    {% endblock meta_keywords_inner %}
+
+    {% endblock meta_keywords %}{% endmetablock %}">
+    <meta name="description" content="{% metablock %}{% block meta_description %}
     {% if page and page.get_absolute_url == request.path %}
     {{ page.description }}
     {% endif %}
-    {% endmetablock %}{% endblock meta_description %}">
+    {% endblock meta_description %}{% endmetablock %}">
     {% block extra_meta %}{% endblock extra_meta %}
 
     <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
