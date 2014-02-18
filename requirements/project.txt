@@ -11,3 +11,4 @@ pygments
 Whoosh==2.5.3
 django-registration==0.8
 -e hg+https://bitbucket.org/slav0nic/djangobb@581#egg=djangobb_forum
+https://bitbucket.org/benoitc/django-authopenid/get/tip.tar.gz
