@@ -1,0 +1,26 @@
+/*
+ * Custom CSS used to fix quirks introduced by DjangoBB stylesheets.
+ * Place rules here so they should work with all available styles.
+ */
+
+.djangobb legend {
+    width: auto;
+    margin-bottom: 0px;
+    line-height: normal;
+    font-size: 11px;
+    border-style: none;
+}
+
+.djangobb h1, .djangobb h2, .djangobb h3,
+.djangobb h4, .djangobb h5, .djangobb h6 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+body {
+    text-align: left;
+    background: url("../img/body-bg.gif") repeat scroll 50% 0px #F6F6F6;
+}
+
+#djangobbwrap {
+    margin: 0px;
+}

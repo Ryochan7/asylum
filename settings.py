@@ -259,6 +259,12 @@ INSTALLED_APPS = (
     #"mezzanine.accounts",
     #"mezzanine.mobile",
     "mezzanine_slides",
+    'registration',
+    'linaro_django_pagination',
+    'django_authopenid',
+    'djangobb_forum',
+    'haystack',
+    'django_messages',
     "projects",
     "videos",
     "gameprofiles",
@@ -278,6 +284,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.core.context_processors.tz",
     "mezzanine.conf.context_processors.settings",
+    'djangobb_forum.context_processors.forum_settings',
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -301,6 +308,12 @@ MIDDLEWARE_CLASSES = (
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
+    'linaro_django_pagination.middleware.PaginationMiddleware',
+    'django_authopenid.middleware.OpenIDMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'djangobb_forum.middleware.LastLoginMiddleware',
+    'djangobb_forum.middleware.UsersOnline',
+    'djangobb_forum.middleware.TimezoneMiddleware',
 )
 
 # Store these package names here as they may change in the future since
@@ -376,7 +389,27 @@ FILEBROWSER_EXTENSIONS = {
     'Audio': ['.mp3','.mp4','.wav',]
 }
 
+# Haystack settings
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(PROJECT_ROOT, 'djangobb_index'),
+        'INCLUDE_SPELLING': True,
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+DJANGOBB_FORUM_BASE_TITLE = "Forums"
+
+# Account settings
+ACCOUNT_ACTIVATION_DAYS = 10
+LOGIN_REDIRECT_URL = '/forums/'
+LOGIN_URL = '/forums/account/signin/'
+
+#Cache settings
+#CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 ##################
 # LOCAL SETTINGS #

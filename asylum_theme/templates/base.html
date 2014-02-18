@@ -26,7 +26,6 @@
     {{ page.description }}
     {% endif %}
     {% endblock meta_description %}{% endmetablock %}">
-    {% block extra_meta %}{% endblock extra_meta %}
 
     <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 
@@ -68,6 +67,7 @@
     <![endif]-->
 
     {% block extra_head %}{% endblock %}
+    {% block extra_meta %}{% endblock extra_meta %}
 </head>
 
 <body id="{% block body_id %}{% spaceless %}
@@ -150,6 +150,7 @@
 <!-- container -->
 <section id="container">
     <div class="container">
+        {% block site_messages %}
 	{% nevercache %}
 	    {% for message in messages %}
 	    <div class="alert alert-{{ message.tags }}" data-alert="alert">
@@ -157,6 +158,7 @@
 	    </div>
 	    {% endfor %}
 	{% endnevercache %}
+	{% endblock site_messages %}
 
 	{% block breadcrumb_wrapper %}
 	<ul class="breadcrumb">

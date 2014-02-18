@@ -1,4 +1,4 @@
-django==1.6.1
+Django==1.6.1
 Mezzanine==3.0.4
 django-classy-tags
 django-extensions
@@ -7,3 +7,7 @@ south
 django-compressor
 django-debug-toolbar
 fabric
+pygments
+Whoosh==2.5.3
+django-registration==0.8
+-e hg+https://bitbucket.org/slav0nic/djangobb@581#egg=djangobb_forum

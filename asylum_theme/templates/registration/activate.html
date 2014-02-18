@@ -1,0 +1,14 @@
+{% extends "djangobb_forum/base.html" %}
+{% load i18n %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="blockform">
+    <h2><span>{% trans "Activation error" %}</span></h2>
+    <div class="box">
+        <p>{% trans 'Sorry, your activation link was incorrect or the activation key for your account has expired.' %}</p>
+    </div>
+</div>
+{% endblock %}

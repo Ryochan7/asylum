@@ -4,8 +4,17 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
+from django_authopenid.urls import urlpatterns as authopenid_urlpatterns
+from registration.forms import RegistrationFormUniqueEmail
+
+from djangobb_forum import settings as forum_settings
+
 from mezzanine.core.views import direct_to_template
 
+for i, rurl in enumerate(authopenid_urlpatterns):
+    if rurl.name == 'registration_register':
+        authopenid_urlpatterns[i].default_args.update({'form_class': RegistrationFormUniqueEmail})
+        break
 
 admin.autodiscover()
 
@@ -19,6 +28,12 @@ urlpatterns = i18n_patterns("",
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
 )
+
+# PM Extension
+if (forum_settings.PM_SUPPORT):
+    urlpatterns += patterns('',
+        (r'^forums/pm/', include('django_messages.urls')),
+   )
 
 urlpatterns += patterns("",
 
@@ -37,6 +52,9 @@ urlpatterns += patterns("",
     url(r'^projects/', include('projects.urls')),
     url(r'^videos/', include('videos.urls')),
     url(r'^profiles/', include("gameprofiles.urls")),
+    # Apps
+    url(r'^forums/account/', include('django_authopenid.urls')),
+    url(r'^forums/', include('djangobb_forum.urls', namespace='djangobb')),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------

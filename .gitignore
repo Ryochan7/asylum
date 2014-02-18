@@ -8,6 +8,7 @@ nbproject/
 local_settings.py
 dev.db
 static/*
+djangobb_index/
 !static/media/blank.txt
 !static/robots.txt
 *.*~
