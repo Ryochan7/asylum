@@ -1,7 +1,9 @@
 from django import template
-from classytags.core import Options
+from classytags.core import Options, Tag
 from classytags.arguments import Argument
 from classytags.helpers import InclusionTag
+
+from mezzanine.pages.models import Page
 
 register = template.Library()
 
@@ -37,3 +39,15 @@ class CustomPaginationFor(InclusionTag):
         }
     
 register.tag(CustomPaginationFor)
+
+class LoadForumsPage(Tag):
+    name = "load_forums_page"
+
+    def render_tag(self, context):
+        possible_page = Page.objects.filter(slug="forums").first()
+        if possible_page:
+            context["page"] = possible_page
+
+        return ''
+
+register.tag(LoadForumsPage)

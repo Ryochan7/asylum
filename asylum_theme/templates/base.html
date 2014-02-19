@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load pages_tags mezzanine_tags i18n future keyword_tags project_tags %}
+{% load pages_tags mezzanine_tags i18n future keyword_tags project_tags asylum_tags %}
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -130,7 +130,9 @@
 	      <a class="brand hidden-desktop" href="#">Ryochan's Asylum</a>  
 	      <div class="nav-collapse collapse">
 		<nav id="top-nav-menu">
-		  {% page_menu "pages/menus/dropdown.html" %}
+                  {% block topmenu_build %}
+                    {% page_menu "pages/menus/dropdown.html" %}
+                  {% endblock topmenu_build %}
 		</nav>
 	      </div>
 	    </div>

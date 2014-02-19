@@ -1,6 +1,11 @@
 {% extends "one_column.html" %}
-{% load forum_extras %}
+{% load forum_extras asylum_tags %}
 {% load i18n %}
+
+{% block topmenu_build %}
+{% load_forums_page %}
+{{ block.super }}
+{% endblock topmenu_build %}
 
 {% block site_messages %}
 {% endblock site_messages %}
