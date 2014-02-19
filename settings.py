@@ -142,7 +142,10 @@ TEMPLATE_LOADERS = (
     "django.template.loaders.app_directories.Loader",
 )
 
-AUTHENTICATION_BACKENDS = ("mezzanine.core.auth_backends.MezzanineBackend",)
+AUTHENTICATION_BACKENDS = (
+    "mezzanine.core.auth_backends.MezzanineBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
 
 # List of finder classes that know how to find static files in
 # various locations.
