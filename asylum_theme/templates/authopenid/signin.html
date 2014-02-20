@@ -37,8 +37,8 @@ $(document).ready(function() {
 						<label><strong>{{ form2.password.label }}</strong><br />{{ form2.password }}</label>
 						<p class="clearb">{% trans "If you have not registered or have forgotten your password click on the appropriate link below." %}</p>
 						<p>
-							<a href="{% url 'registration_register' %}">{% trans "Not registered yet?" %}</a>&nbsp;&nbsp;
-							<a href="{% url 'auth_password_reset' %}">{% trans "Forgotten your password?" %}</a>
+							<a href="{% url 'registration_register' %}" rel="nofollow">{% trans "Not registered yet?" %}</a>&nbsp;&nbsp;
+							<a href="{% url 'auth_password_reset' %}" rel="nofollow">{% trans "Forgotten your password?" %}</a>
 						</p>
 					</div>
 			</fieldset>

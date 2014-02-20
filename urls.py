@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 from django_authopenid.urls import urlpatterns as authopenid_urlpatterns
 from registration.forms import RegistrationFormUniqueEmail
@@ -52,6 +53,17 @@ urlpatterns += patterns("",
     url(r'^projects/', include('projects.urls')),
     url(r'^videos/', include('videos.urls')),
     url(r'^profiles/', include("gameprofiles.urls")),
+    # Overrides to fix password reset URLs in django_authopenid.
+    url(r'^forums/account/password/reset/$', auth_views.password_reset,  name='password_reset'),
+    url(r'^forums/account/password/reset/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+        auth_views.password_reset_confirm,
+        name='password_reset_confirm'),
+    url(r'^forums/account/password/reset/complete/$',
+        auth_views.password_reset_complete,
+        name='password_reset_complete'),
+    url(r'^forums/account/password/reset/done/$',
+        auth_views.password_reset_done,
+        name='password_reset_done'),
     # Apps
     url(r'^forums/account/', include('django_authopenid.urls')),
     url(r'^forums/', include('djangobb_forum.urls', namespace='djangobb')),

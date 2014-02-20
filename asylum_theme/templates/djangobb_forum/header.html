@@ -25,10 +25,10 @@
 					{% if forum_settings.PM_SUPPORT %}
 						<li id="navpm"><a href="{% url 'messages_inbox' %}">{% trans "PM" %}</a></li>
 					{% endif %}
-					<li id="navlogout"><a href="{% url 'user_signout' %}?next={{ request.path }}">{% trans "Log out" %}</a></li>
+					<li id="navlogout"><a href="{% url 'user_signout' %}?next={{ request.path }}" rel="nofollow">{% trans "Log out" %}</a></li>
 				{% else %}
-                    <li><a href="{% url 'user_signin' %}">{% trans "Log in" %}</a></li>
-					<li><a href="{% url 'registration_register' %}">{% trans "Sign up" %}</a></li>
+                    <li><a href="{% url 'user_signin' %}" rel="nofollow">{% trans "Log in" %}</a></li>
+					<li><a href="{% url 'registration_register' %}" rel="nofollow">{% trans "Sign up" %}</a></li>
 				{% endif %}
 				{% endblock %}
 			</ul>
