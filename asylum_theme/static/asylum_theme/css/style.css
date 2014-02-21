@@ -1749,8 +1749,6 @@ blockquote p{
     font-family: 'Georgia', serif;
 }
 
-
-
 .video {
     position: relative;
     padding-bottom: 56.25%;
@@ -1775,6 +1773,10 @@ blockquote p{
 .percent-50 {
     float: left;
     width: 50%;
+}
+
+#page-content #video_detail .video {
+    margin-bottom: 10px;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -2077,11 +2079,6 @@ pre {
   text-align: center;
 }
 
-/*.breadcrumb .divider {
-  color: #ABABAB;
-}
-*/
-
 .breadcrumb > li + li:before {
     padding: 0px 5px 0px 5px;
     color: #ababab;
@@ -2108,9 +2105,8 @@ pre {
     margin-bottom: 20px;
 }
 
-.application-teaser img {
-    display: block;
-    margin: 0px auto;
+.application-teaser a {
+    display: inline-block;
 }
 
 .application-details .boxart {

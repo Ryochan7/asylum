@@ -14,7 +14,7 @@
 {% block main %}
     {% comment %}{% block profile_page_description %}
     {% endblock profile_page_description %}{% endcomment %}
-    <section id="application-list" class="row-fluid">
+    <section id="application-list" class="row-fluid text-center">
         {% for application in application_list %}
         <article class="span3 application-teaser">
             <a href="{{ application.get_absolute_url }}"><img src="{{ MEDIA_URL }}{% thumbnail application.boxart 196 0 %}" alt="{{ application.title }} Profile" class="img-rounded block-grey" /></a>

@@ -8,11 +8,11 @@
     {% endif %}
 </div>
 
-    {% if rating_average %}
-    <div class="progress">
-        <div class="bar" style="width: {% widthratio rating_average 5 100 %}%;"></div>
-    </div>
-    {% endif %}
+{% if rating_average %}
+<div class="progress progress-success">
+    <div class="bar" style="width: {% widthratio rating_average 5 100 %}%;"></div>
+</div>
+{% endif %}
 
 {% if not rated or request.user.is_authenticated %}
 <form class="form-inline" role="form" method="post" action="{% url "rating" %}">
