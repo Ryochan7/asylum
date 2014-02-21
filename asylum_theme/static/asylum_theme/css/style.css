@@ -1350,31 +1350,9 @@ article.span3 h4{
     width: 20.06578947368421% ;
 }
 
-/* Latest Projects Widget */
-.carousel{margin-bottom: 0;}
-.carousel-control{
-    border: none;
-    position: absolute;
-    top: inherit;
-    left: inherit;
-    bottom: 0;
-    width: 17px;
-    height: 17px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    border-radius: 0;
-}
-
-.carousel-control.post{top: 50%;}
-.carousel-control.left.post{left: 0;}
-.carousel-control.left{
-    right: 17px;
-    background: url(../img/arrow-blog-left.png) no-repeat center center;
-}
-.carousel-control.right{
-    right: 0;
-    background: url(../img/arrow-blog-right.png) no-repeat center center;
+.carousel-control {
+    margin-top: 0px;
+    font-size: 50px;
 }
 
 /* Comments Widget */
