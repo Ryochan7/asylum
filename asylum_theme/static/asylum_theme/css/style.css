@@ -1985,7 +1985,7 @@ aside .search form {
 	margin-right: 20px;
 }
 
-#page-content .panel.rating * {
+#page-content .panel.rating form * {
 	display: inline-block;
 	list-style-type: none;
 }
@@ -1994,8 +1994,8 @@ aside .search form {
 	margin-right: 15px;
 }
 
-#page-content .panel-body > span:first-child {
-    margin-right: 10px;
+#page-content .panel.rating .panel-body > div {
+    margin-bottom: 10px;
 }
 
 #page-content .rating .form-inline {

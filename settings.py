@@ -129,10 +129,10 @@ SITE_ID = 1
 USE_I18N = False
 
 # Make this unique, and don't share it with anybody. Overwritten
-# on deployment server.
+# on production server.
 SECRET_KEY = "2a422284-e6db-434c-b61e-66a6845ab15bf99cb216-f7bf-452f-8107-39a7f078ce34a4dc1ca0-437c-4917-ab15-4829f3b558dd"
 
-# Overwritten on deployment server.
+# Overwritten on production server.
 NEVERCACHE_KEY = "k(du2%@if)b8-(y$5^(ci&toyzun!h9w%cqce^-7d4dakstz#1"
 
 # Tuple of IP addresses, as strings, that:
@@ -416,11 +416,12 @@ LOGIN_URL = '/forums/account/signin/'
 #Cache settings
 #CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
-    }
-}
+# Enable CACHES on production server.
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+#    }
+#}
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
