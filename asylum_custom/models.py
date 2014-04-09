@@ -8,7 +8,8 @@ from djangobb_forum.models import Post, Topic
 from .signals import post_saved as custom_post_saved
 
 # Create your models here.
-post_save.disconnect(receiver=post_saved, sender=Post)
+post_save.disconnect(receiver=post_saved, sender=Post,
+    dispatch_uid='djangobb_post_save')
 #post_save.disconnect(receiver=topic_saved, sender=Topic)
 
 post_save.connect(custom_post_saved, sender=Post, dispatch_uid='djangobb_post_save')
