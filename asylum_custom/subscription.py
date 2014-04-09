@@ -35,9 +35,10 @@ TOPIC_SUBSCRIPTION_TEXT_TEMPLATE = (u"""New reply from %(username)s to topic tha
 Quick Link to the post
 See topic: %(post_url)s
 ---
+Message:
 %(message)s
 ---
-If you wish not to get this notification, click the link below and
+If you wish to not get notifications, click the link below and
 Unsubscribe %(unsubscribe_url)s""")
 
 
