@@ -261,13 +261,12 @@ INSTALLED_APPS = (
     "mezzanine.blog",
     "mezzanine.forms",
     "mezzanine.pages",
-    "mezzanine.galleries",
-    "mezzanine.twitter",
+    #"mezzanine.galleries",
+    #"mezzanine.twitter",
     #"mezzanine.accounts",
     #"mezzanine.mobile",
     "mezzanine_slides",
     'registration',
-    'linaro_django_pagination',
     'django_authopenid',
     'djangobb_forum',
     'haystack',
@@ -276,6 +275,7 @@ INSTALLED_APPS = (
     "videos",
     "gameprofiles",
     "asylum_custom", # "Secret" sauce app
+    'linaro_django_pagination',
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -291,7 +291,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.core.context_processors.tz",
     "mezzanine.conf.context_processors.settings",
-    'djangobb_forum.context_processors.forum_settings',
+    "mezzanine.pages.context_processors.page",
+    "djangobb_forum.context_processors.forum_settings",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -314,7 +315,8 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the following if using any of the SSL settings:
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
-    'linaro_django_pagination.middleware.PaginationMiddleware',
+    #'linaro_django_pagination.middleware.PaginationMiddleware',
+    "asylum_custom.middleware.CustomPaginationMiddleware",
     'django_authopenid.middleware.OpenIDMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     'djangobb_forum.middleware.LastLoginMiddleware',
@@ -341,7 +343,10 @@ OPTIONAL_APPS = (
     PACKAGE_NAME_GRAPPELLI,
 )
 
-DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
+DEBUG_TOOLBAR_CONFIG = {"DISABLE_PANELS":
+    ["debug_toolbar.panels.redirects.RedirectsPanel"],
+    "INTERCEPT_REDIRECTS": False,
+}
 
 ###################
 # DEPLOY SETTINGS #
@@ -372,7 +377,8 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 #RICHTEXT_FILTER = 'mezzanine_pagedown.filters.plain'
 
 ADMIN_THUMB_SIZE="64x64"
-BLOG_URLS_USE_DATE = True
+#BLOG_URLS_USE_DATE = True
+BLOG_URLS_DATE_FORMAT = "day"
 BLOG_RSS_LIMIT = 20
 
 VIDEO_PAGINATE_BY = 5
