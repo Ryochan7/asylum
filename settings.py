@@ -374,10 +374,10 @@ DEBUG_TOOLBAR_CONFIG = {"DISABLE_PANELS":
 # }
 
 #RICHTEXT_WIDGET_CLASS = 'mezzanine_pagedown.widgets.PageDownWidget'
-#RICHTEXT_FILTER = 'mezzanine_pagedown.filters.plain'
+#RICHTEXT_FILTERS = ("asylum_custom.utils.html.thumbnails",)
+RICHTEXT_FILTERS = ()
 
 ADMIN_THUMB_SIZE="64x64"
-#BLOG_URLS_USE_DATE = True
 BLOG_URLS_DATE_FORMAT = "day"
 BLOG_RSS_LIMIT = 20
 
